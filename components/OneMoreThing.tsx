@@ -1,23 +1,25 @@
 "use client";
 
-import { Card, CardBody, Button } from "@heroui/react";
+import { Button } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
+import { Surface } from "./Surface";
+import { SectionHeader } from "./SectionHeader";
 
 export const OneMoreThing = () => {
   const reduce = useReducedMotion();
   return (
     <section className="mt-20 sm:mt-28" aria-label="One more thing">
+      <SectionHeader title="One more thing..." />
       <motion.div
         {...(reduce
           ? { initial: false, transition: { duration: 0 } }
           : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
         viewport={{ once: true }}
       >
-        <Card className="bg-gradient-to-b from-white/10 to-white/5 border border-white/10 backdrop-blur shadow-xl">
-          <CardBody className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
-            <div className="space-y-2">
-              <p className="text-sm uppercase tracking-widest text-white/60">One more thing...</p>
+        <Surface className="p-6">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="space-y-2 text-left">
               <h3 className="text-2xl sm:text-3xl font-bold">
                 AutoMate...s 多智能体协作，让效率突飞猛进
               </h3>
@@ -28,8 +30,8 @@ export const OneMoreThing = () => {
             <Button as={Link} href="#voices" color="primary" radius="full" size="lg">
               看用户声音 →
             </Button>
-          </CardBody>
-        </Card>
+          </div>
+        </Surface>
       </motion.div>
     </section>
   );
