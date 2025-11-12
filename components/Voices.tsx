@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardBody } from "@heroui/react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const TESTIMONIALS = [
   {
@@ -22,13 +22,14 @@ const TESTIMONIALS = [
 ];
 
 export const Voices = () => {
+  const reduce = useReducedMotion();
   return (
     <section id="voices" className="mt-20 sm:mt-28">
       <motion.h2
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        {...(reduce
+          ? { initial: false, transition: { duration: 0 } }
+          : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
         className="mb-8 text-2xl sm:text-3xl font-semibold"
       >
         用户声音
@@ -37,10 +38,10 @@ export const Voices = () => {
         {TESTIMONIALS.map((t, i) => (
           <motion.blockquote
             key={i}
-            initial={{ opacity: 0, y: 12 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            {...(reduce
+              ? { initial: false, transition: { duration: 0 } }
+              : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
           >
             <Card className="bg-white/5 backdrop-blur border border-white/10">
               <CardBody className="space-y-4">

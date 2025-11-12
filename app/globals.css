@@ -29,6 +29,7 @@ body {
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system;
 }
 
+/* Accessibility: Skip link */
 .skip-link {
   position: absolute;
   left: -10000px;
@@ -47,4 +48,14 @@ body {
   color: #fff;
   border-radius: 0.5rem;
   z-index: 50;
+}
+
+/* Reduce motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
 }

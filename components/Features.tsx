@@ -1,7 +1,7 @@
 "use client";
 
 import { Card, CardBody, CardHeader } from "@heroui/react";
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
 const FEATURES = [
   {
@@ -27,13 +27,14 @@ const FEATURES = [
 ];
 
 export const Features = () => {
+  const reduce = useReducedMotion();
   return (
     <section id="features" className="mt-20 sm:mt-28">
       <motion.h2
-        initial={{ opacity: 0, y: 16 }}
-        whileInView={{ opacity: 1, y: 0 }}
+        {...(reduce
+          ? { initial: false, transition: { duration: 0 } }
+          : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
         viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
         className="mb-8 text-2xl sm:text-3xl font-semibold"
       >
         主打特性
@@ -42,15 +43,17 @@ export const Features = () => {
         {FEATURES.map((f, i) => (
           <motion.div
             key={f.title}
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            {...(reduce
+              ? { initial: false, transition: { duration: 0 } }
+              : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
             viewport={{ once: true }}
-            transition={{ delay: i * 0.05, duration: 0.5 }}
-            whileHover={{ y: -4 }}
+            whileHover={reduce ? undefined : { y: -4 }}
           >
             <Card className="h-full bg-white/5 backdrop-blur border border-white/10">
               <CardHeader className="flex items-center gap-3">
-                <div className="text-2xl" aria-hidden>{f.icon}</div>
+                <div className="text-2xl" aria-hidden>
+                  {f.icon}
+                </div>
                 <h3 className="text-lg font-semibold">{f.title}</h3>
               </CardHeader>
               <CardBody>

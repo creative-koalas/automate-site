@@ -1,13 +1,15 @@
 "use client";
 
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
 export const VideoSection = () => {
+  const reduce = useReducedMotion();
   const ref = useRef<HTMLVideoElement | null>(null);
   const [loaded, setLoaded] = useState(false);
 
   useEffect(() => {
+    if (reduce) return; // honor reduced motion: don't auto-play or observe
     const el = ref.current;
     if (!el) return;
     const io = new IntersectionObserver(
@@ -24,14 +26,14 @@ export const VideoSection = () => {
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [reduce]);
 
   return (
     <motion.section
-      initial={{ opacity: 0, scale: 0.98 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={reduce ? undefined : { opacity: 0, scale: 0.98 }}
+      whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
-      transition={{ duration: 0.6 }}
+      transition={reduce ? { duration: 0 } : { duration: 0.6 }}
       className="relative mt-10"
     >
       <div className="aspect-video w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
@@ -39,9 +41,9 @@ export const VideoSection = () => {
           ref={ref}
           className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
           src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-          muted
+          muted={!reduce}
           playsInline
-          loop
+          loop={!reduce}
           controls
           preload="metadata"
           poster="/og.svg"

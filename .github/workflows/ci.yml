@@ -22,9 +22,11 @@ jobs:
         run: pnpm lint -- --max-warnings=0 || true
       - name: Build
         run: pnpm build
+      - name: Unit tests
+        run: pnpm test
       - name: Preview server
         run: |
-          nohup pnpm preview  &
+          nohup pnpm preview &
           sleep 2
       - name: Playwright install
         run: npx playwright install --with-deps chromium
