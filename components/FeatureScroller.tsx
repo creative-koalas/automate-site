@@ -3,22 +3,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import clsx from "clsx";
+import { SCROLLER_SLIDES } from "./data/features";
 
-type Slide = {
-  key: string;
-  kind: "feature" | "interstitial" | "final";
-  title?: string;
-  desc?: string;
-  icon?: string;
-};
-
-const SLIDES: Slide[] = [
-  { key: "ease", kind: "feature", title: "省心", desc: "无需指导，长时间连续工作，自主解决环境配置、API接入等问题。", icon: "🧠" },
-  { key: "understand", kind: "feature", title: "懂你", desc: "自研类脑记忆系统，在工作中持续进化，逐渐与你心有灵犀。", icon: "🤝" },
-  { key: "natural", kind: "feature", title: "自然", desc: "人类级交互体验，会发飞书、发邮件，甚至能联系你的领导。", icon: "💬" },
-  { key: "omg", kind: "interstitial" },
-  { key: "automate", kind: "final", title: "不是一个 AI，而是一群 AI", desc: "AutoMate...s：人管AI、AI管AI、AI也能提醒人。", icon: "∞" },
-];
+type Slide = typeof SCROLLER_SLIDES[number];
 
 export const FeatureScroller = () => {
   const reduce = useReducedMotion();
@@ -47,21 +34,43 @@ export const FeatureScroller = () => {
   }, []);
 
   const dotIndex = useMemo(() => {
-    const slide = SLIDES[active];
+    const slide = SCROLLER_SLIDES[active];
     if (!slide) return 0;
-    if (slide.kind === "feature") return SLIDES.slice(0, active + 1).filter((s) => s.kind !== "interstitial").length - 1;
+    if (slide.kind === "feature") return SCROLLER_SLIDES.slice(0, active + 1).filter((s) => s.kind !== "interstitial").length - 1;
     if (slide.kind === "interstitial") return 2;
     return 3;
   }, [active]);
+
+  const dotToSlideIndex = (d: number) => [0, 1, 2, 4][d] ?? 0;
+
+  const gotoDot = (d: number) => {
+    const idx = dotToSlideIndex(d);
+    const el = sectionRefs.current[idx];
+    if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  };
+
+  const onKey = (e: React.KeyboardEvent) => {
+    if (e.key === "ArrowDown" || e.key === "PageDown") {
+      e.preventDefault();
+      gotoDot(Math.min(dotIndex + 1, 3));
+    } else if (e.key === "ArrowUp" || e.key === "PageUp") {
+      e.preventDefault();
+      gotoDot(Math.max(dotIndex - 1, 0));
+    }
+  };
 
   return (
     <section id="features" aria-label="主打特性滚动展示" className="relative">
       <div
         ref={containerRef}
+        tabIndex={0}
+        onKeyDown={onKey}
+        aria-label="特性滚动容器（可用上下键切换）"
         className="relative h-screen snap-y snap-mandatory overflow-y-scroll rounded-brand border border-white/10 bg-black/20 backdrop-blur supports-[backdrop-filter]:bg-black/30"
       >
-        {SLIDES.map((s, i) => (
+        {SCROLLER_SLIDES.map((s, i) => (
           <motion.section
+            id={`slide-${s.key}`}
             key={s.key}
             ref={(el: HTMLElement | null) => {
               sectionRefs.current[i] = el;
@@ -87,17 +96,29 @@ export const FeatureScroller = () => {
                   {s.icon}
                 </div>
                 <h3 className="text-4xl sm:text-5xl font-extrabold">{s.title}</h3>
-                {s.desc && <p className="text-white/70 text-lg leading-7">{s.desc}</p>}
+                {"desc" in s && s.desc && <p className="text-white/70 text-lg leading-7">{s.desc}</p>}
               </div>
             )}
           </motion.section>
         ))}
 
-        <div className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex flex-col gap-3">
+        <nav aria-label="特性滚动导航" className="absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex flex-col gap-3">
           {[0, 1, 2, 3].map((d) => (
-            <div key={d} className={clsx("h-2 w-2 rounded-full bg-white/30 transition-all", dotIndex === d && "h-3 w-3 bg-white")} aria-hidden />
+            <button
+              key={d}
+              type="button"
+              role="tab"
+              aria-selected={dotIndex === d}
+              aria-controls={`slide-${SCROLLER_SLIDES[dotToSlideIndex(d)].key}`}
+              onClick={() => gotoDot(d)}
+              className={clsx(
+                "h-2 w-2 rounded-full bg-white/30 transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400", // tokens
+                dotIndex === d && "h-3 w-3 bg-white"
+              )}
+              title={`跳转到第 ${d + 1} 屏`}
+            />
           ))}
-        </div>
+        </nav>
       </div>
     </section>
   );
