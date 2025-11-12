@@ -3,9 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, useReducedMotion } from "framer-motion";
 import clsx from "clsx";
-import { SCROLLER_SLIDES } from "./data/features";
+import { IMMERSIVE_SLIDES } from "./data/features";
+import { Hero } from "./Hero";
+import { VideoSection } from "./VideoSection";
+import { Voices } from "./Voices";
+import { Footer } from "./Footer";
 
-type Slide = typeof SCROLLER_SLIDES[number];
+type Slide = typeof IMMERSIVE_SLIDES[number];
 
 export const FeatureScroller = () => {
   const reduce = useReducedMotion();
@@ -14,7 +18,6 @@ export const FeatureScroller = () => {
   const animatingRef = useRef(false);
   const touchStartY = useRef<number | null>(null);
 
-  // Observe slide visibility in the viewport (window-level scroll)
   useEffect(() => {
     const els = sectionRefs.current.filter(Boolean) as HTMLElement[];
     if (!els.length) return;
@@ -34,28 +37,28 @@ export const FeatureScroller = () => {
     return () => io.disconnect();
   }, []);
 
+  const dotMap = [0, 1, 2, 3, 5]; // hero, 3 features, final
   const dotIndex = useMemo(() => {
-    const slide = SCROLLER_SLIDES[active];
-    if (!slide) return 0;
-    if (slide.kind === "feature")
-      return (
-        SCROLLER_SLIDES.slice(0, active + 1).filter((s) => s.kind !== "interstitial").length - 1
-      );
-    if (slide.kind === "interstitial") return 2;
-    return 3;
+    const slide = IMMERSIVE_SLIDES[active]?.kind;
+    if (slide === "hero") return 0;
+    if (slide === "feature") {
+      // active indices 1..3 map to 1..3
+      return Math.min(3, Math.max(1, active));
+    }
+    if (slide === "interstitial") return 3;
+    if (slide === "final") return 4;
+    // voices/footer -> stick to final dot
+    return 4;
   }, [active]);
 
-  const dotToSlideIndex = (d: number) => [0, 1, 2, 4][d] ?? 0;
-
   const gotoDot = (d: number) => {
-    const idx = dotToSlideIndex(d);
+    const idx = dotMap[d] ?? 0;
     const el = sectionRefs.current[idx];
     if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   };
 
-  // Immediate step-on-wheel/touch for fluent feel
   useEffect(() => {
-    if (reduce) return; // honor reduced motion
+    if (reduce) return;
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < 10) return;
@@ -63,9 +66,9 @@ export const FeatureScroller = () => {
       if (animatingRef.current) return;
       animatingRef.current = true;
       const dir = e.deltaY > 0 ? 1 : -1;
-      const next = Math.max(0, Math.min(3, dotIndex + dir));
+      const next = Math.max(0, Math.min(dotMap.length - 1, dotIndex + dir));
       gotoDot(next);
-      setTimeout(() => (animatingRef.current = false), 650);
+      setTimeout(() => (animatingRef.current = false), 550);
     };
 
     const onTouchStart = (e: TouchEvent) => {
@@ -75,13 +78,13 @@ export const FeatureScroller = () => {
       const start = touchStartY.current;
       if (start == null) return;
       const dy = start - (e.changedTouches[0]?.clientY ?? start);
-      if (Math.abs(dy) < 24) return;
+      if (Math.abs(dy) < 20) return;
       if (animatingRef.current) return;
       animatingRef.current = true;
       const dir = dy > 0 ? 1 : -1;
-      const next = Math.max(0, Math.min(3, dotIndex + dir));
+      const next = Math.max(0, Math.min(dotMap.length - 1, dotIndex + dir));
       gotoDot(next);
-      setTimeout(() => (animatingRef.current = false), 650);
+      setTimeout(() => (animatingRef.current = false), 550);
       touchStartY.current = null;
     };
 
@@ -98,18 +101,17 @@ export const FeatureScroller = () => {
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown" || e.key === "PageDown") {
       e.preventDefault();
-      gotoDot(Math.min(dotIndex + 1, 3));
+      gotoDot(Math.min(dotMap.length - 1, dotIndex + 1));
     } else if (e.key === "ArrowUp" || e.key === "PageUp") {
       e.preventDefault();
-      gotoDot(Math.max(dotIndex - 1, 0));
+      gotoDot(Math.max(0, dotIndex - 1));
     }
   };
 
   return (
-    <section id="features-snap" aria-label="主打特性滚动展示" className="relative">
-      {/* Window-level fullpage slides */}
-      <div tabIndex={0} onKeyDown={onKey} aria-label="特性滚动容器（可用上下键切换）">
-        {SCROLLER_SLIDES.map((s, i) => (
+    <section id="immersive" aria-label="沉浸式滚动" className="relative">
+      <div tabIndex={0} onKeyDown={onKey} aria-label="沉浸式滚动容器">
+        {IMMERSIVE_SLIDES.map((s, i) => (
           <motion.section
             id={`slide-${s.key}`}
             key={s.key}
@@ -124,44 +126,65 @@ export const FeatureScroller = () => {
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={{ amount: 0.6, once: false }}
             transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-            aria-label={
-              s.kind === "interstitial" ? "One more thing 序章" : s.title ? s.title : undefined
-            }
           >
-            {s.kind === "interstitial" ? (
+            {s.kind === "hero" && (
+              <div className="w-full max-w-6xl mx-auto text-left">
+                <Hero />
+                <div className="mt-8">
+                  <VideoSection />
+                </div>
+              </div>
+            )}
+
+            {s.kind === "feature" && (
+              <div className="max-w-2xl space-y-6">
+                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
+                  {s.icon}
+                </div>
+                <h3 className="text-4xl sm:text-5xl font-extrabold">{s.title}</h3>
+                <p className="text-white/70 text-lg leading-7">{s.desc}</p>
+              </div>
+            )}
+
+            {s.kind === "interstitial" && (
               <div className="space-y-6">
                 <p className="text-sm tracking-widest text-white/60 uppercase">One more thing...</p>
                 <h3 className="text-4xl sm:text-6xl font-extrabold text-white">准备好了吗</h3>
               </div>
-            ) : (
+            )}
+
+            {s.kind === "final" && (
               <div className="max-w-2xl space-y-6">
-                <div
-                  className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl"
-                  aria-hidden
-                >
+                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
                   {s.icon}
                 </div>
                 <h3 className="text-4xl sm:text-5xl font-extrabold">{s.title}</h3>
-                {"desc" in s && s.desc && (
-                  <p className="text-white/70 text-lg leading-7">{s.desc}</p>
-                )}
+                <p className="text-white/80 text-lg leading-7">{s.desc}</p>
+              </div>
+            )}
+
+            {s.kind === "voices" && (
+              <div className="w-full max-w-6xl mx-auto">
+                <Voices />
+              </div>
+            )}
+
+            {s.kind === "footer" && (
+              <div className="w-full max-w-6xl mx-auto">
+                <Footer />
               </div>
             )}
           </motion.section>
         ))}
 
-        {/* Fixed dot nav (desktop) */}
-        <nav
-          aria-label="特性滚动导航"
-          className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3"
-        >
-          {[0, 1, 2, 3].map((d) => (
+        <nav aria-label="滚动导航" className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3">
+          {dotMap.map((_, d) => (
             <button
               key={d}
               type="button"
               role="tab"
               aria-selected={dotIndex === d}
-              aria-controls={`slide-${SCROLLER_SLIDES[dotToSlideIndex(d)].key}`}
+              aria-controls={`slide-${IMMERSIVE_SLIDES[dotMap[d]].key}`}
               onClick={() => gotoDot(d)}
               className={clsx(
                 "h-2 w-2 rounded-full bg-white/30 transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400",

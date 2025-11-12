@@ -6,14 +6,20 @@ export const CORE_FEATURES: CoreFeature[] = [
 ];
 
 export type Slide =
+  | { kind: "hero"; key: string }
   | { kind: "feature"; key: string; title: string; desc: string; icon: string }
   | { kind: "interstitial"; key: string }
-  | { kind: "final"; key: string; title: string; desc: string; icon: string };
+  | { kind: "final"; key: string; title: string; desc: string; icon: string }
+  | { kind: "voices"; key: string }
+  | { kind: "footer"; key: string };
 
-export const SCROLLER_SLIDES: Slide[] = [
+export const IMMERSIVE_SLIDES: Slide[] = [
+  { kind: "hero", key: "hero" },
   { kind: "feature", ...CORE_FEATURES[0] },
   { kind: "feature", ...CORE_FEATURES[1] },
   { kind: "feature", ...CORE_FEATURES[2] },
   { kind: "interstitial", key: "omg" },
   { kind: "final", key: "automate", title: "不是一个 AI，而是一群 AI", desc: "AutoMate...s：人管AI、AI管AI、AI也能提醒人。", icon: "∞" },
+  { kind: "voices", key: "voices" },
+  { kind: "footer", key: "footer" },
 ];
