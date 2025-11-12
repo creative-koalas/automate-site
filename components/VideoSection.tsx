@@ -41,6 +41,8 @@ export const VideoSection = () => {
     return () => io.disconnect();
   }, [reduce]);
 
+  const busy = !loaded && !error;
+
   return (
     <motion.section
       initial={reduce ? undefined : { opacity: 0, scale: 0.98 }}
@@ -48,10 +50,12 @@ export const VideoSection = () => {
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
       className="relative mt-10 scroll-mt-24"
-      aria-label="产品演示视频"
+      aria-label="产品演示视频区域"
+      aria-busy={busy}
+      role="region"
     >
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
-        {!loaded && !error && (
+        {busy && (
           <div
             aria-hidden
             className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,rgba(255,255,255,0.06),rgba(255,255,255,0.12),rgba(255,255,255,0.06))] bg-[length:200%_100%]"
