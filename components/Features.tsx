@@ -22,7 +22,7 @@ export const Features = () => {
           >
             <Card className={`h-full rounded-brand backdrop-blur border border-white/10 transition-transform shadow-md hover:shadow-xl hover:border-white/20 bg-white/5`}>
               <CardHeader className="flex items-center gap-3">
-                <div className="text-2xl h-10 w-10 grid place-items-center rounded-full bg白/10" aria-hidden>
+                <div className="text-2xl h-10 w-10 grid place-items-center rounded-full bg-white/10" aria-hidden>
                   {f.icon}
                 </div>
                 <h3 className="text-lg font-semibold">{f.title}</h3>

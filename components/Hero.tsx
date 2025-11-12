@@ -12,7 +12,7 @@ export const Hero = () => {
     : { initial: { opacity: 0, y: 20 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } };
 
   return (
-    <section className="relative grid items-center gap-10 sm:grid-cols-2">
+    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start">
       {/* Decorative gradient blobs */}
       <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(244,114,182,0.35),transparent_60%)] blur-2xl" />

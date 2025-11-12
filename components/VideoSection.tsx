@@ -51,7 +51,7 @@ export const VideoSection = () => {
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-      className="relative mt-10 scroll-mt-24"
+      className="relative md:min-h-screen md:snap-start flex items-center mt-10 md:mt-0 scroll-mt-24"
       aria-labelledby="video-title"
       aria-busy={busy}
       role="region"
@@ -80,7 +80,7 @@ export const VideoSection = () => {
             onError={() => setError("视频加载失败，请稍后重试。")}
           />
         ) : (
-          <div className="flex h-full w-full items-center justify-center bg-black/40 p-6 text-center text-white/80">
+          <div className="flex h-full w-full items-center justify-center bg-black/40 p-6 text-center text白/80">
             <p className="max-w-md">
               {error} 您可以稍后刷新页面，或联系团队索要演示视频链接。
             </p>
