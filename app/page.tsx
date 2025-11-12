@@ -4,6 +4,7 @@ import { Navbar } from "@/components/NavBar";
 import { Hero } from "@/components/Hero";
 import { VideoSection } from "@/components/VideoSection";
 import { Features } from "@/components/Features";
+import { OneMoreThing } from "@/components/OneMoreThing";
 import { Voices } from "@/components/Voices";
 import { Footer } from "@/components/Footer";
 import { BackToTop } from "@/components/BackToTop";
@@ -20,6 +21,7 @@ export default function Home() {
         <Hero />
         <VideoSection />
         <Features />
+        <OneMoreThing />
         <Voices />
         <Footer />
       </main>
