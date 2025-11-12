@@ -2,6 +2,7 @@
 
 import { Card, CardBody, CardHeader } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
+import { SectionHeader } from "./SectionHeader";
 
 const FEATURES = [
   { title: "省心", desc: "无需指导，长时间连续工作，自主解决环境配置、API接入等问题。", icon: "🧠" },
@@ -14,15 +15,7 @@ export const Features = () => {
   const reduce = useReducedMotion();
   return (
     <section id="features" className="mt-20 sm:mt-28">
-      <motion.h2
-        {...(reduce
-          ? { initial: false, transition: { duration: 0 } }
-          : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
-        viewport={{ once: true }}
-        className="mb-8 text-2xl sm:text-3xl font-semibold"
-      >
-        主打特性
-      </motion.h2>
+      <SectionHeader title="主打特性" />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {FEATURES.map((f, i) => (
           <motion.div
@@ -33,7 +26,7 @@ export const Features = () => {
             viewport={{ once: true }}
             whileHover={reduce ? undefined : { y: -4 }}
           >
-            <Card className={`h-full backdrop-blur border border-white/10 shadow-md ${
+            <Card className={`h-full rounded-brand backdrop-blur border border-white/10 shadow-md ${
               i === 3 ? "bg-gradient-to-b from-white/10 to-white/5" : "bg-white/5"
             }`}>
               <CardHeader className="flex items-center gap-3">

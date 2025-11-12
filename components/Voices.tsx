@@ -3,6 +3,7 @@
 import { Card, CardBody } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef } from "react";
+import { SectionHeader } from "./SectionHeader";
 
 const TESTIMONIALS = [
   {
@@ -49,20 +50,10 @@ export const Voices = () => {
 
   return (
     <section id="voices" className="mt-24 scroll-mt-24">
-      <motion.h2
-        {...(reduce
-          ? { initial: false, transition: { duration: 0 } }
-          : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
-        viewport={{ once: true }}
-        className="mb-8 text-2xl sm:text-3xl font-semibold"
-      >
-        用户声音
-      </motion.h2>
-      <div
-        ref={scrollerRef}
-        className="relative rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur"
-      >
+      <SectionHeader title="用户声音" />
+      <div className="relative rounded-brand border border-white/10 bg-white/5 p-3 backdrop-blur">
         <div
+          ref={scrollerRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           aria-label="用户声音水平滚动列表"
         >
@@ -75,7 +66,7 @@ export const Voices = () => {
               viewport={{ once: true }}
               className="min-w-[280px] snap-start"
             >
-              <Card className="bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 shadow-md">
+              <Card className="rounded-brand bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 shadow-md">
                 <CardBody className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center" aria-hidden>💬</div>
