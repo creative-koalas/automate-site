@@ -7,9 +7,9 @@ import { ThemeToggle } from "./ThemeToggle";
 
 export const Navbar = () => {
   return (
-    <UINavbar maxWidth="xl" className="bg-transparent">
+    <UINavbar maxWidth="xl" className="bg-transparent" aria-label="主导航">
       <NavbarBrand className="gap-3">
-        <Image src="/next.svg" alt="logo" width={28} height={28} className="invert" />
+        <Image src="/next.svg" alt="AI劳动力 Logo（占位）" width={28} height={28} className="invert" />
         <span className="text-lg font-semibold tracking-tight">AI劳动力</span>
       </NavbarBrand>
       <NavbarContent justify="end">

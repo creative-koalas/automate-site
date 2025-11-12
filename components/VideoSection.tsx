@@ -15,8 +15,14 @@ export const VideoSection = () => {
         <video
           className="h-full w-full object-cover"
           src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
+          muted
+          autoPlay
+          playsInline
+          loop
           controls
+          preload="metadata"
           poster="/vercel.svg"
+          aria-label="产品演示视频（占位）"
         />
       </div>
     </motion.section>
