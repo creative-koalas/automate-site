@@ -50,7 +50,7 @@ export const Voices = () => {
 
   return (
     <section id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
-      <SectionHeader title="用户声音" />
+      <SectionHeader id="voices-title" title="用户声音" />
       <div className="relative rounded-brand border border-white/10 bg-white/5 p-3 backdrop-blur">
         <div
           ref={scrollerRef}

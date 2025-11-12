@@ -52,11 +52,11 @@ export const VideoSection = () => {
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
       className="relative mt-10 scroll-mt-24"
-      aria-label="产品演示视频区域"
+      aria-labelledby="video-title"
       aria-busy={busy}
       role="region"
     >
-      <SectionHeader title="产品演示" />
+      <SectionHeader id="video-title" title="产品演示" />
       <Surface className="relative aspect-video w-full overflow-hidden p-0">
         {busy && (
           <div

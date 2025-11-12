@@ -2,10 +2,11 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 
-export const SectionHeader = ({ title }: { title: string }) => {
+export const SectionHeader = ({ id, title }: { id?: string; title: string }) => {
   const reduce = useReducedMotion();
   return (
     <motion.h2
+      id={id}
       {...(reduce
         ? { initial: false, transition: { duration: 0 } }
         : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.6 } })}
