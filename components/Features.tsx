@@ -4,26 +4,10 @@ import { Card, CardBody, CardHeader } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
 
 const FEATURES = [
-  {
-    title: "省心",
-    desc: "无需指导，长时间连续工作，自主解决环境配置、API接入等问题。",
-    icon: "🧠",
-  },
-  {
-    title: "懂你",
-    desc: "自研类脑记忆系统，在工作中持续进化，逐渐与你心有灵犀。",
-    icon: "🤝",
-  },
-  {
-    title: "自然",
-    desc: "人类级交互体验，会发飞书、发邮件，甚至能联系你的领导。",
-    icon: "💬",
-  },
-  {
-    title: "One more thing... AutoMate...s",
-    desc: "不是一个AI，而是一群AI，加一群人。人管AI、AI管AI、AI管人类。",
-    icon: "∞",
-  },
+  { title: "省心", desc: "无需指导，长时间连续工作，自主解决环境配置、API接入等问题。", icon: "🧠" },
+  { title: "懂你", desc: "自研类脑记忆系统，在工作中持续进化，逐渐与你心有灵犀。", icon: "🤝" },
+  { title: "自然", desc: "人类级交互体验，会发飞书、发邮件，甚至能联系你的领导。", icon: "💬" },
+  { title: "One more thing... AutoMate...s", desc: "不是一个AI，而是一群AI，加一群人。人管AI、AI管AI、AI管人类。", icon: "∞" },
 ];
 
 export const Features = () => {
@@ -49,9 +33,11 @@ export const Features = () => {
             viewport={{ once: true }}
             whileHover={reduce ? undefined : { y: -4 }}
           >
-            <Card className="h-full bg-white/5 backdrop-blur border border-white/10">
+            <Card className={`h-full backdrop-blur border border-white/10 shadow-md ${
+              i === 3 ? "bg-gradient-to-b from-white/10 to-white/5" : "bg-white/5"
+            }`}>
               <CardHeader className="flex items-center gap-3">
-                <div className="text-2xl" aria-hidden>
+                <div className="text-2xl h-10 w-10 grid place-items-center rounded-full bg-white/10" aria-hidden>
                   {f.icon}
                 </div>
                 <h3 className="text-lg font-semibold">{f.title}</h3>
