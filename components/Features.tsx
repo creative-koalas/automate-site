@@ -14,7 +14,7 @@ const FEATURES = [
 export const Features = () => {
   const reduce = useReducedMotion();
   return (
-    <section id="features" className="mt-20 sm:mt-28">
+    <section id="features" className="mt-20 sm:mt-28" aria-labelledby="features-title">
       <SectionHeader title="主打特性" />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
         {FEATURES.map((f, i) => (
@@ -24,11 +24,13 @@ export const Features = () => {
               ? { initial: false, transition: { duration: 0 } }
               : { initial: { opacity: 0, y: 16 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
             viewport={{ once: true }}
-            whileHover={reduce ? undefined : { y: -4 }}
+            whileHover={reduce ? undefined : { y: -4, scale: 1.01 }}
           >
-            <Card className={`h-full rounded-brand backdrop-blur border border-white/10 shadow-md ${
-              i === 3 ? "bg-gradient-to-b from-white/10 to-white/5" : "bg-white/5"
-            }`}>
+            <Card
+              className={`h-full rounded-brand backdrop-blur border border-white/10 transition-transform shadow-md hover:shadow-xl hover:border-white/20 ${
+                i === 3 ? "bg-gradient-to-b from-white/10 to-white/5" : "bg-white/5"
+              }`}
+            >
               <CardHeader className="flex items-center gap-3">
                 <div className="text-2xl h-10 w-10 grid place-items-center rounded-full bg-white/10" aria-hidden>
                   {f.icon}

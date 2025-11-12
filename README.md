@@ -2,6 +2,9 @@
 
 技术栈：Next.js 16 (App Router, TS) + Tailwind CSS v4 + HeroUI v2 + Framer Motion + next-themes
 
+公开预览（无需登录）
+- https://automate-site-preview-03-na377fkn9-trent-fellbootmans-projects.vercel.app
+
 开发
 - 安装依赖：pnpm i
 - 本地运行：pnpm dev
@@ -27,7 +30,7 @@
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
 - app/page.tsx: 页面入口，拆分为 components/*；附 BackToTop 与 #top 锚点
 - app/robots.ts, app/sitemap.ts, app/manifest.ts, app/not-found.tsx
-- components: NavBar(ScrollSpy 高亮), Hero, VideoSection(Skeleton/错误 fallback/aria-busy), Features, Voices(水平滚动), Footer, JsonLd, ThemeToggle, BackToTop
+- components: NavBar(ScrollSpy 高亮), Hero(Surface右侧占位), VideoSection(Surface/SectionHeader/Skeleton/fallback), Features(Surface/SectionHeader), OneMoreThing(Surface/SectionHeader), Voices(水平滚动/Surface/SectionHeader), Footer(Surface), JsonLd, ThemeToggle, BackToTop, Surface, SectionHeader
 - public: favicon.svg, logo.svg, og.svg
 
 占位替换清单
@@ -36,7 +39,7 @@
 - 特性文案: components/Features.tsx 的 FEATURES 常量
 - 用户声音: components/Voices.tsx 的 TESTIMONIALS 常量
 - SEO: app/layout.tsx 的 metadata/OG/Twitter/canonical；robots/sitemap/manifest 基础域名
-- 品牌色: tailwind.config.ts 中 brand 颜色
+- 品牌色: app/globals.css 中 --brand/--radius tokens
 
 推送脚本
 - 复制 .env.example 为 .env，设置：GIT_URL、REMOTE(默认origin)、BRANCH(默认main)

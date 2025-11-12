@@ -49,7 +49,7 @@ export const Voices = () => {
   }, [reduce]);
 
   return (
-    <section id="voices" className="mt-24 scroll-mt-24">
+    <section id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
       <SectionHeader title="用户声音" />
       <div className="relative rounded-brand border border-white/10 bg-white/5 p-3 backdrop-blur">
         <div
@@ -66,7 +66,7 @@ export const Voices = () => {
               viewport={{ once: true }}
               className="min-w-[280px] snap-start"
             >
-              <Card className="rounded-brand bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 shadow-md">
+              <Card className="rounded-brand bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md">
                 <CardBody className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center" aria-hidden>💬</div>
