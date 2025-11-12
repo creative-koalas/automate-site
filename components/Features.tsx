@@ -8,7 +8,7 @@ import { CORE_FEATURES } from "./data/features";
 export const Features = () => {
   const reduce = useReducedMotion();
   return (
-    <section id="features" className="mt-20 sm:mt-28" aria-labelledby="features-title">
+    <section className="mt-20 sm:mt-28" aria-labelledby="features-title">
       <SectionHeader id="features-title" title="主打特性" />
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {CORE_FEATURES.map((f, i) => (

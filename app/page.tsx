@@ -21,7 +21,9 @@ export default function Home() {
       <main id="main-content" className="mx-auto max-w-6xl px-4 py-12 sm:py-20">
         <Hero />
         <VideoSection />
-        {/* Large screens: immersive scroller; Small screens: fallback grid */}
+        {/* Anchor for both desktop scroller and mobile grid */}
+        <div id="features" className="h-0" />
+        {/* Desktop: immersive fullpage scroller; Mobile: fallback grid */}
         <div className="hidden md:block">
           <FeatureScroller />
         </div>

@@ -9,14 +9,13 @@ type Slide = typeof SCROLLER_SLIDES[number];
 
 export const FeatureScroller = () => {
   const reduce = useReducedMotion();
-  const containerRef = useRef<HTMLDivElement | null>(null);
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
 
+  // Observe slide visibility in the viewport (window-level scroll)
   useEffect(() => {
-    const rootEl = containerRef.current;
     const els = sectionRefs.current.filter(Boolean) as HTMLElement[];
-    if (!els.length || !rootEl) return;
+    if (!els.length) return;
     const io = new IntersectionObserver(
       (entries) => {
         const visible = entries
@@ -27,7 +26,7 @@ export const FeatureScroller = () => {
           if (idx !== -1) setActive(idx);
         }
       },
-      { root: rootEl, threshold: [0.5, 0.75, 0.9] }
+      { threshold: [0.55, 0.75, 0.9] }
     );
     els.forEach((el) => io.observe(el));
     return () => io.disconnect();
@@ -36,7 +35,10 @@ export const FeatureScroller = () => {
   const dotIndex = useMemo(() => {
     const slide = SCROLLER_SLIDES[active];
     if (!slide) return 0;
-    if (slide.kind === "feature") return SCROLLER_SLIDES.slice(0, active + 1).filter((s) => s.kind !== "interstitial").length - 1;
+    if (slide.kind === "feature")
+      return (
+        SCROLLER_SLIDES.slice(0, active + 1).filter((s) => s.kind !== "interstitial").length - 1
+      );
     if (slide.kind === "interstitial") return 2;
     return 3;
   }, [active]);
@@ -60,14 +62,9 @@ export const FeatureScroller = () => {
   };
 
   return (
-    <section id="features" aria-label="主打特性滚动展示" className="relative">
-      <div
-        ref={containerRef}
-        tabIndex={0}
-        onKeyDown={onKey}
-        aria-label="特性滚动容器（可用上下键切换）"
-        className="relative h-screen snap-y snap-mandatory overflow-y-scroll rounded-brand border border-white/10 bg-black/20 backdrop-blur supports-[backdrop-filter]:bg-black/30"
-      >
+    <section id="features-snap" aria-label="主打特性滚动展示" className="relative">
+      {/* Window-level fullpage slides. Each slide fills the viewport and snaps to start on desktop. */}
+      <div tabIndex={0} onKeyDown={onKey} aria-label="特性滚动容器（可用上下键切换）">
         {SCROLLER_SLIDES.map((s, i) => (
           <motion.section
             id={`slide-${s.key}`}
@@ -76,6 +73,7 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
+              // Full viewport height; enable snap on supported viewports via global css
               "snap-start h-screen flex items-center justify-center px-6 text-center",
               s.kind === "interstitial" ? "bg-black" : "bg-transparent"
             )}
@@ -83,7 +81,9 @@ export const FeatureScroller = () => {
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={{ amount: 0.6, once: false }}
             transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-            aria-label={s.kind === "interstitial" ? "One more thing 序章" : s.title ? s.title : undefined}
+            aria-label={
+              s.kind === "interstitial" ? "One more thing 序章" : s.title ? s.title : undefined
+            }
           >
             {s.kind === "interstitial" ? (
               <div className="space-y-6">
@@ -92,17 +92,26 @@ export const FeatureScroller = () => {
               </div>
             ) : (
               <div className="max-w-2xl space-y-6">
-                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
+                <div
+                  className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl"
+                  aria-hidden
+                >
                   {s.icon}
                 </div>
                 <h3 className="text-4xl sm:text-5xl font-extrabold">{s.title}</h3>
-                {"desc" in s && s.desc && <p className="text-white/70 text-lg leading-7">{s.desc}</p>}
+                {"desc" in s && s.desc && (
+                  <p className="text-white/70 text-lg leading-7">{s.desc}</p>
+                )}
               </div>
             )}
           </motion.section>
         ))}
 
-        <nav aria-label="特性滚动导航" className="absolute right-4 top-1/2 -translate-y-1/2 hidden sm:flex flex-col gap-3">
+        {/* Fixed dot nav on the viewport (desktop) */}
+        <nav
+          aria-label="特性滚动导航"
+          className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3"
+        >
           {[0, 1, 2, 3].map((d) => (
             <button
               key={d}
@@ -112,7 +121,7 @@ export const FeatureScroller = () => {
               aria-controls={`slide-${SCROLLER_SLIDES[dotToSlideIndex(d)].key}`}
               onClick={() => gotoDot(d)}
               className={clsx(
-                "h-2 w-2 rounded-full bg-white/30 transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400", // tokens
+                "h-2 w-2 rounded-full bg-white/30 transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
                 dotIndex === d && "h-3 w-3 bg-white"
               )}
               title={`跳转到第 ${d + 1} 屏`}
