@@ -9,7 +9,11 @@
 
 测试
 - 单元测试：pnpm test（Vitest + Testing Library；已含 jsdom polyfills 与路径别名）
-- 端到端测试：先执行 pnpm preview，再执行 pnpm test:e2e（或在 CI 中自动执行）
+- 端到端测试（本地）：
+  1) 安装浏览器：npx playwright install --with-deps chromium
+  2) 启动预览：pnpm preview（另一个窗口）
+  3) 运行：pnpm test:e2e
+- 端到端测试（CI）：自动在 GitHub Actions 中执行
 
 结构
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
