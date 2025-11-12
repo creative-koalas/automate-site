@@ -2,6 +2,8 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useRef, useState } from "react";
+import { Surface } from "./Surface";
+import { SectionHeader } from "./SectionHeader";
 
 export const VideoSection = () => {
   const reduce = useReducedMotion();
@@ -54,7 +56,8 @@ export const VideoSection = () => {
       aria-busy={busy}
       role="region"
     >
-      <div className="relative aspect-video w-full overflow-hidden rounded-2xl border border-white/10 shadow-2xl">
+      <SectionHeader title="产品演示" />
+      <Surface className="relative aspect-video w-full overflow-hidden p-0">
         {busy && (
           <div
             aria-hidden
@@ -83,7 +86,7 @@ export const VideoSection = () => {
             </p>
           </div>
         )}
-      </div>
+      </Surface>
     </motion.section>
   );
 };

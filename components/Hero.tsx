@@ -3,6 +3,7 @@
 import { Button, Chip } from "@heroui/react";
 import Link from "next/link";
 import { motion, useReducedMotion } from "framer-motion";
+import { Surface } from "./Surface";
 
 export const Hero = () => {
   const reduce = useReducedMotion();
@@ -13,7 +14,7 @@ export const Hero = () => {
   return (
     <section className="relative grid items-center gap-10 sm:grid-cols-2">
       {/* Decorative gradient blobs */}
-      <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(59,130,246,0.35),transparent_60%)] blur-2xl" />
+      <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
       <div aria-hidden className="pointer-events-none absolute -bottom-24 -right-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(244,114,182,0.35),transparent_60%)] blur-2xl" />
 
       <div className="space-y-6">
@@ -60,16 +61,16 @@ export const Hero = () => {
         </div>
       </div>
 
-      {/* Visual panel placeholder */}
+      {/* Visual panel placeholder (unified Surface) */}
       <motion.div
         {...(reduce
           ? { initial: false, transition: { duration: 0 } }
           : { initial: { opacity: 0, scale: 0.98 }, whileInView: { opacity: 1, scale: 1 }, transition: { duration: 0.6 } })}
         viewport={{ once: true }}
-        className="hidden sm:block rounded-3xl border border-white/10 bg-white/5 backdrop-blur p-6 shadow-2xl"
-        aria-hidden
       >
-        <div className="aspect-video w-full rounded-xl bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.12))]" />
+        <Surface className="hidden sm:block p-6">
+          <div className="aspect-video w-full rounded-brand bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.12))]" />
+        </Surface>
       </motion.div>
     </section>
   );
