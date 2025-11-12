@@ -3,6 +3,8 @@
 :root {
   --background: #030712;
   --foreground: #e5e7eb;
+  --brand: #38bdf8; /* sky-400 */
+  --radius: 14px;
 }
 
 @theme inline {
@@ -28,10 +30,13 @@ html {
 }
 
 body {
-  background: var(--background);
+  background: radial-gradient(ellipse at top, rgba(56,189,248,0.1), transparent 50%), linear-gradient(to bottom,#020617 0%,#000 100%);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system;
 }
+
+/* rounded tokens */
+.rounded-brand { border-radius: var(--radius); }
 
 /* Accessibility: Skip link */
 .skip-link {

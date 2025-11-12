@@ -20,7 +20,11 @@ export const Navbar = () => {
     rootMargin: "-40% 0px -55% 0px",
   });
   return (
-    <UINavbar maxWidth="xl" className="bg-transparent" aria-label="主导航">
+    <UINavbar
+      maxWidth="xl"
+      className="bg-white/5 backdrop-blur border-b border-white/10 rounded-none"
+      aria-label="主导航"
+    >
       <NavbarBrand className="gap-3">
         <Image src="/logo.svg" alt="AI劳动力 Logo（占位）" width={28} height={28} className="invert" />
         <span className="text-lg font-semibold tracking-tight">AI劳动力</span>
