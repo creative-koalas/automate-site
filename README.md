@@ -5,13 +5,17 @@
 开发
 - 安装依赖：pnpm i
 - 本地运行：pnpm dev
-- 构建：pnpm build；预览：pnpm start
+- 构建：pnpm build；预览：pnpm preview
+
+测试
+- 单元测试：pnpm test（Vitest + Testing Library；已含 jsdom polyfills 与路径别名）
+- 端到端测试：先执行 pnpm preview，再执行 pnpm test:e2e（或在 CI 中自动执行）
 
 结构
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
 - app/page.tsx: 页面入口，拆分为 components/*
 - app/robots.ts, app/sitemap.ts, app/manifest.ts, app/not-found.tsx
-- components: NavBar, Hero, VideoSection, Features, Voices, Footer, JsonLd
+- components: NavBar, Hero, VideoSection, Features, Voices, Footer, JsonLd, ThemeToggle
 - public: favicon.svg, logo.svg, og.svg
 
 占位替换清单
@@ -27,5 +31,5 @@
 - 执行：pnpm push
 
 注意
-- 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效
-- 建议部署 Vercel 并开启预览环境（PR 构建预览）
+- 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效；支持 prefers-reduced-motion
+- 推荐部署：Vercel（自动预览/环境变量/域名）
