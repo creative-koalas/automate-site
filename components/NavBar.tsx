@@ -13,8 +13,12 @@ import {
   Button,
 } from "@heroui/react";
 import { ThemeToggle } from "./ThemeToggle";
+import { useScrollSpy } from "./hooks/useScrollSpy";
 
 export const Navbar = () => {
+  const activeId = useScrollSpy(["features", "voices"], {
+    rootMargin: "-40% 0px -55% 0px",
+  });
   return (
     <UINavbar maxWidth="xl" className="bg-transparent" aria-label="主导航">
       <NavbarBrand className="gap-3">
@@ -23,12 +27,20 @@ export const Navbar = () => {
       </NavbarBrand>
       <NavbarContent justify="end" className="hidden sm:flex">
         <NavbarItem>
-          <Link href="#features" className="text-sm text-white/80 hover:text-white">
+          <Link
+            href="#features"
+            className={`text-sm hover:text-white ${activeId === "features" ? "text-white" : "text-white/80"}`}
+            aria-current={activeId === "features" ? "page" : undefined}
+          >
             特性
           </Link>
         </NavbarItem>
         <NavbarItem>
-          <Link href="#voices" className="text-sm text-white/80 hover:text-white">
+          <Link
+            href="#voices"
+            className={`text-sm hover:text-white ${activeId === "voices" ? "text-white" : "text-white/80"}`}
+            aria-current={activeId === "voices" ? "page" : undefined}
+          >
             用户声音
           </Link>
         </NavbarItem>

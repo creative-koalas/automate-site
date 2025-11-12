@@ -24,9 +24,9 @@
 
 结构
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
-- app/page.tsx: 页面入口，拆分为 components/*
+- app/page.tsx: 页面入口，拆分为 components/*；附 BackToTop 与 #top 锚点
 - app/robots.ts, app/sitemap.ts, app/manifest.ts, app/not-found.tsx
-- components: NavBar, Hero, VideoSection, Features, Voices, Footer, JsonLd, ThemeToggle
+- components: NavBar(ScrollSpy 高亮), Hero, VideoSection(Skeleton/错误 fallback), Features, Voices(水平滚动), Footer, JsonLd, ThemeToggle, BackToTop
 - public: favicon.svg, logo.svg, og.svg
 
 占位替换清单
@@ -42,5 +42,5 @@
 - 执行：pnpm push
 
 注意
-- 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效；支持 prefers-reduced-motion
+- 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效；支持 prefers-reduced-motion；导航自动高亮当前锚点；支持返回顶部按钮
 - 推荐部署：Vercel（自动预览/环境变量/域名）
