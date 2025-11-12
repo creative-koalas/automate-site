@@ -35,18 +35,26 @@ export const Voices = () => {
       </motion.h2>
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {TESTIMONIALS.map((t, i) => (
-          <Card key={i} className="bg-white/5 backdrop-blur border border-white/10">
-            <CardBody className="space-y-4">
-              <div className="flex items-center gap-3">
-                <div className="h-10 w-10 rounded-full bg-white/10" />
-                <div>
-                  <p className="text-sm font-medium">{t.name}</p>
-                  <p className="text-xs text-white/60">{t.title}</p>
+          <motion.blockquote
+            key={i}
+            initial={{ opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: i * 0.05, duration: 0.5 }}
+          >
+            <Card className="bg-white/5 backdrop-blur border border-white/10">
+              <CardBody className="space-y-4">
+                <div className="flex items-center gap-3">
+                  <div className="h-10 w-10 rounded-full bg-white/10" />
+                  <div>
+                    <p className="text-sm font-medium">{t.name}</p>
+                    <p className="text-xs text-white/60">{t.title}</p>
+                  </div>
                 </div>
-              </div>
-              <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
-            </CardBody>
-          </Card>
+                <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
+              </CardBody>
+            </Card>
+          </motion.blockquote>
         ))}
       </div>
     </section>

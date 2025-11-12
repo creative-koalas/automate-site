@@ -8,23 +8,24 @@
 - 构建：pnpm build；预览：pnpm start
 
 结构
-- app/layout.tsx: 元数据、Provider
+- app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
 - app/page.tsx: 页面入口，拆分为 components/*
-- components: NavBar, Hero, VideoSection, Features, Voices, Footer
-- public/favicon.svg: 占位 favicon
+- app/robots.ts, app/sitemap.ts, app/manifest.ts, app/not-found.tsx
+- components: NavBar, Hero, VideoSection, Features, Voices, Footer, JsonLd
+- public: favicon.svg, logo.svg, og.svg
 
 占位替换清单
-- Logo: /public/logo.svg 或在 NavBar 中替换 Image 源
-- 视频: components/VideoSection.tsx 的 video src/poster
+- Logo: /public/logo.svg 或 NavBar 中 Image 源
+- 视频: components/VideoSection.tsx 的 src/poster
 - 特性文案: components/Features.tsx 的 FEATURES 常量
 - 用户声音: components/Voices.tsx 的 TESTIMONIALS 常量
-- SEO: app/layout.tsx 的 metadata/openGraph/twitter/metadataBase、icons
+- SEO: app/layout.tsx 的 metadata/OG/Twitter/canonical；robots/sitemap/manifest 基础域名
 - 品牌色: tailwind.config.ts 中 brand 颜色
 
 推送脚本
-- 设置环境变量：GIT_URL(远程仓库地址) REMOTE(默认origin) BRANCH(默认main)
+- 复制 .env.example 为 .env，设置：GIT_URL、REMOTE(默认origin)、BRANCH(默认main)
 - 执行：pnpm push
 
 注意
-- 默认深色科技风，已支持主题切换；动效已针对滚动进入与悬浮优化
-- 部署推荐 Vercel；也可使用任意支持 Node 的平台
+- 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效
+- 建议部署 Vercel 并开启预览环境（PR 构建预览）

@@ -14,7 +14,7 @@ export default function Home() {
         <Navbar />
       </header>
 
-      <main className="mx-auto max-w-6xl px-4 py-12 sm:py-20">
+      <main id="main-content" className="mx-auto max-w-6xl px-4 py-12 sm:py-20">
         <Hero />
         <VideoSection />
         <Features />

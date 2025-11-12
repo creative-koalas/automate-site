@@ -12,7 +12,7 @@ const FEATURES = [
   {
     title: "懂你",
     desc: "自研类脑记忆系统，在工作中持续进化，逐渐与你心有灵犀。",
-    icon: "🫱🏻‍🫲🏽",
+    icon: "🤝",
   },
   {
     title: "自然",
@@ -46,10 +46,11 @@ export const Features = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.05, duration: 0.5 }}
+            whileHover={{ y: -4 }}
           >
             <Card className="h-full bg-white/5 backdrop-blur border border-white/10">
               <CardHeader className="flex items-center gap-3">
-                <div className="text-2xl">{f.icon}</div>
+                <div className="text-2xl" aria-hidden>{f.icon}</div>
                 <h3 className="text-lg font-semibold">{f.title}</h3>
               </CardHeader>
               <CardBody>
