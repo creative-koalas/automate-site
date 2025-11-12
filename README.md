@@ -15,6 +15,13 @@
   3) 运行：pnpm test:e2e
 - 端到端测试（CI）：自动在 GitHub Actions 中执行
 
+部署
+- Vercel CLI（个人空间/Hobby 适用）：
+  export VERCEL_TOKEN=...; npx vercel --yes --name automate-site --token $VERCEL_TOKEN
+  再次部署生产可使用：npx vercel --prod --token $VERCEL_TOKEN（若报权限需将提交者加入项目或改用 Git 集成）
+- Vercel Git 集成（推荐）：在 Vercel 连接 GitHub 仓库 creative-koalas/automate-site，开启自动预览与生产部署
+- GitHub PAT 推送：PAT 需包含 workflow scope 才能推送 .github/workflows/**
+
 结构
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
 - app/page.tsx: 页面入口，拆分为 components/*
