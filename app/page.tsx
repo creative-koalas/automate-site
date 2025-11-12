@@ -3,6 +3,7 @@
 import { Navbar } from "@/components/NavBar";
 import { Hero } from "@/components/Hero";
 import { VideoSection } from "@/components/VideoSection";
+import { FeatureScroller } from "@/components/FeatureScroller";
 import { Features } from "@/components/Features";
 import { OneMoreThing } from "@/components/OneMoreThing";
 import { Voices } from "@/components/Voices";
@@ -20,8 +21,14 @@ export default function Home() {
       <main id="main-content" className="mx-auto max-w-6xl px-4 py-12 sm:py-20">
         <Hero />
         <VideoSection />
-        <Features />
-        <OneMoreThing />
+        {/* Large screens: immersive scroller; Small screens: fallback grid */}
+        <div className="hidden md:block">
+          <FeatureScroller />
+        </div>
+        <div className="md:hidden">
+          <Features />
+          <OneMoreThing />
+        </div>
         <Voices />
         <Footer />
       </main>
