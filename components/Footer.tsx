@@ -1,10 +1,12 @@
 "use client";
 
 import Link from "next/link";
+import { Divider } from "@heroui/react";
 
 export const Footer = () => {
   return (
-    <footer id="contact" className="mt-20 sm:mt-28 border-t border-white/10 py-10 text-center text-white/60">
+    <footer id="contact" className="mt-24 border-t border-white/10 py-12 text-center text-white/70">
+      <Divider className="mb-8 bg-white/10" />
       <nav aria-label="页脚导航" className="mb-4 flex items-center justify-center gap-6 text-sm">
         <Link href="#features" className="hover:text-white">特性</Link>
         <Link href="#voices" className="hover:text-white">用户声音</Link>

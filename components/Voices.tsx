@@ -48,7 +48,7 @@ export const Voices = () => {
   }, [reduce]);
 
   return (
-    <section id="voices" className="mt-20 sm:mt-28 scroll-mt-24">
+    <section id="voices" className="mt-24 scroll-mt-24">
       <motion.h2
         {...(reduce
           ? { initial: false, transition: { duration: 0 } }
@@ -60,32 +60,36 @@ export const Voices = () => {
       </motion.h2>
       <div
         ref={scrollerRef}
-        className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        aria-label="用户声音水平滚动列表"
+        className="relative rounded-2xl border border-white/10 bg-white/5 p-3 backdrop-blur"
       >
-        {TESTIMONIALS.map((t, i) => (
-          <motion.blockquote
-            key={i}
-            {...(reduce
-              ? { initial: false, transition: { duration: 0 } }
-              : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
-            viewport={{ once: true }}
-            className="min-w-[280px] snap-start"
-          >
-            <Card className="bg-white/5 backdrop-blur border border-white/10">
-              <CardBody className="space-y-4">
-                <div className="flex items-center gap-3">
-                  <div className="h-10 w-10 rounded-full bg-white/10" />
-                  <div>
-                    <p className="text-sm font-medium">{t.name}</p>
-                    <p className="text-xs text-white/60">{t.title}</p>
+        <div
+          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label="用户声音水平滚动列表"
+        >
+          {TESTIMONIALS.map((t, i) => (
+            <motion.blockquote
+              key={i}
+              {...(reduce
+                ? { initial: false, transition: { duration: 0 } }
+                : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
+              viewport={{ once: true }}
+              className="min-w-[280px] snap-start"
+            >
+              <Card className="bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 shadow-md">
+                <CardBody className="space-y-4">
+                  <div className="flex items-center gap-3">
+                    <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center" aria-hidden>💬</div>
+                    <div>
+                      <p className="text-sm font-medium">{t.name}</p>
+                      <p className="text-xs text-white/60">{t.title}</p>
+                    </div>
                   </div>
-                </div>
-                <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
-              </CardBody>
-            </Card>
-          </motion.blockquote>
-        ))}
+                  <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
+                </CardBody>
+              </Card>
+            </motion.blockquote>
+          ))}
+        </div>
       </div>
     </section>
   );
