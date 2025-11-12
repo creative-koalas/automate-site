@@ -24,4 +24,10 @@ if ! git remote | grep -q "^${REMOTE}$"; then
   git remote add "${REMOTE}" "${GIT_URL}"
 fi
 
+# Ensure branch exists remotely
+UPSTREAM_EXISTS=$(git ls-remote --heads "${REMOTE}" "${BRANCH}" | wc -l || true)
+if [ "${UPSTREAM_EXISTS}" -eq 0 ]; then
+  echo "Creating remote branch ${BRANCH} on ${REMOTE}"
+fi
+
 git push -u "${REMOTE}" "HEAD:${BRANCH}"
