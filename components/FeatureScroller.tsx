@@ -11,6 +11,8 @@ export const FeatureScroller = () => {
   const reduce = useReducedMotion();
   const sectionRefs = useRef<(HTMLElement | null)[]>([]);
   const [active, setActive] = useState(0);
+  const animatingRef = useRef(false);
+  const touchStartY = useRef<number | null>(null);
 
   // Observe slide visibility in the viewport (window-level scroll)
   useEffect(() => {
@@ -51,6 +53,48 @@ export const FeatureScroller = () => {
     if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   };
 
+  // Immediate step-on-wheel/touch for fluent feel
+  useEffect(() => {
+    if (reduce) return; // honor reduced motion
+
+    const onWheel = (e: WheelEvent) => {
+      if (Math.abs(e.deltaY) < 10) return;
+      e.preventDefault();
+      if (animatingRef.current) return;
+      animatingRef.current = true;
+      const dir = e.deltaY > 0 ? 1 : -1;
+      const next = Math.max(0, Math.min(3, dotIndex + dir));
+      gotoDot(next);
+      setTimeout(() => (animatingRef.current = false), 650);
+    };
+
+    const onTouchStart = (e: TouchEvent) => {
+      touchStartY.current = e.touches[0]?.clientY ?? null;
+    };
+    const onTouchEnd = (e: TouchEvent) => {
+      const start = touchStartY.current;
+      if (start == null) return;
+      const dy = start - (e.changedTouches[0]?.clientY ?? start);
+      if (Math.abs(dy) < 24) return;
+      if (animatingRef.current) return;
+      animatingRef.current = true;
+      const dir = dy > 0 ? 1 : -1;
+      const next = Math.max(0, Math.min(3, dotIndex + dir));
+      gotoDot(next);
+      setTimeout(() => (animatingRef.current = false), 650);
+      touchStartY.current = null;
+    };
+
+    window.addEventListener("wheel", onWheel, { passive: false });
+    window.addEventListener("touchstart", onTouchStart, { passive: true });
+    window.addEventListener("touchend", onTouchEnd, { passive: true });
+    return () => {
+      window.removeEventListener("wheel", onWheel as any);
+      window.removeEventListener("touchstart", onTouchStart as any);
+      window.removeEventListener("touchend", onTouchEnd as any);
+    };
+  }, [dotIndex, reduce]);
+
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown" || e.key === "PageDown") {
       e.preventDefault();
@@ -63,7 +107,7 @@ export const FeatureScroller = () => {
 
   return (
     <section id="features-snap" aria-label="主打特性滚动展示" className="relative">
-      {/* Window-level fullpage slides. Each slide fills the viewport and snaps to start on desktop. */}
+      {/* Window-level fullpage slides */}
       <div tabIndex={0} onKeyDown={onKey} aria-label="特性滚动容器（可用上下键切换）">
         {SCROLLER_SLIDES.map((s, i) => (
           <motion.section
@@ -73,7 +117,6 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
-              // Full viewport height; enable snap on supported viewports via global css
               "snap-start h-screen flex items-center justify-center px-6 text-center",
               s.kind === "interstitial" ? "bg-black" : "bg-transparent"
             )}
@@ -107,7 +150,7 @@ export const FeatureScroller = () => {
           </motion.section>
         ))}
 
-        {/* Fixed dot nav on the viewport (desktop) */}
+        {/* Fixed dot nav (desktop) */}
         <nav
           aria-label="特性滚动导航"
           className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3"
