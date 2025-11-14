@@ -5,12 +5,33 @@ import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
 
-const TESTIMONIALS = [
-  { name: "某行业客户 A", title: "CTO", quote: "接入后，让 AI 和同事一起排班，自动抄送、自动汇报，周转从天到小时。" },
-  { name: "某行业客户 B", title: "运营总监", quote: "复杂流程全链路自动化，跨系统拉通，人工占比下降 60%+。" },
-  { name: "某行业客户 C", title: "技术负责人", quote: "AutoMate...s 的多智能体协同带来了质的提升。" },
-  { name: "某行业客户 D", title: "产品经理", quote: "自然的交互体验让团队更乐于使用，反馈积极。" },
+type T = { name: string; title: string; quote: string; rating: number };
+
+const TESTIMONIALS: T[] = [
+  { name: "某行业客户 A", title: "CTO", quote: "接入后，让 AI 和同事一起排班，自动抄送、自动汇报，周转从天到小时。", rating: 5 },
+  { name: "某行业客户 B", title: "运营总监", quote: "复杂流程全链路自动化，跨系统拉通，人工占比下降 60%+。", rating: 5 },
+  { name: "某行业客户 C", title: "技术负责人", quote: "AutoMate...s 的多智能体协同带来了质的提升。", rating: 4.5 },
+  { name: "某行业客户 D", title: "产品经理", quote: "自然的交互体验让团队更乐于使用，反馈积极。", rating: 5 },
 ];
+
+function Stars({ value }: { value: number }) {
+  const full = Math.floor(value);
+  const half = value - full >= 0.5;
+  const empty = 5 - full - (half ? 1 : 0);
+  const items: string[] = [];
+  for (let i = 0; i < full; i++) items.push("★");
+  if (half) items.push("☆");
+  for (let i = 0; i < empty; i++) items.push("✩");
+  return (
+    <div className="flex items-center gap-1 text-[12px] leading-none text-amber-300" aria-label={`评分 ${value}/5`} role="img">
+      {items.map((s, i) => (
+        <span key={i} aria-hidden>
+          {s}
+        </span>
+      ))}
+    </div>
+  );
+}
 
 export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" | "blk2" }) => {
   const reduce = useReducedMotion();
@@ -35,7 +56,10 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
 
     let id: number | null = null;
     const step = () => {
-      if (!inView || paused) { id = requestAnimationFrame(step); return; }
+      if (!inView || paused) {
+        id = requestAnimationFrame(step);
+        return;
+      }
       el.scrollBy({ left: 1, behavior: "auto" });
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
         el.scrollTo({ left: 0, behavior: "auto" });
@@ -98,14 +122,17 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
             >
               <Card className={`rounded-brand backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md ${darker ? "bg-white/[0.06]" : "bg-gradient-to-b from-white/10 to-white/5"}`}>
                 <CardBody className="space-y-4">
-                  <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center text-white/80" aria-hidden>
-                      {(t.name || "用").slice(0,1)}
+                  <div className="flex items-center justify-between gap-3">
+                    <div className="flex items-center gap-3">
+                      <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center text-white/80" aria-hidden>
+                        {(t.name || "用").slice(0, 1)}
+                      </div>
+                      <div>
+                        <p className="text-sm font-medium">{t.name}</p>
+                        <p className="text-xs text-white/60">{t.title}</p>
+                      </div>
                     </div>
-                    <div>
-                      <p className="text-sm font-medium">{t.name}</p>
-                      <p className="text-xs text-white/60">{t.title}</p>
-                    </div>
+                    <Stars value={t.rating} />
                   </div>
                   <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
                 </CardBody>
