@@ -9,6 +9,7 @@ import { VideoSection } from "./VideoSection";
 import { Voices } from "./Voices";
 import { Footer } from "./Footer";
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 type Slide = typeof IMMERSIVE_SLIDES[number];
 
 export const FeatureScroller = () => {
@@ -118,7 +119,9 @@ export const FeatureScroller = () => {
   };
 
   return (
-    <section id="immersive" aria-label="沉浸式滚动" className={clsx("relative", variant !== "default" && "bg-black")}>
+    <section id="immersive" aria-label="沉浸式滚动" className={clsx("relative", variant !== "default" && "bg-black")}
+      style={{ scrollSnapType: "y proximity" }}
+    >
       <div tabIndex={0} onKeyDown={onKey} aria-label="沉浸式滚动容器">
         {IMMERSIVE_SLIDES.map((s, i) => (
           <motion.section
@@ -149,24 +152,35 @@ export const FeatureScroller = () => {
             )}
 
             {s.kind === "feature" && (
-              <div className="max-w-2xl space-y-6">
-                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
+              <div className="max-w-3xl w-full mx-auto sm:max-w-4xl">
+                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 ring-1 ring-white/15 text-3xl" aria-hidden>
                   {(s as any).icon ?? "★"}
                 </div>
-                <h3 className={clsx("font-extrabold text-white", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
-                <p className={clsx("text-lg leading-7", variant !== "default" ? "text-white/90" : "text-white/80")}>{(s as any).desc}</p>
+                <h3 className={clsx(
+                  "mt-6 font-extrabold text-white",
+                  variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl"
+                )}>
+                  {(s as any).title}
+                </h3>
+                <p className={clsx(
+                  "mt-4 text-lg leading-7 mx-auto",
+                  variant !== "default" ? "text-white/90" : "text-white/80"
+                )}>
+                  {(s as any).desc}
+                </p>
               </div>
             )}
 
             {s.kind === "interstitial" && (
-              <div className="space-y-6">
+              <div className="space-y-4 max-w-2xl mx-auto">
                 <p className="text-sm tracking-widest text-white/70 uppercase">One more thing...</p>
                 <h3 className="text-4xl sm:text-6xl font-extrabold text-white">准备好了吗</h3>
+                <p className="text-white/70">不是一句口号，是可以落地的自动化和协作。</p>
               </div>
             )}
 
             {s.kind === "final" && (
-              <div className="max-w-2xl space-y-6">
+              <div className="max-w-2xl space-y-6 mx-auto">
                 <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
                   {(s as any).icon ?? "∞"}
                 </div>
