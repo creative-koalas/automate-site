@@ -140,20 +140,20 @@ export const FeatureScroller = () => {
             transition={reduce ? { duration: 0 } : { duration: variant === "blk2" ? 0.35 : variant === "blk1" ? 0.45 : 0.6 }}
           >
             {s.kind === "hero" && (
-              <div className="w-full max-w-6xl mx-auto text-left">
+              <div className="w-full max-w-7xl mx-auto text-left">
                 <Hero variant={variant} />
               </div>
             )}
 
             {s.kind === "video" && (
-              <div className="w-full max-w-6xl mx-auto">
+              <div className="w-full max-w-7xl mx-auto">
                 <VideoSection />
               </div>
             )}
 
             {s.kind === "feature" && (
-              <div className="max-w-3xl w-full mx-auto sm:max-w-4xl">
-                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 ring-1 ring-white/15 text-3xl" aria-hidden>
+              <div className="max-w-4xl w-full mx-auto">
+                <div className="mx-auto h-14 w-14 sm:h-16 sm:w-16 grid place-items-center rounded-full bg-white/10 ring-1 ring-white/15 text-3xl" aria-hidden>
                   {(s as any).icon ?? "★"}
                 </div>
                 <h3 className={clsx(
@@ -163,7 +163,7 @@ export const FeatureScroller = () => {
                   {(s as any).title}
                 </h3>
                 <p className={clsx(
-                  "mt-4 text-lg leading-7 mx-auto",
+                  "mt-4 text-lg leading-7 mx-auto px-2 sm:px-4",
                   variant !== "default" ? "text-white/90" : "text-white/80"
                 )}>
                   {(s as any).desc}
@@ -172,7 +172,7 @@ export const FeatureScroller = () => {
             )}
 
             {s.kind === "interstitial" && (
-              <div className="space-y-4 max-w-2xl mx-auto">
+              <div className="space-y-4 max-w-2xl mx-auto px-2 sm:px-4">
                 <p className="text-sm tracking-widest text-white/70 uppercase">One more thing...</p>
                 <h3 className="text-4xl sm:text-6xl font-extrabold text-white">准备好了吗</h3>
                 <p className="text-white/70">不是一句口号，是可以落地的自动化和协作。</p>
@@ -180,7 +180,7 @@ export const FeatureScroller = () => {
             )}
 
             {s.kind === "final" && (
-              <div className="max-w-2xl space-y-6 mx-auto">
+              <div className="max-w-2xl space-y-6 mx-auto px-2 sm:px-4">
                 <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
                   {(s as any).icon ?? "∞"}
                 </div>
