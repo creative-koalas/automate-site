@@ -34,10 +34,13 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "chrome-launcher": "^1.2.1",
     "dotenv-cli": "^7.4.4",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "jsdom": "^27.2.0",
+    "lighthouse": "^13.0.1",
+    "puppeteer": "^24.30.0",
     "tailwindcss": "^4",
     "typescript": "^5",
     "vitest": "^4.0.8"
