@@ -5,6 +5,7 @@
   --foreground: #e5e7eb;
   --brand: #38bdf8; /* sky-400 */
   --radius: 14px;
+  --header-h: 56px;
 }
 
 @theme inline {
@@ -21,54 +22,34 @@
   }
 }
 
-html, body {
-  height: 100%;
-}
+html, body { height: 100%; }
 
-html {
-  scroll-behavior: smooth;
-}
+html { scroll-behavior: smooth; }
 
-/* Enable viewport-level scroll snapping on desktop; only slides with snap-align will snap */
+/* Viewport snapping (desktop), plus global scroll-padding for anchored sections */
 @media (min-width: 768px) {
-  html { scroll-snap-type: y proximity; /* relaxed, avoids aggressive auto jump */ }
+  html {
+    scroll-snap-type: y proximity; /* relaxed, avoids aggressive auto jump */
+    scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top));
+  }
 }
 
 body {
   background: radial-gradient(ellipse at top, rgba(56,189,248,0.1), transparent 50%), linear-gradient(to bottom,#020617 0%,#000 100%);
   color: var(--foreground);
   font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system;
+  padding-bottom: env(safe-area-inset-bottom);
 }
 
 /* rounded tokens */
 .rounded-brand { border-radius: var(--radius); }
 
 /* Accessibility: Skip link */
-.skip-link {
-  position: absolute;
-  left: -10000px;
-  top: auto;
-  width: 1px;
-  height: 1px;
-  overflow: hidden;
-}
-.skip-link:focus {
-  left: 1rem;
-  top: 1rem;
-  width: auto;
-  height: auto;
-  padding: 0.5rem 0.75rem;
-  background: #111827;
-  color: #fff;
-  border-radius: 0.5rem;
-  z-index: 50;
-}
+.skip-link { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
+.skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 0.75rem; background: #111827; color: #fff; border-radius: 0.5rem; z-index: 50; }
 
 /* Focus visible baseline for keyboard users */
-:focus-visible {
-  outline: 2px solid #7dd3fc; /* sky-300 */
-  outline-offset: 2px;
-}
+:focus-visible { outline: 2px solid #7dd3fc; /* sky-300 */ outline-offset: 2px; }
 
 /* Reduce motion preference: disable snapping and animations */
 @media (prefers-reduced-motion: reduce) {
