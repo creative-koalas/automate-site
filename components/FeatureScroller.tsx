@@ -45,14 +45,15 @@ export const FeatureScroller = () => {
     return () => io.disconnect();
   }, []);
 
-  const dotMap = [0, 1, 2, 3, 5];
+  // Include interstitial slide so it won't be skipped when scrolling
+  const dotMap = [0, 1, 2, 3, 4, 5];
   const dotIndex = useMemo(() => {
     const slide = IMMERSIVE_SLIDES[active]?.kind;
     if (slide === "hero") return 0;
     if (slide === "feature") return Math.min(3, Math.max(1, active));
-    if (slide === "interstitial") return 3;
-    if (slide === "final") return 4;
-    return 4;
+    if (slide === "interstitial") return 4;
+    if (slide === "final") return 5;
+    return 5;
   }, [active]);
 
   const gotoDot = (d: number) => {
