@@ -6,31 +6,16 @@ import { useEffect, useRef } from "react";
 import { SectionHeader } from "./SectionHeader";
 
 const TESTIMONIALS = [
-  {
-    name: "某行业客户 A",
-    title: "CTO",
-    quote: "接入后，让 AI 和同事一起排班，自动抄送、自动汇报，周转从天到小时。",
-  },
-  {
-    name: "某行业客户 B",
-    title: "运营总监",
-    quote: "复杂流程全链路自动化，跨系统拉通，人工占比下降 60%+。",
-  },
-  {
-    name: "某行业客户 C",
-    title: "技术负责人",
-    quote: "AutoMate...s 的多智能体协同带来了质的提升。",
-  },
-  {
-    name: "某行业客户 D",
-    title: "产品经理",
-    quote: "自然的交互体验让团队更乐于使用，反馈积极。",
-  },
+  { name: "某行业客户 A", title: "CTO", quote: "接入后，让 AI 和同事一起排班，自动抄送、自动汇报，周转从天到小时。" },
+  { name: "某行业客户 B", title: "运营总监", quote: "复杂流程全链路自动化，跨系统拉通，人工占比下降 60%+。" },
+  { name: "某行业客户 C", title: "技术负责人", quote: "AutoMate...s 的多智能体协同带来了质的提升。" },
+  { name: "某行业客户 D", title: "产品经理", quote: "自然的交互体验让团队更乐于使用，反馈积极。" },
 ];
 
-export const Voices = () => {
+export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" | "blk2" }) => {
   const reduce = useReducedMotion();
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const darker = variant !== "default";
 
   useEffect(() => {
     if (reduce) return;
@@ -51,7 +36,7 @@ export const Voices = () => {
   return (
     <section id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
       <SectionHeader id="voices-title" title="用户声音" />
-      <div className="relative rounded-brand border border-white/10 bg-white/5 p-3 backdrop-blur">
+      <div className={`relative rounded-brand border border-white/10 ${darker ? "bg-white/[0.04]" : "bg-white/5"} p-3 backdrop-blur`}>
         <div
           ref={scrollerRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
@@ -66,7 +51,7 @@ export const Voices = () => {
               viewport={{ once: true }}
               className="min-w-[280px] snap-start"
             >
-              <Card className="rounded-brand bg-gradient-to-b from-white/10 to-white/5 backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md">
+              <Card className={`rounded-brand backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md ${darker ? "bg-white/[0.06]" : "bg-gradient-to-b from-white/10 to-white/5"}`}>
                 <CardBody className="space-y-4">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center" aria-hidden>💬</div>
