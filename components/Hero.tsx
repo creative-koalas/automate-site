@@ -15,11 +15,11 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
     : {
         initial: { opacity: 0, y: 20 },
         whileInView: { opacity: 1, y: 0 },
-        transition: { duration: fast ? 0.4 : 0.6 },
+        transition: { duration: fast ? 0.35 : 0.55 },
       };
 
   return (
-    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6 py-16 sm:py-24">
+    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6 py-24 sm:py-28">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
@@ -46,36 +46,35 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
               : `${big ? "text-5xl sm:text-7xl" : "text-4xl sm:text-6xl"} font-extrabold tracking-tight text-white`
           }
         >
-          让 AI 成为你的同事
+          即插即用的 AI 劳动力，立刻为你开工
         </motion.h1>
         <motion.p
           {...(reduce
             ? common
-            : { initial: { opacity: 0, y: 10 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: 0.05, duration: fast ? 0.35 : 0.6 } })}
+            : { initial: { opacity: 0, y: 10 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: 0.05, duration: fast ? 0.3 : 0.5 } })}
           viewport={{ once: true }}
           className={`text-base ${big ? "sm:text-xl" : "sm:text-lg"} ${variant === "default" ? "text-white/70" : "text-white/80"} max-w-prose mx-auto sm:mx-0`}
         >
-          省心、懂你、自然。AutoMate...s 以群体智能与人机协同，让效率爆表。
+          面向产品/工程/运营的一体化自动化与协作，支持多智能体并行、可审计与人机共创。
         </motion.p>
         <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
-          <Button as={Link} href="#slide-ease" color="primary" radius="full" size={big ? "lg" : "md"}>
+          <Button as={Link} href="#contact" color="primary" radius="full" size={big ? "lg" : "md"}>
+            立即体验
+          </Button>
+          <Button as={Link} href="#contact" variant="bordered" radius="full" size={big ? "lg" : "md"} className="border-white/20 text-white">
+            免费试用
+          </Button>
+          <Button as={Link} href="#slide-ease" variant="light" radius="full" size={big ? "lg" : "md"} className="text-white/80">
             了解特性
-          </Button>
-          <Button as={Link} href="#slide-voices" variant="bordered" radius="full" size={big ? "lg" : "md"} className="border-white/20 text-white">
-            用户声音
-          </Button>
-          <Button as={Link} href="#contact" variant="light" radius="full" size={big ? "lg" : "md"} className="text-white/80">
-            联系我们 →
           </Button>
         </div>
       </div>
 
-      {/* Visual panel is hidden in blk2 for更黑/更快 */}
       {variant !== "blk2" && (
         <motion.div
           {...(reduce
             ? { initial: false, transition: { duration: 0 } }
-            : { initial: { opacity: 0, scale: 0.98 }, whileInView: { opacity: 1, scale: 1 }, transition: { duration: fast ? 0.4 : 0.6 } })}
+            : { initial: { opacity: 0, scale: 0.98 }, whileInView: { opacity: 1, scale: 1 }, transition: { duration: fast ? 0.35 : 0.55 } })}
           viewport={{ once: true }}
         >
           <Surface className="hidden sm:block p-0 overflow-hidden">
