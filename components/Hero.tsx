@@ -2,6 +2,7 @@
 
 import { Button, Chip } from "@heroui/react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Surface } from "./Surface";
 
@@ -70,7 +71,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </div>
       </div>
 
-      {/* Visual panel placeholder (hidden on blk2 for更黑) */}
+      {/* Visual panel (blk2 hides to maximize contrast/speed) */}
       {variant !== "blk2" && (
         <motion.div
           {...(reduce
@@ -78,8 +79,18 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
             : { initial: { opacity: 0, scale: 0.98 }, whileInView: { opacity: 1, scale: 1 }, transition: { duration: fast ? 0.4 : 0.6 } })}
           viewport={{ once: true }}
         >
-          <Surface className="hidden sm:block p-6">
-            <div className="aspect-video w-full rounded-brand bg-[linear-gradient(135deg,rgba(255,255,255,0.06),rgba(255,255,255,0.12))]" />
+          <Surface className="hidden sm:block p-0 overflow-hidden">
+            <div className="relative aspect-video w-full rounded-brand">
+              <Image
+                src="/og.svg"
+                alt="产品主视觉占位"
+                fill
+                sizes="(min-width: 640px) 50vw, 100vw"
+                className="object-contain"
+                priority
+                fetchPriority="high"
+              />
+            </div>
           </Surface>
         </motion.div>
       )}

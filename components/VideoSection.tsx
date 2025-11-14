@@ -1,6 +1,7 @@
 "use client";
 
 import { motion, useReducedMotion } from "framer-motion";
+import Image from "next/image";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Surface } from "./Surface";
 import { SectionHeader } from "./SectionHeader";
@@ -8,8 +9,10 @@ import { SectionHeader } from "./SectionHeader";
 export const VideoSection = () => {
   const reduce = useReducedMotion();
   const ref = useRef<HTMLVideoElement | null>(null);
+  const hostRef = useRef<HTMLElement | null>(null);
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [shouldLoad, setShouldLoad] = useState(false);
   const [src, setSrc] = useState<string>(
     "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
   );
@@ -24,29 +27,33 @@ export const VideoSection = () => {
   }, []);
 
   useEffect(() => {
-    if (reduce) return; // honor reduced motion: don't auto-play or observe
-    const el = ref.current;
-    if (!el) return;
+    // Only load/play when in view to reduce LCP/INP impact
+    const host = hostRef.current;
+    if (!host) return;
     const io = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            el.play().catch(() => {});
-          } else {
-            el.pause();
-          }
-        });
+        const vis = entries.some((e) => e.isIntersecting);
+        setShouldLoad((prev) => prev || vis); // latch to true once seen
+        const el = ref.current;
+        if (!el) return;
+        if (reduce) return; // respect reduced motion
+        if (vis) {
+          el.play().catch(() => {});
+        } else {
+          el.pause();
+        }
       },
       { threshold: 0.2 }
     );
-    io.observe(el);
+    io.observe(host);
     return () => io.disconnect();
   }, [reduce]);
 
-  const busy = !loaded && !error;
+  const busy = !loaded && !error && shouldLoad;
 
   return (
     <motion.section
+      ref={hostRef}
       initial={reduce ? undefined : { opacity: 0, scale: 0.98 }}
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
@@ -58,13 +65,16 @@ export const VideoSection = () => {
     >
       <SectionHeader id="video-title" title="产品演示" />
       <Surface className="relative aspect-video w-full overflow-hidden p-0">
-        {busy && (
-          <div
-            aria-hidden
-            className="absolute inset-0 animate-pulse bg-[linear-gradient(110deg,rgba(255,255,255,0.06),rgba(255,255,255,0.12),rgba(255,255,255,0.06))] bg-[length:200%_100%]"
+        {!shouldLoad ? (
+          <Image
+            src="/og.svg"
+            alt="产品演示占位图"
+            fill
+            sizes="100vw"
+            className="object-contain"
+            priority={false}
           />
-        )}
-        {!error ? (
+        ) : !error ? (
           <video
             ref={ref}
             className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
