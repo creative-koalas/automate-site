@@ -19,7 +19,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
       };
 
   return (
-    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6">
+    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6 py-16 sm:py-24">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
@@ -27,9 +27,9 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </>
       )}
 
-      <div className="space-y-6 w-full max-w-3xl mx-auto sm:mx-0">
+      <div className="space-y-6 w-full max-w-3xl mx-auto sm:mx-0 text-center sm:text-left">
         {variant === "default" && (
-          <motion.div {...common} viewport={{ once: true }} className="flex items-center gap-3">
+          <motion.div {...common} viewport={{ once: true }} className="flex items-center gap-3 justify-center sm:justify-start">
             <Chip color="primary" variant="flat" size="sm" radius="sm" className="bg-white/10 text-white">
               Beta
             </Chip>
@@ -53,11 +53,11 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
             ? common
             : { initial: { opacity: 0, y: 10 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: 0.05, duration: fast ? 0.35 : 0.6 } })}
           viewport={{ once: true }}
-          className={`text-base ${big ? "sm:text-xl" : "sm:text-lg"} ${variant === "default" ? "text-white/70" : "text-white/80"} max-w-prose`}
+          className={`text-base ${big ? "sm:text-xl" : "sm:text-lg"} ${variant === "default" ? "text-white/70" : "text-white/80"} max-w-prose mx-auto sm:mx-0`}
         >
           省心、懂你、自然。AutoMate...s 以群体智能与人机协同，让效率爆表。
         </motion.p>
-        <div className="flex flex-wrap gap-3">
+        <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
           <Button as={Link} href="#slide-ease" color="primary" radius="full" size={big ? "lg" : "md"}>
             了解特性
           </Button>
