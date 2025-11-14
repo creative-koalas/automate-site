@@ -2,7 +2,7 @@
 
 import { Card, CardBody } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
 
 const TESTIMONIALS = [
@@ -15,26 +15,44 @@ const TESTIMONIALS = [
 export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" | "blk2" }) => {
   const reduce = useReducedMotion();
   const scrollerRef = useRef<HTMLDivElement | null>(null);
+  const containerRef = useRef<HTMLElement | null>(null);
+  const [inView, setInView] = useState(false);
   const darker = variant !== "default";
 
   useEffect(() => {
     if (reduce) return;
     const el = scrollerRef.current;
-    if (!el) return;
+    const host = containerRef.current;
+    if (!el || !host) return;
+
     let id: any;
     const step = () => {
+      if (!inView) return; // pause when out of view
       el.scrollBy({ left: 1, behavior: "auto" });
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
         el.scrollTo({ left: 0, behavior: "auto" });
       }
       id = requestAnimationFrame(step);
     };
+
+    // Observe visibility of the section
+    const io = new IntersectionObserver(
+      (entries) => {
+        setInView(entries.some((e) => e.isIntersecting));
+      },
+      { threshold: 0.2 }
+    );
+    io.observe(host);
+
     id = requestAnimationFrame(step);
-    return () => cancelAnimationFrame(id);
-  }, [reduce]);
+    return () => {
+      cancelAnimationFrame(id);
+      io.disconnect();
+    };
+  }, [reduce, inView]);
 
   return (
-    <section id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
+    <section ref={containerRef} id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
       <SectionHeader id="voices-title" title="用户声音" />
       <div className={`relative rounded-brand border border-white/10 ${darker ? "bg-white/[0.04]" : "bg-white/5"} p-3 backdrop-blur`}>
         <div

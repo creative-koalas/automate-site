@@ -64,6 +64,12 @@ body {
   z-index: 50;
 }
 
+/* Focus visible baseline for keyboard users */
+:focus-visible {
+  outline: 2px solid #7dd3fc; /* sky-300 */
+  outline-offset: 2px;
+}
+
 /* Reduce motion preference: disable snapping and animations */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-snap-type: none !important; }
