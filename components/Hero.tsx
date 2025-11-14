@@ -19,7 +19,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
       };
 
   return (
-    <section className="relative grid items-center gap-10 lg:grid-cols-12 md:min-h-screen md:snap-start px-6 py-24 sm:py-28 max-w-7xl mx-auto">
+    <section className="relative grid items-center gap-10 lg:grid-cols-12 md:min-h-screen md:snap-start px-6 sm:px-8 py-24 sm:py-28 max-w-7xl mx-auto">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
@@ -41,8 +41,8 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
           viewport={{ once: true }}
           className={
             variant === "default"
-              ? "text-3xl sm:text-5xl font-extrabold tracking-tight bg-gradient-to-r from-sky-400 to-fuchsia-500 bg-clip-text text-transparent"
-              : `${big ? "text-5xl sm:text-7xl" : "text-4xl sm:text-6xl"} font-extrabold tracking-tight text-white`
+              ? "text-3xl sm:text-5xl font-extrabold tracking-tight leading-tight bg-gradient-to-r from-sky-400 to-fuchsia-500 bg-clip-text text-transparent"
+              : `${big ? "text-5xl sm:text-7xl" : "text-4xl sm:text-6xl"} font-extrabold tracking-tight leading-tight text-white`
           }
         >
           即插即用的 AI 劳动力，立刻为你开工

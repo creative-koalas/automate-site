@@ -67,8 +67,8 @@ export const FeatureScroller = () => {
   useEffect(() => {
     if (reduce) return;
 
-    const throttle = variant === "blk2" ? 420 : 560;
-    const threshold = 16;
+    const throttle = variant === "blk2" ? 400 : 540;
+    const threshold = 15;
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < threshold) return;
@@ -131,13 +131,14 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
-              "snap-start h-screen flex items-center justify-center px-6 scroll-mt-24 sm:scroll-mt-28",
+              "snap-start h-screen flex items-center justify-center px-6 sm:px-8 scroll-mt-24 sm:scroll-mt-28",
               s.kind === "interstitial" ? "text-center bg-black" : "text-center"
             )}
             initial={reduce ? undefined : { opacity: 0, y: 20 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
             viewport={{ amount: 0.6, once: false }}
-            transition={reduce ? { duration: 0 } : { duration: variant === "blk2" ? 0.35 : variant === "blk1" ? 0.45 : 0.6 }}
+            transition={reduce ? { duration: 0 } : { duration: variant === "blk2" ? 0.33 : variant === "blk1" ? 0.42 : 0.55 }}
+            aria-roledescription="分屏"
           >
             {s.kind === "hero" && (
               <div className="w-full max-w-7xl mx-auto text-left">
@@ -157,13 +158,13 @@ export const FeatureScroller = () => {
                   {(s as any).icon ?? "★"}
                 </div>
                 <h3 className={clsx(
-                  "mt-6 font-extrabold text-white",
+                  "mt-6 font-extrabold text-white leading-tight",
                   variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl"
                 )}>
                   {(s as any).title}
                 </h3>
                 <p className={clsx(
-                  "mt-4 text-lg leading-7 mx-auto px-2 sm:px-4",
+                  "mt-4 text-lg leading-7 mx-auto px-2 sm:px-4 max-w-prose",
                   variant !== "default" ? "text-white/90" : "text-white/80"
                 )}>
                   {(s as any).desc}
@@ -174,7 +175,7 @@ export const FeatureScroller = () => {
             {s.kind === "interstitial" && (
               <div className="space-y-4 max-w-2xl mx-auto px-2 sm:px-4">
                 <p className="text-sm tracking-widest text-white/70 uppercase">One more thing...</p>
-                <h3 className="text-4xl sm:text-6xl font-extrabold text-white">准备好了吗</h3>
+                <h3 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight">准备好了吗</h3>
                 <p className="text-white/70">不是一句口号，是可以落地的自动化和协作。</p>
               </div>
             )}
@@ -184,7 +185,7 @@ export const FeatureScroller = () => {
                 <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
                   {(s as any).icon ?? "∞"}
                 </div>
-                <h3 className={clsx("font-extrabold text-white", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
+                <h3 className={clsx("font-extrabold text-white leading-tight", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
                 <p className="text-white/90 text-lg leading-7">{(s as any).desc}</p>
               </div>
             )}
@@ -212,6 +213,7 @@ export const FeatureScroller = () => {
               aria-selected={dotIndex === d}
               aria-current={dotIndex === d}
               aria-controls={`slide-${IMMERSIVE_SLIDES[dotMap[d]].key}`}
+              aria-label={`跳转到 ${IMMERSIVE_SLIDES[dotMap[d]].key} 屏`}
               onClick={() => gotoDot(d)}
               className={clsx(
                 "h-2 w-2 rounded-full transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
