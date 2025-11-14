@@ -17,17 +17,18 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
   const scrollerRef = useRef<HTMLDivElement | null>(null);
   const containerRef = useRef<HTMLElement | null>(null);
   const [inView, setInView] = useState(false);
+  const [paused, setPaused] = useState(false);
   const darker = variant !== "default";
 
   useEffect(() => {
-    if (reduce) return;
+    if (reduce) return; // respect reduced motion
     const el = scrollerRef.current;
     const host = containerRef.current;
     if (!el || !host) return;
 
-    let id: any;
+    let id: number | null = null;
     const step = () => {
-      if (!inView) return; // pause when out of view
+      if (!inView || paused) { id = requestAnimationFrame(step); return; }
       el.scrollBy({ left: 1, behavior: "auto" });
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
         el.scrollTo({ left: 0, behavior: "auto" });
@@ -35,30 +36,40 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
       id = requestAnimationFrame(step);
     };
 
-    // Observe visibility of the section
-    const io = new IntersectionObserver(
-      (entries) => {
-        setInView(entries.some((e) => e.isIntersecting));
-      },
-      { threshold: 0.2 }
-    );
+    const io = new IntersectionObserver((entries) => {
+      setInView(entries.some((e) => e.isIntersecting));
+    }, { threshold: 0.2 });
     io.observe(host);
 
     id = requestAnimationFrame(step);
+
+    const onEnter = () => setPaused(true);
+    const onLeave = () => setPaused(false);
+    el.addEventListener("mouseenter", onEnter);
+    el.addEventListener("mouseleave", onLeave);
+    el.addEventListener("focusin", onEnter);
+    el.addEventListener("focusout", onLeave);
+
     return () => {
-      cancelAnimationFrame(id);
+      if (id) cancelAnimationFrame(id);
       io.disconnect();
+      el.removeEventListener("mouseenter", onEnter);
+      el.removeEventListener("mouseleave", onLeave);
+      el.removeEventListener("focusin", onEnter);
+      el.removeEventListener("focusout", onLeave);
     };
-  }, [reduce, inView]);
+  }, [reduce, inView, paused]);
 
   return (
-    <section ref={containerRef} id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title">
+    <section ref={containerRef} id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title" aria-roledescription="用户反馈">
       <SectionHeader id="voices-title" title="用户声音" />
       <div className={`relative rounded-brand border border-white/10 ${darker ? "bg-white/[0.04]" : "bg-white/5"} p-3 backdrop-blur`}>
         <div
           ref={scrollerRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          aria-label="用户声音水平滚动列表"
+          aria-label="用户反馈水平滚动列表"
+          role="list"
+          tabIndex={0}
         >
           {TESTIMONIALS.map((t, i) => (
             <motion.blockquote
@@ -68,6 +79,7 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
                 : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
               viewport={{ once: true }}
               className="min-w-[280px] snap-start"
+              role="listitem"
             >
               <Card className={`rounded-brand backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md ${darker ? "bg-white/[0.06]" : "bg-gradient-to-b from-white/10 to-white/5"}`}>
                 <CardBody className="space-y-4">

@@ -131,7 +131,7 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
-              "snap-start h-screen flex items-center justify-center px-6",
+              "snap-start h-screen flex items-center justify-center px-6 scroll-mt-24 sm:scroll-mt-28",
               s.kind === "interstitial" ? "text-center bg-black" : "text-center"
             )}
             initial={reduce ? undefined : { opacity: 0, y: 20 }}
