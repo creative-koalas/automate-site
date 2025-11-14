@@ -46,38 +46,32 @@ export const FeatureScroller = () => {
     return () => io.disconnect();
   }, []);
 
-  // Include video and interstitial explicitly in the navigation map
-  const dotMap = [0, 1, 2, 3, 4, 5, 6];
-  const dotIndex = useMemo(() => {
-    const slide = IMMERSIVE_SLIDES[active]?.kind;
-    if (slide === "hero") return 0;
-    if (slide === "video") return 1;
-    if (slide === "feature") return Math.min(4, Math.max(2, active));
-    if (slide === "interstitial") return 5;
-    if (slide === "final") return 6;
-    return 6;
-  }, [active]);
-
+  // Navigation covers all slides. Also expose safe next/prev helpers.
+  const dotMap = useMemo(() => IMMERSIVE_SLIDES.map((_, i) => i), []);
+  const dotIndex = active;
+  const safeIndex = (i: number) => Math.max(0, Math.min(dotMap.length - 1, i));
   const gotoDot = (d: number) => {
-    const idx = dotMap[d] ?? 0;
+    const idx = dotMap[safeIndex(d)] ?? 0;
     const el = sectionRefs.current[idx];
     if (el) el.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
   };
 
+  const gotoOffset = (offset: number) => gotoDot(dotIndex + offset);
+
   useEffect(() => {
     if (reduce) return;
 
-    const throttle = variant === "blk2" ? 400 : 540;
-    const threshold = 15;
+    const throttle = variant === "blk2" ? 380 : 520;
+    const threshold = 14;
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < threshold) return;
+      if (e.ctrlKey) return; // ignore pinch-zoom on some devices
       e.preventDefault();
       if (animatingRef.current) return;
       animatingRef.current = true;
       const dir = e.deltaY > 0 ? 1 : -1;
-      const next = Math.max(0, Math.min(dotMap.length - 1, dotIndex + dir));
-      gotoDot(next);
+      gotoOffset(dir);
       setTimeout(() => (animatingRef.current = false), throttle);
     };
 
@@ -92,8 +86,7 @@ export const FeatureScroller = () => {
       if (animatingRef.current) return;
       animatingRef.current = true;
       const dir = dy > 0 ? 1 : -1;
-      const next = Math.max(0, Math.min(dotMap.length - 1, dotIndex + dir));
-      gotoDot(next);
+      gotoOffset(dir);
       setTimeout(() => (animatingRef.current = false), throttle);
       touchStartY.current = null;
     };
@@ -106,15 +99,21 @@ export const FeatureScroller = () => {
       window.removeEventListener("touchstart", onTouchStart as any);
       window.removeEventListener("touchend", onTouchEnd as any);
     };
-  }, [dotIndex, reduce, variant]);
+  }, [dotIndex, reduce, variant, dotMap]);
 
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowDown" || e.key === "PageDown") {
       e.preventDefault();
-      gotoDot(Math.min(dotMap.length - 1, dotIndex + 1));
+      gotoOffset(1);
     } else if (e.key === "ArrowUp" || e.key === "PageUp") {
       e.preventDefault();
-      gotoDot(Math.max(0, dotIndex - 1));
+      gotoOffset(-1);
+    } else if (e.key === "End") {
+      e.preventDefault();
+      gotoDot(dotMap.length - 1);
+    } else if (e.key === "Home") {
+      e.preventDefault();
+      gotoDot(0);
     }
   };
 
@@ -175,8 +174,12 @@ export const FeatureScroller = () => {
             {s.kind === "interstitial" && (
               <div className="space-y-4 max-w-2xl mx-auto px-2 sm:px-4">
                 <p className="text-sm tracking-widest text-white/70 uppercase">One more thing...</p>
-                <h3 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight">准备好了吗</h3>
-                <p className="text-white/70">不是一句口号，是可以落地的自动化和协作。</p>
+                <h3 className="text-4xl sm:text-6xl font-extrabold text-white leading-tight">
+                  准备好了吗
+                </h3>
+                <p className="text-white/70">
+                  不是一句口号，是可以落地的自动化和协作。
+                </p>
               </div>
             )}
 
@@ -185,7 +188,9 @@ export const FeatureScroller = () => {
                 <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
                   {(s as any).icon ?? "∞"}
                 </div>
-                <h3 className={clsx("font-extrabold text-white leading-tight", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
+                <h3 className={clsx("font-extrabold text-white leading-tight", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>
+                  {(s as any).title}
+                </h3>
                 <p className="text-white/90 text-lg leading-7">{(s as any).desc}</p>
               </div>
             )}

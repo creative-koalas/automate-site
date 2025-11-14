@@ -1,6 +1,6 @@
 "use client";
 
-import { Card, CardBody } from "@heroui/react";
+import { Card, CardBody, Button as NButton } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 import { SectionHeader } from "./SectionHeader";
@@ -19,6 +19,13 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
   const [inView, setInView] = useState(false);
   const [paused, setPaused] = useState(false);
   const darker = variant !== "default";
+
+  const scrollByPage = (dir: 1 | -1) => {
+    const el = scrollerRef.current;
+    if (!el) return;
+    const step = Math.max(320, Math.floor(el.clientWidth * 0.85));
+    el.scrollBy({ left: dir * step, behavior: "smooth" });
+  };
 
   useEffect(() => {
     if (reduce) return; // respect reduced motion
@@ -50,6 +57,13 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
     el.addEventListener("focusin", onEnter);
     el.addEventListener("focusout", onLeave);
 
+    const onKey = (e: KeyboardEvent) => {
+      if (!el.contains(document.activeElement)) return;
+      if (e.key === "ArrowRight") scrollByPage(1);
+      else if (e.key === "ArrowLeft") scrollByPage(-1);
+    };
+    window.addEventListener("keydown", onKey);
+
     return () => {
       if (id) cancelAnimationFrame(id);
       io.disconnect();
@@ -57,6 +71,7 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
       el.removeEventListener("mouseleave", onLeave);
       el.removeEventListener("focusin", onEnter);
       el.removeEventListener("focusout", onLeave);
+      window.removeEventListener("keydown", onKey);
     };
   }, [reduce, inView, paused]);
 
@@ -84,7 +99,9 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
               <Card className={`rounded-brand backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md ${darker ? "bg-white/[0.06]" : "bg-gradient-to-b from-white/10 to-white/5"}`}>
                 <CardBody className="space-y-4">
                   <div className="flex items-center gap-3">
-                    <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center" aria-hidden>💬</div>
+                    <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center text-white/80" aria-hidden>
+                      {(t.name || "用").slice(0,1)}
+                    </div>
                     <div>
                       <p className="text-sm font-medium">{t.name}</p>
                       <p className="text-xs text-white/60">{t.title}</p>
@@ -95,6 +112,15 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
               </Card>
             </motion.blockquote>
           ))}
+        </div>
+        {/* Controls */}
+        <div className="pointer-events-none absolute inset-y-0 flex items-center justify-between px-2">
+          <NButton size="sm" radius="full" variant="flat" className="pointer-events-auto bg-white/10 text-white" aria-label="上一条" onPress={() => scrollByPage(-1)}>
+            ←
+          </NButton>
+          <NButton size="sm" radius="full" variant="flat" className="pointer-events-auto bg-white/10 text-white" aria-label="下一条" onPress={() => scrollByPage(1)}>
+            →
+          </NButton>
         </div>
       </div>
     </section>
