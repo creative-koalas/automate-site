@@ -61,18 +61,22 @@ export const FeatureScroller = () => {
   useEffect(() => {
     if (reduce) return;
 
-    const throttle = variant === "blk2" ? 380 : 520;
+    const throttle = variant === "blk2" ? 360 : 500;
     const threshold = 14;
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < threshold) return;
       if (e.ctrlKey) return; // ignore pinch-zoom on some devices
-      e.preventDefault();
-      if (animatingRef.current) return;
-      animatingRef.current = true;
       const dir = e.deltaY > 0 ? 1 : -1;
-      gotoOffset(dir);
-      setTimeout(() => (animatingRef.current = false), throttle);
+      const next = safeIndex(dotIndex + dir);
+      if (next !== dotIndex) {
+        e.preventDefault();
+        if (animatingRef.current) return;
+        animatingRef.current = true;
+        gotoDot(next);
+        setTimeout(() => (animatingRef.current = false), throttle);
+      }
+      // allow native scroll at ends
     };
 
     const onTouchStart = (e: TouchEvent) => {
@@ -130,7 +134,7 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
-              "snap-start h-screen flex items-center justify-center px-6 sm:px-8 scroll-mt-24 sm:scroll-mt-28",
+              "snap-start min-h-[100svh] flex items-center justify-center px-6 sm:px-8 scroll-mt-24 sm:scroll-mt-28",
               s.kind === "interstitial" ? "text-center bg-black" : "text-center"
             )}
             initial={reduce ? undefined : { opacity: 0, y: 20 }}
@@ -157,13 +161,13 @@ export const FeatureScroller = () => {
                   {(s as any).icon ?? "★"}
                 </div>
                 <h3 className={clsx(
-                  "mt-6 font-extrabold text-white leading-tight",
+                  "mt-4 font-extrabold text-white leading-tight",
                   variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl"
                 )}>
                   {(s as any).title}
                 </h3>
                 <p className={clsx(
-                  "mt-4 text-lg leading-7 mx-auto px-2 sm:px-4 max-w-prose",
+                  "mt-3 text-lg leading-7 mx-auto px-2 sm:px-4 max-w-prose",
                   variant !== "default" ? "text-white/90" : "text-white/80"
                 )}>
                   {(s as any).desc}

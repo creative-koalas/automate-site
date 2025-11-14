@@ -58,14 +58,14 @@ export const VideoSection = () => {
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-      className="relative flex items-center md:min-h-screen md:snap-start px-6 py-16 sm:py-20"
+      className="relative flex items-center justify-center min-h-[100svh] snap-start px-6 py-8 sm:py-10"
       aria-labelledby="video-title"
       aria-busy={busy}
       role="region"
     >
-      <div className="w-full max-w-6xl mx-auto">
+      <div className="w-full max-w-6xl mx-auto flex flex-col items-center">
         <SectionHeader id="video-title" title="产品演示" />
-        <Surface className="relative aspect-video w-full overflow-hidden p-0 mt-6 sm:mt-8 rounded-brand">
+        <Surface className="relative aspect-video w-full max-h-[72svh] overflow-hidden p-0 mt-4 sm:mt-6 rounded-brand">
           {!shouldLoad ? (
             <Image
               src="/og.svg"

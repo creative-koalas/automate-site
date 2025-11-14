@@ -19,7 +19,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
       };
 
   return (
-    <section className="relative grid items-center gap-10 lg:grid-cols-12 md:min-h-screen md:snap-start px-6 sm:px-8 py-24 sm:py-28 max-w-7xl mx-auto">
+    <section className="relative grid items-center gap-10 lg:grid-cols-12 px-6 sm:px-8 py-16 sm:py-20 max-w-7xl mx-auto">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
