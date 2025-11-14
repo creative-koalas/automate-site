@@ -116,7 +116,7 @@ export const FeatureScroller = () => {
   };
 
   return (
-    <section id="immersive" aria-label="沉浸式滚动" className={clsx("relative", variant !== "default" && "bg-black")}> 
+    <section id="immersive" aria-label="沉浸式滚动" className={clsx("relative", variant !== "default" && "bg-black")}>
       <div tabIndex={0} onKeyDown={onKey} aria-label="沉浸式滚动容器">
         {IMMERSIVE_SLIDES.map((s, i) => (
           <motion.section
@@ -146,53 +146,57 @@ export const FeatureScroller = () => {
             {s.kind === "feature" && (
               <div className="max-w-2xl space-y-6">
                 <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
-                  {/* icon */}
+                  {(s as any).icon ?? "★"}
                 </div>
-                <h3 className={clsx("font-extrabold", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
-                <p className={clsx("text-lg leading-7", variant !== "default" ? "text-white/80" : "text-white/70")}>{(s as any).desc}</p>
+                <h3 className={clsx("font-extrabold text-white", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
+                <p className={clsx("text-lg leading-7", variant !== "default" ? "text-white/90" : "text-white/80")}>{(s as any).desc}</p>
               </div>
             )}
 
             {s.kind === "interstitial" && (
               <div className="space-y-6">
-                <p className="text-sm tracking-widest text-white/60 uppercase">One more thing...</p>
+                <p className="text-sm tracking-widest text-white/70 uppercase">One more thing...</p>
                 <h3 className="text-4xl sm:text-6xl font-extrabold text-white">准备好了吗</h3>
               </div>
             )}
 
             {s.kind === "final" && (
               <div className="max-w-2xl space-y-6">
-                <h3 className={clsx("font-extrabold", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
-                <p className="text-white/80 text-lg leading-7">{(s as any).desc}</p>
+                <div className="mx-auto h-16 w-16 grid place-items-center rounded-full bg-white/10 text-3xl" aria-hidden>
+                  {(s as any).icon ?? "∞"}
+                </div>
+                <h3 className={clsx("font-extrabold text-white", variant === "blk2" ? "text-5xl sm:text-6xl" : "text-4xl sm:text-5xl")}>{(s as any).title}</h3>
+                <p className="text-white/90 text-lg leading-7">{(s as any).desc}</p>
               </div>
             )}
 
             {s.kind === "voices" && (
               <div className="w-full max-w-6xl mx-auto">
-                <Voices />
+                <Voices variant={variant} />
               </div>
             )}
 
             {s.kind === "footer" && (
               <div className="w-full max-w-6xl mx-auto">
-                <Footer />
+                <Footer variant={variant} />
               </div>
             )}
           </motion.section>
         ))}
 
-        <nav aria-label="滚动导航" className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3">
+        <nav role="tablist" aria-label="滚动导航" className="fixed right-4 top-1/2 -translate-y-1/2 hidden md:flex flex-col gap-3">
           {dotMap.map((_, d) => (
             <button
               key={d}
               type="button"
               role="tab"
               aria-selected={dotIndex === d}
+              aria-current={dotIndex === d}
               aria-controls={`slide-${IMMERSIVE_SLIDES[dotMap[d]].key}`}
               onClick={() => gotoDot(d)}
               className={clsx(
                 "h-2 w-2 rounded-full transition-all outline-none focus-visible:ring-2 focus-visible:ring-sky-400",
-                variant !== "default" ? "bg-white/40" : "bg-white/30",
+                variant !== "default" ? "bg-white/50" : "bg-white/40",
                 dotIndex === d && "h-3 w-3 bg-white"
               )}
               title={`跳转到第 ${d + 1} 屏`}
