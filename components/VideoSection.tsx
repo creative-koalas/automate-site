@@ -81,9 +81,11 @@ export const VideoSection = () => {
               className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
               src={src}
               muted={!reduce}
+              autoPlay={!reduce}
               playsInline
               loop={!reduce}
               controls
+              controlsList="nodownload"
               preload="metadata"
               poster="/og.svg"
               aria-label="产品演示视频（占位）"

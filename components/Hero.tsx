@@ -19,7 +19,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
       };
 
   return (
-    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6 py-24 sm:py-28">
+    <section className="relative grid items-center gap-10 lg:grid-cols-12 md:min-h-screen md:snap-start px-6 py-24 sm:py-28 max-w-7xl mx-auto">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
@@ -27,12 +27,11 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </>
       )}
 
-      <div className="space-y-6 w-full max-w-3xl mx-auto sm:mx-0 text-center sm:text-left">
+      {/* Left: Copy */}
+      <div className="space-y-6 w-full max-w-3xl mx-auto sm:mx-0 text-center sm:text-left lg:col-span-7">
         {variant === "default" && (
           <motion.div {...common} viewport={{ once: true }} className="flex items-center gap-3 justify-center sm:justify-start">
-            <Chip color="primary" variant="flat" size="sm" radius="sm" className="bg-white/10 text-white">
-              Beta
-            </Chip>
+            <Chip color="primary" variant="flat" size="sm" radius="sm" className="bg-white/10 text-white">Beta</Chip>
             <span className="text-white/60 text-sm">企业级 AI 劳动力平台</span>
           </motion.div>
         )}
@@ -58,32 +57,28 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
           面向产品/工程/运营的一体化自动化与协作，支持多智能体并行、可审计与人机共创。
         </motion.p>
         <div className="flex flex-wrap gap-3 justify-center sm:justify-start">
-          <Button as={Link} href="#contact" color="primary" radius="full" size={big ? "lg" : "md"}>
-            立即体验
-          </Button>
-          <Button as={Link} href="#contact" variant="bordered" radius="full" size={big ? "lg" : "md"} className="border-white/20 text-white">
-            免费试用
-          </Button>
-          <Button as={Link} href="#slide-ease" variant="light" radius="full" size={big ? "lg" : "md"} className="text-white/80">
-            了解特性
-          </Button>
+          <Button as={Link} href="#contact" color="primary" radius="full" size={big ? "lg" : "md"}>立即体验</Button>
+          <Button as={Link} href="#contact" variant="bordered" radius="full" size={big ? "lg" : "md"} className="border-white/20 text-white">免费试用</Button>
+          <Button as={Link} href="#slide-ease" variant="light" radius="full" size={big ? "lg" : "md"} className="text-white/80">了解特性</Button>
         </div>
       </div>
 
+      {/* Right: Visual (poster on desktop), hidden for blk2 for speed */}
       {variant !== "blk2" && (
         <motion.div
           {...(reduce
             ? { initial: false, transition: { duration: 0 } }
             : { initial: { opacity: 0, scale: 0.98 }, whileInView: { opacity: 1, scale: 1 }, transition: { duration: fast ? 0.35 : 0.55 } })}
           viewport={{ once: true }}
+          className="hidden lg:block lg:col-span-5"
         >
-          <Surface className="hidden sm:block p-0 overflow-hidden">
+          <Surface className="p-0 overflow-hidden">
             <div className="relative aspect-video w-full rounded-brand">
               <Image
                 src="/og.svg"
                 alt="产品主视觉占位"
                 fill
-                sizes="(min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 1024px) 40vw, 100vw"
                 className="object-contain"
                 priority
                 fetchPriority="high"
