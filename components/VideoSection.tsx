@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Surface } from "./Surface";
 import { SectionHeader } from "./SectionHeader";
 
@@ -58,45 +58,47 @@ export const VideoSection = () => {
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-      className="relative md:min-h-screen md:snap-start flex items-center mt-10 md:mt-0 scroll-mt-24"
+      className="relative flex items-center md:min-h-screen md:snap-start px-6 py-16 sm:py-20"
       aria-labelledby="video-title"
       aria-busy={busy}
       role="region"
     >
-      <SectionHeader id="video-title" title="产品演示" />
-      <Surface className="relative aspect-video w-full overflow-hidden p-0">
-        {!shouldLoad ? (
-          <Image
-            src="/og.svg"
-            alt="产品演示占位图"
-            fill
-            sizes="100vw"
-            className="object-contain"
-            priority={false}
-          />
-        ) : !error ? (
-          <video
-            ref={ref}
-            className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
-            src={src}
-            muted={!reduce}
-            playsInline
-            loop={!reduce}
-            controls
-            preload="metadata"
-            poster="/og.svg"
-            aria-label="产品演示视频（占位）"
-            onLoadedData={() => setLoaded(true)}
-            onError={() => setError("视频加载失败，请稍后重试。")}
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center bg-black/40 p-6 text-center text白/80">
-            <p className="max-w-md">
-              {error} 您可以稍后刷新页面，或联系团队索要演示视频链接。
-            </p>
-          </div>
-        )}
-      </Surface>
+      <div className="w-full max-w-6xl mx-auto">
+        <SectionHeader id="video-title" title="产品演示" />
+        <Surface className="relative aspect-video w-full overflow-hidden p-0 mt-6 sm:mt-8 rounded-brand">
+          {!shouldLoad ? (
+            <Image
+              src="/og.svg"
+              alt="产品演示占位图"
+              fill
+              sizes="100vw"
+              className="object-contain"
+              priority={false}
+            />
+          ) : !error ? (
+            <video
+              ref={ref}
+              className={`h-full w-full object-cover transition-opacity duration-500 ${loaded ? "opacity-100" : "opacity-0"}`}
+              src={src}
+              muted={!reduce}
+              playsInline
+              loop={!reduce}
+              controls
+              preload="metadata"
+              poster="/og.svg"
+              aria-label="产品演示视频（占位）"
+              onLoadedData={() => setLoaded(true)}
+              onError={() => setError("视频加载失败，请稍后重试。")}
+            />
+          ) : (
+            <div className="flex h-full w-full items-center justify-center bg-black/40 p-6 text-center text-white/80">
+              <p className="max-w-md">
+                {error} 您可以稍后刷新页面，或联系团队索要演示视频链接。
+              </p>
+            </div>
+          )}
+        </Surface>
+      </div>
     </motion.section>
   );
 };
