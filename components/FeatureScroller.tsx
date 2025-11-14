@@ -45,15 +45,16 @@ export const FeatureScroller = () => {
     return () => io.disconnect();
   }, []);
 
-  // Include interstitial slide so it won't be skipped when scrolling
-  const dotMap = [0, 1, 2, 3, 4, 5];
+  // Include video and interstitial explicitly in the navigation map
+  const dotMap = [0, 1, 2, 3, 4, 5, 6];
   const dotIndex = useMemo(() => {
     const slide = IMMERSIVE_SLIDES[active]?.kind;
     if (slide === "hero") return 0;
-    if (slide === "feature") return Math.min(3, Math.max(1, active));
-    if (slide === "interstitial") return 4;
-    if (slide === "final") return 5;
-    return 5;
+    if (slide === "video") return 1;
+    if (slide === "feature") return Math.min(4, Math.max(2, active));
+    if (slide === "interstitial") return 5;
+    if (slide === "final") return 6;
+    return 6;
   }, [active]);
 
   const gotoDot = (d: number) => {
@@ -65,8 +66,8 @@ export const FeatureScroller = () => {
   useEffect(() => {
     if (reduce) return;
 
-    const throttle = variant === "blk2" ? 400 : 550;
-    const threshold = 15;
+    const throttle = variant === "blk2" ? 420 : 560;
+    const threshold = 16;
 
     const onWheel = (e: WheelEvent) => {
       if (Math.abs(e.deltaY) < threshold) return;
@@ -86,7 +87,7 @@ export const FeatureScroller = () => {
       const start = touchStartY.current;
       if (start == null) return;
       const dy = start - (e.changedTouches[0]?.clientY ?? start);
-      if (Math.abs(dy) < 18) return;
+      if (Math.abs(dy) < 20) return;
       if (animatingRef.current) return;
       animatingRef.current = true;
       const dir = dy > 0 ? 1 : -1;
@@ -127,8 +128,8 @@ export const FeatureScroller = () => {
               sectionRefs.current[i] = el;
             }}
             className={clsx(
-              "snap-start h-screen flex items-center justify-center px-6 text-center",
-              s.kind === "interstitial" ? "bg-black" : variant !== "default" ? "bg-transparent" : "bg-transparent"
+              "snap-start h-screen flex items-center justify-center px-6",
+              s.kind === "interstitial" ? "text-center bg-black" : "text-center"
             )}
             initial={reduce ? undefined : { opacity: 0, y: 20 }}
             whileInView={reduce ? undefined : { opacity: 1, y: 0 }}
@@ -138,9 +139,12 @@ export const FeatureScroller = () => {
             {s.kind === "hero" && (
               <div className="w-full max-w-6xl mx-auto text-left">
                 <Hero variant={variant} />
-                <div className="mt-8">
-                  <VideoSection />
-                </div>
+              </div>
+            )}
+
+            {s.kind === "video" && (
+              <div className="w-full max-w-6xl mx-auto">
+                <VideoSection />
               </div>
             )}
 

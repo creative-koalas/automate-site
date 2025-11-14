@@ -19,8 +19,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
       };
 
   return (
-    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start">
-      {/* Decorative blobs (hidden in blk variants) */}
+    <section className="relative grid items-center gap-10 sm:grid-cols-2 md:min-h-screen md:snap-start px-6">
       {variant === "default" && (
         <>
           <div aria-hidden className="pointer-events-none absolute -top-24 -left-20 h-72 w-72 rounded-full bg-[radial-gradient(circle_at_center,rgba(56,189,248,0.35),transparent_60%)] blur-2xl" />
@@ -28,7 +27,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </>
       )}
 
-      <div className="space-y-6">
+      <div className="space-y-6 w-full max-w-3xl mx-auto sm:mx-0">
         {variant === "default" && (
           <motion.div {...common} viewport={{ once: true }} className="flex items-center gap-3">
             <Chip color="primary" variant="flat" size="sm" radius="sm" className="bg-white/10 text-white">
@@ -71,7 +70,7 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </div>
       </div>
 
-      {/* Visual panel (blk2 hides to maximize contrast/speed) */}
+      {/* Visual panel is hidden in blk2 for更黑/更快 */}
       {variant !== "blk2" && (
         <motion.div
           {...(reduce

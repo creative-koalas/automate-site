@@ -7,6 +7,7 @@ export const CORE_FEATURES: CoreFeature[] = [
 
 export type Slide =
   | { kind: "hero"; key: string }
+  | { kind: "video"; key: string }
   | { kind: "feature"; key: string; title: string; desc: string; icon: string }
   | { kind: "interstitial"; key: string }
   | { kind: "final"; key: string; title: string; desc: string; icon: string }
@@ -15,6 +16,7 @@ export type Slide =
 
 export const IMMERSIVE_SLIDES: Slide[] = [
   { kind: "hero", key: "hero" },
+  { kind: "video", key: "video" },
   { kind: "feature", ...CORE_FEATURES[0] },
   { kind: "feature", ...CORE_FEATURES[1] },
   { kind: "feature", ...CORE_FEATURES[2] },
