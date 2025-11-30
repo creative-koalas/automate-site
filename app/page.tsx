@@ -9,7 +9,6 @@ export default function Home() {
   useEffect(() => {
     if (typeof window !== "undefined") {
       window.scrollTo({ top: 0, left: 0, behavior: "auto" });
-      document.documentElement.style.scrollSnapType = "y proximity";
     }
   }, []);
 

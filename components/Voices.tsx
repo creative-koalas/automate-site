@@ -49,7 +49,8 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
   };
 
   useEffect(() => {
-    if (reduce) return; // respect reduced motion
+    const enableAutoScroll = false;
+    if (reduce || !enableAutoScroll) return; // keep static for poster mode
     const el = scrollerRef.current;
     const host = containerRef.current;
     if (!el || !host) return;

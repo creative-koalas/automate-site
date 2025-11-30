@@ -13,18 +13,15 @@ export const VideoSection = () => {
   const [loaded, setLoaded] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [shouldLoad, setShouldLoad] = useState(false);
-  const [src, setSrc] = useState<string>(
-    "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4"
-  );
-
-  useEffect(() => {
+  const [src] = useState<string>(() => {
     if (typeof window !== "undefined") {
       const url = new URL(window.location.href);
       if (url.searchParams.get("broken") === "1") {
-        setSrc("/non-existent-video.mp4");
+        return "/non-existent-video.mp4";
       }
     }
-  }, []);
+    return "https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4";
+  });
 
   useEffect(() => {
     // Only load/play when in view to reduce LCP/INP impact
@@ -58,7 +55,7 @@ export const VideoSection = () => {
       whileInView={reduce ? undefined : { opacity: 1, scale: 1 }}
       viewport={{ once: true }}
       transition={reduce ? { duration: 0 } : { duration: 0.6 }}
-      className="relative flex items-center justify-center min-h-[100svh] snap-start px-6 py-8 sm:py-10"
+      className="relative flex items-center justify-center min-h-[480px] px-6 py-8 sm:py-10"
       aria-labelledby="video-title"
       aria-busy={busy}
       role="region"

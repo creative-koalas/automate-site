@@ -26,14 +26,6 @@ html, body { height: 100%; }
 
 html { scroll-behavior: smooth; }
 
-/* Viewport snapping (desktop), plus global scroll-padding for anchored sections */
-@media (min-width: 768px) {
-  html {
-    scroll-snap-type: y proximity; /* relaxed, avoids aggressive auto jump */
-    scroll-padding-top: calc(var(--header-h) + env(safe-area-inset-top));
-  }
-}
-
 body {
   background: radial-gradient(ellipse at top, rgba(56,189,248,0.1), transparent 50%), linear-gradient(to bottom,#020617 0%,#000 100%);
   color: var(--foreground);
@@ -53,7 +45,6 @@ body {
 
 /* Reduce motion preference: disable snapping and animations */
 @media (prefers-reduced-motion: reduce) {
-  html { scroll-snap-type: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;

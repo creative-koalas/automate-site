@@ -4,7 +4,7 @@ import "@testing-library/jest-dom/vitest";
 if (typeof window !== "undefined") {
   // matchMedia
   if (!window.matchMedia) {
-    // @ts-ignore
+    // @ts-expect-error jsdom patch
     window.matchMedia = () => ({
       matches: false,
       media: "",
@@ -27,8 +27,8 @@ class MockIntersectionObserver {
   takeRecords(): IntersectionObserverEntry[] { return []; }
 }
 
-// @ts-ignore
+// @ts-expect-error jsdom patch
 if (typeof globalThis.IntersectionObserver === "undefined") {
-  // @ts-ignore
+  // @ts-expect-error jsdom patch
   globalThis.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
 }
