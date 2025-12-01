@@ -5,11 +5,17 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { ThemeSwitcher } from "./components/ThemeSwitcher";
 import { useRef } from "react";
 
+import type { Variants } from "framer-motion";
+
 // Animation Variants
 const fadeInUp = {
   hidden: { opacity: 0, y: 30 },
-  visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } },
-};
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.8, ease: "easeOut" as const },
+  },
+} satisfies Variants;
 
 const staggerContainer = {
   hidden: { opacity: 0 },
@@ -19,7 +25,7 @@ const staggerContainer = {
       staggerChildren: 0.2,
     },
   },
-};
+} satisfies Variants;
 
 export default function Home() {
   const targetRef = useRef(null);
