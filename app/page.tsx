@@ -53,14 +53,14 @@ export default function Home() {
             variants={fadeInUp}
             className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50"
           >
-            让 AutoMate <br />
+            工作交给<br />
             <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-              替你干活
+              AutoMate
             </span>
           </motion.h1>
 
           <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-default-500 max-w-2xl mx-auto mb-12">
-            释放创造力，将繁琐留给智能。
+            释放你的创造力，将繁琐留给AI。
           </motion.p>
         </motion.div>
         
@@ -97,8 +97,8 @@ export default function Home() {
             className="order-1"
           >
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              工作交给 <span className="text-purple-400">AutoMate</span>。<br />
-              句号。
+              把活派给 <span className="text-purple-400">AutoMate</span>。<br />
+              结束。
             </h2>
             <p className="text-lg text-default-500 mb-8">
               不再被琐事困扰。从文档处理到复杂的工作流，只需一个指令，剩下的交给我们。
@@ -189,7 +189,7 @@ export default function Home() {
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               AutoMate,<br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                感觉不像 AI。
+                不是程序。
               </span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
@@ -210,7 +210,7 @@ export default function Home() {
           >
             <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
               懂你，<br />
-              与你<span className="text-pink-400">心有灵犀</span>。
+              而且<span className="text-pink-400">越来越懂你</span>。
             </h2>
             <p className="text-lg text-default-500 mb-8">
               深度学习你的工作习惯，预判你的需求。比你更懂你想做什么。
@@ -278,7 +278,7 @@ export default function Home() {
                 <span className="bg-white text-black rounded-lg px-4 py-1 text-5xl md:text-7xl shadow-[0_0_30px_rgba(255,255,255,0.5)]">S</span>
               </h2>
               <p className="text-2xl text-indigo-300 font-light tracking-wide">
-                  不是一个AI，是一群AI。
+                  不是智能体，而是<span className="text-pink-400">智能群落</span>。
               </p>
            </motion.div>
 
@@ -347,7 +347,7 @@ export default function Home() {
 
               <motion.div variants={fadeInUp} className="space-y-10">
                 <h2 className="text-5xl md:text-7xl font-bold leading-tight tracking-tight">
-                    AGI 的曙光，<br />
+                    通用人工智能的曙光，<br />
                     从 <span className="text-purple-400">AutoMate</span> 开始。
                 </h2>
                 
