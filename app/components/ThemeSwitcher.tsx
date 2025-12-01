@@ -26,7 +26,11 @@ export const ThemeSwitcher = () => {
             <SunIcon className={className} />
           )
         }
-        onChange={(e) => setTheme(e.target.checked ? "dark" : "light")}
+        onChange={(e) => {
+          const next = e.target.checked ? "dark" : "light";
+          setTheme(next);
+          document.cookie = `theme=${next}; path=/; max-age=${60 * 60 * 24 * 365}`;
+        }}
       />
     </div>
   );

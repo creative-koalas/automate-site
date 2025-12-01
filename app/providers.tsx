@@ -3,9 +3,20 @@
 import { HeroUIProvider } from "@heroui/react";
 import { ThemeProvider as NextThemesProvider } from "next-themes";
 
-export function Providers({ children }: { children: React.ReactNode }) {
+export function Providers({
+  children,
+  initialTheme,
+}: {
+  children: React.ReactNode;
+  initialTheme: "light" | "dark";
+}) {
   return (
-    <NextThemesProvider attribute="class" defaultTheme="dark">
+    <NextThemesProvider
+      attribute="class"
+      defaultTheme={initialTheme}
+      enableSystem={false}
+      storageKey="theme"
+    >
       <HeroUIProvider>{children}</HeroUIProvider>
     </NextThemesProvider>
   );
