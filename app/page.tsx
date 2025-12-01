@@ -342,7 +342,7 @@ export default function Home() {
                         whileHover={{ y: -5 }}
                         className="p-8 bg-white/5 rounded-2xl border border-white/5 backdrop-blur-sm hover:bg-white/10 transition-colors"
                     >
-                       <p className="text-default-300 mb-6 font-light leading-relaxed">"{item.text}"</p>
+                       <p className="text-default-300 mb-6 font-light leading-relaxed">{item.text}</p>
                        <div className="flex items-center gap-3">
                           <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-purple-500 to-blue-500" />
                           <span className="text-sm font-medium text-white">{item.author}</span>
