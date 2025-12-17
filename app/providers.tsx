@@ -5,15 +5,13 @@ import { ThemeProvider as NextThemesProvider } from "next-themes";
 
 export function Providers({
   children,
-  initialTheme,
 }: {
   children: React.ReactNode;
-  initialTheme: "light" | "dark";
 }) {
   return (
     <NextThemesProvider
       attribute="class"
-      defaultTheme={initialTheme}
+      defaultTheme="dark"
       enableSystem={false}
       storageKey="theme"
     >
