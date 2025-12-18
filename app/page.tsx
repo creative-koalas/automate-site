@@ -366,14 +366,7 @@ export default function Home() {
               </motion.div>
            </motion.div>
 
-           <div className="pt-20 border-t border-white/5 text-default-400 text-sm flex flex-col md:flex-row justify-between items-center max-w-7xl mx-auto px-6">
-             <p>Copyright © 2025 AutoMate Inc.</p>
-             <div className="flex gap-6 mt-4 md:mt-0">
-                 <a href="#" className="hover:text-white transition-colors">Privacy</a>
-                 <a href="#" className="hover:text-white transition-colors">Terms</a>
-                 <a href="#" className="hover:text-white transition-colors">Twitter</a>
-             </div>
-           </div>
+           
         </footer>
       </div>
     </div>

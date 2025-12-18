@@ -28,7 +28,12 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        <Providers>{children}</Providers>
+        <Providers>
+          {children}
+          <div className="pt-20 border-t border-white/5 text-default-400 text-sm flex flex-col md:flex-row justify-center items-center max-w-7xl mx-auto px-6">
+            <p>© 2025 创意考拉 Psygo AI 劳动力 / 鄂ICP备2025165530号</p>
+          </div>
+        </Providers>
       </body>
     </html>
   );
