@@ -321,15 +321,34 @@ export default function Home() {
         {/* One More Thing */}
         <section className="py-40 flex flex-col items-center justify-center text-center relative">
           <div className="absolute inset-0 bg-radial-gradient from-white/5 to-transparent opacity-20" />
-          <motion.p 
-            initial={{ opacity: 0, scale: 0.8 }}
-            whileInView={{ opacity: 1, scale: 1 }}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
             viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 1.5, ease: "easeOut" }}
-            className="text-4xl md:text-6xl font-thin tracking-[0.2em] text-foreground/80 font-mono"
+            className="text-6xl md:text-8xl font-light tracking-tight text-foreground/90"
           >
-            One more thing...
-          </motion.p>
+            {"One more thing...".split("").map((char, index) => (
+              <motion.span
+                key={index}
+                variants={{
+                  hidden: { opacity: 0, y: 10, filter: "blur(4px)" },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    filter: "blur(0px)",
+                    transition: {
+                      duration: 0.3,
+                      delay: index * 0.03,
+                      ease: "easeOut",
+                    },
+                  },
+                }}
+                style={{ display: "inline-block" }}
+              >
+                {char === " " ? "\u00A0" : char}
+              </motion.span>
+            ))}
+          </motion.div>
         </section>
 
         {/* AutoMate S */}
