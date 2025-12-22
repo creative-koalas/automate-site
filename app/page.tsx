@@ -55,19 +55,15 @@ export default function Home() {
           variants={staggerContainer}
           className="relative z-10"
         >
-          <motion.h1
+          <motion.div
             variants={fadeInUp}
-            className="text-5xl md:text-8xl font-bold tracking-tighter mb-8 bg-clip-text text-transparent bg-gradient-to-b from-foreground to-foreground/50"
+            className="text-4xl md:text-6xl font-bold tracking-tight mb-8 text-default-600"
           >
-            工作交给<br />
-            <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">
-              AutoMate
-            </span>
-          </motion.h1>
-
-          <motion.p variants={fadeInUp} className="text-xl md:text-2xl text-default-500 max-w-2xl mx-auto mb-12">
-            释放你的创造力，将繁琐留给AI。
-          </motion.p>
+            <p className="mb-6">“给我一个git链接，还你一个生产级项目。”</p>
+            <p className="text-3xl md:text-5xl">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">—— Psygo，地球上最省心的AI程序员</span>
+            </p>
+          </motion.div>
         </motion.div>
         
         <motion.div
@@ -102,12 +98,15 @@ export default function Home() {
             variants={fadeInUp}
             className="order-1"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              把活派给 <span className="text-purple-400">AutoMate</span>。<br />
-              结束。
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              <span className="text-purple-400">“交给我吧，你不管了。”</span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
-              不再被琐事困扰。从文档处理到复杂的工作流，只需一个指令，剩下的交给我们。
+              作为新一代AI生命体，Psygo可以独立完成大型项目从产品设计、开发调试再到部署上线全流程，
+              并能像人一样通过Gitee等方式协作。
+              <br/>
+              <br/>
+              <span className="font-bold text-xl">正如Psygo所说的：“给我一个git链接，还你一个生产级项目。”</span>
             </p>
             <div className="flex gap-2">
                 <div className="h-1 w-24 bg-purple-500 rounded-full" />
@@ -192,14 +191,18 @@ export default function Home() {
             variants={fadeInUp}
             className="order-1 md:order-2"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              AutoMate,<br />
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                不是程序。
+                “我不是工具，我是工人！”
               </span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
-               它不冰冷，也不机械。如同与一位默契的老友协作，自然流畅，心领神会。
+              没有IDE。没有CLI。没有任何学习成本。
+              <br/>
+              你下载的App，本质是“微信 - 人类AI共用版”。
+              <br/>
+              <br/>
+              <span className="font-bold text-xl">Psygo可以往Gitee上推代码，可以往阿里云上部署产品...人用电脑能做的，他都能做。</span>
             </p>
             <div className="h-1 w-full max-w-md bg-gradient-to-r from-blue-500/50 to-transparent rounded-full" />
           </motion.div>
@@ -214,12 +217,16 @@ export default function Home() {
             variants={fadeInUp}
             className="order-1"
           >
-            <h2 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-              懂你，<br />
-              而且<span className="text-pink-400">越来越懂你</span>。
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              <span className="text-pink-400">“我可不只会写代码。”</span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
-              深度学习你的工作习惯，预判你的需求。比你更懂你想做什么。
+              Psygo是AI程序员，而不是只会写代码的AI编程工具。
+              <br/>
+              除了写代码，Psygo还会设计产品，调研技术栈，写文档，出报告...
+              <br/>
+              <br/>
+              <span className="text-xl font-bold">Psygo完成的不只是代码，更是一个完整项目的方方面面。</span>
             </p>
           </motion.div>
           
@@ -257,6 +264,57 @@ export default function Home() {
                     </div>
                 </div>
              </div>
+          </motion.div>
+        </section>
+
+        {/* Feature 4: Placeholder */}
+        <section className="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="order-2 md:order-1 aspect-square relative"
+          >
+             <Card className="w-full h-full bg-gradient-to-b from-zinc-900 to-black border border-white/10 shadow-2xl">
+                 <CardBody className="flex items-center justify-center p-0 overflow-hidden">
+                    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-orange-900/20 via-transparent to-transparent opacity-50" />
+                    <motion.div
+                        animate={{ y: [0, -10, 0] }}
+                        transition={{ repeat: Infinity, duration: 4, ease: "easeInOut" }}
+                        className="relative z-10"
+                    >
+                        <div className="w-64 h-32 bg-white/5 backdrop-blur-md rounded-2xl border border-white/10 p-4 flex gap-4 items-center">
+                             <div className="w-12 h-12 rounded-full bg-gradient-to-br from-orange-400 to-red-300" />
+                             <div className="space-y-2">
+                                <div className="h-2 w-32 bg-white/20 rounded-full" />
+                                <div className="h-2 w-20 bg-white/20 rounded-full" />
+                             </div>
+                        </div>
+                        <div className="absolute -top-6 -right-6 w-12 h-12 bg-orange-500/20 rounded-full blur-md" />
+                        <div className="absolute -bottom-8 -left-4 w-20 h-20 bg-red-500/10 rounded-full blur-xl" />
+                    </motion.div>
+                 </CardBody>
+             </Card>
+          </motion.div>
+
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            variants={fadeInUp}
+            className="order-1 md:order-2"
+          >
+            <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
+              <span className="text-orange-400">“我们一起成长。”</span>
+            </h2>
+            <p className="text-lg text-default-500 mb-8">
+              Psygo会在每一次工作中总结经验教训，变得越来越会干活，也和你越来越有默契。
+              <br/>
+              <br/>
+              <span className="text-xl font-bold">Psygo不是工具，而是会不断成长的智慧生命。</span>
+            </p>
+            <div className="h-1 w-full max-w-md bg-gradient-to-r from-orange-500/50 to-transparent rounded-full" />
           </motion.div>
         </section>
 
