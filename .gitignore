@@ -3,6 +3,9 @@
 # IDE user-specific files
 /.idea
 
+# output artifacts
+/public/legal
+
 # dependencies
 /node_modules
 /.pnp
