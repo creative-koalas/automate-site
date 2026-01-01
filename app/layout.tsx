@@ -29,7 +29,7 @@ export default function RootLayout({
         <footer className="py-12 border-t border-white/5">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <p className="text-sm text-[#86868b]">
-              © 2025 创意考拉 Psygo AI 劳动力
+              © 2026 创意考拉 Psygo AI 劳动力
             </p>
             <p className="text-xs text-[#86868b]/60 mt-2">
               鄂ICP备2025165530号

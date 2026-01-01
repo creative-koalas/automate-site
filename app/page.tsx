@@ -36,25 +36,25 @@ export default function Home() {
     <main>
       {/* Hero Section */}
       <section className="section glow">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.p
-            className="text-[#86868b] text-lg mb-6"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 1, delay: 0.2 }}
-          >
-            Alice，第一个 Psygo AI 劳动力
-          </motion.p>
+        <div className="max-w-6xl mx-auto text-center px-4">
           <motion.h1
             className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight leading-[1.1] mb-8"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.4 }}
+            transition={{ duration: 1, delay: 0.2 }}
           >
-            忘记AI智能体
+            忘记AI智能体。
             <br />
-            <span className="text-gradient-accent">迎接AI劳动力</span>
+            <span className="text-gradient-accent">迎接AI劳动力。</span>
           </motion.h1>
+          <motion.p
+            className="text-2xl md:text-3xl lg:text-4xl"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 1, delay: 0.6 }}
+          >
+            —— Alice，第一个 <span className="text-5xl md:text-7xl lg:text-8xl text-gradient-accent font-semibold">Psygo</span> AI 劳动力
+          </motion.p>
         </div>
       </section>
 
@@ -67,13 +67,13 @@ export default function Home() {
             Alice
           </motion.p>
           <motion.blockquote
-            className="text-3xl md:text-4xl lg:text-5xl font-medium leading-snug mb-6"
+            className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-6"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <span className="text-[#86868b]">"有人督促才会工作的智能体，终究只是工具。</span>
             <br />
-            自己有主观能动性的AI劳动力，才能称为工人。"
+            自己有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主观能动性</span>的AI劳动力，才能称为工人。"
           </motion.blockquote>
           <motion.p
             className="text-lg text-[#86868b] mb-16 max-w-2xl"
@@ -82,7 +82,7 @@ export default function Home() {
           >
             对智能体来说，聊天框就是一切。
             <br />
-            对AI劳动力来说，那只是一个聊天框。
+            对AI劳动力来说...那只是一个框。
           </motion.p>
 
           {/* Image group: Phone + IDE + Computer */}
@@ -119,13 +119,13 @@ export default function Home() {
             Bob
           </motion.p>
           <motion.blockquote
-            className="text-3xl md:text-4xl lg:text-5xl font-medium leading-snug mb-16"
+            className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <span className="text-[#86868b]">"智能体的生命，在'任务'结束那一刻消亡；</span>
             <br />
-            AI劳动力，可以一直陪着你。"
+            AI劳动力，可以<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">一直陪着你</span>。"
           </motion.blockquote>
 
           {/* Chat history spanning 3 months */}
@@ -154,13 +154,13 @@ export default function Home() {
             Carol
           </motion.p>
           <motion.blockquote
-            className="text-3xl md:text-4xl lg:text-5xl font-medium leading-snug mb-16"
+            className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <span className="text-[#86868b]">"智能体不能持续学习。</span>
             <br />
-            AI劳动力，一直在学习。"
+            AI劳动力，<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">一直在学习</span>。"
           </motion.blockquote>
 
           {/* Screenshots showing skill improvement */}
@@ -197,13 +197,13 @@ export default function Home() {
             David
           </motion.p>
           <motion.blockquote
-            className="text-3xl md:text-4xl lg:text-5xl font-medium leading-snug mb-16"
+            className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <span className="text-[#86868b]">"智能体才会炫耀自己支持多少工具。</span>
             <br />
-            而劳动力，天然就可以使用和创造任何工具。"
+            而AI劳动力，天然就可以使用和创造<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">任何工具</span>。"
           </motion.blockquote>
 
           {/* App icons grid */}
@@ -294,19 +294,17 @@ export default function Home() {
 
       <div className="section-divider" />
 
-      {/* Credits Section */}
+      {/* Memorial Section */}
       <section className="section">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <motion.h2
-            className="text-3xl md:text-4xl font-medium text-center mb-4"
+            className="text-2xl md:text-3xl font-medium text-center mb-16 text-[#86868b]"
             {...fadeInUp}
           >
-            没有这些 Psygo AI 劳动力，
-            <br />
-            就没有我们的今天。
+            Psygo的发布，离不开这些Psygo AI劳动力。
           </motion.h2>
           <motion.div
-            className="mt-16 space-y-8"
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
@@ -339,13 +337,13 @@ export default function Home() {
             ].map((ai, index) => (
               <motion.div
                 key={ai.name}
-                className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6 py-6 border-b border-white/5"
+                className="text-center"
                 {...stagger}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
               >
-                <span className="text-2xl font-medium min-w-[140px]">{ai.name}</span>
-                <span className="text-[#86868b] text-sm min-w-[160px]">{ai.period}</span>
-                <span className="text-[#86868b]">{ai.achievement}</span>
+                <p className="text-3xl md:text-4xl font-semibold mb-3">{ai.name}</p>
+                <p className="text-xl md:text-2xl text-[#86868b] mb-4">{ai.period}</p>
+                <p className="text-sm text-[#86868b]/60 leading-relaxed">{ai.achievement}</p>
               </motion.div>
             ))}
           </motion.div>
@@ -364,31 +362,24 @@ export default function Home() {
             千言万语，化作一句
           </motion.p>
 
-          {/* Central thank you message with faded praise around */}
+          {/* Word cloud style thank you */}
           <motion.div
-            className="relative py-20"
+            className="relative py-12"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            {/* Faded praise words */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="text-[#86868b]/20 text-sm md:text-base space-y-4 text-center leading-loose">
-                <p className="transform -translate-y-16 -translate-x-20">太厉害了</p>
-                <p className="transform translate-y-12 translate-x-24">你真棒</p>
-                <p className="transform -translate-y-8 translate-x-32">效率超高</p>
-                <p className="transform translate-y-20 -translate-x-28">专业</p>
-                <p className="transform -translate-y-24 translate-x-8">靠谱</p>
-                <p className="transform translate-y-4 -translate-x-40">优秀</p>
-              </div>
-            </div>
-
-            {/* Central message */}
-            <div className="relative z-10">
-              <p className="text-4xl md:text-5xl lg:text-6xl font-medium">
-                "麻烦你了Alice。
-                <br />
-                <span className="text-gradient-accent">谢谢。"</span>
-              </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-3">
+              <span className="text-[#86868b]/40 text-lg md:text-xl">太厉害了</span>
+              <span className="text-[#86868b]/30 text-base md:text-lg">效率超高</span>
+              <span className="text-[#86868b]/50 text-xl md:text-2xl">专业</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了Alice。</span>
+              <span className="text-[#86868b]/35 text-base md:text-lg">你真棒</span>
+              <span className="text-[#86868b]/45 text-lg md:text-xl">靠谱</span>
+              <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-gradient-accent">谢谢。</span>
+              <span className="text-[#86868b]/30 text-sm md:text-base">学到了</span>
+              <span className="text-[#86868b]/40 text-lg md:text-xl">优秀</span>
+              <span className="text-[#86868b]/35 text-base md:text-lg">厉害</span>
+              <span className="text-[#86868b]/25 text-sm md:text-base">牛</span>
             </div>
           </motion.div>
         </div>
@@ -397,16 +388,16 @@ export default function Home() {
       <div className="section-divider" />
 
       {/* Final CTA Section */}
-      <section className="section">
-        <div className="max-w-4xl mx-auto text-center">
+      <section className="section glow">
+        <div className="max-w-6xl mx-auto text-center px-4">
           <motion.h2
-            className="text-5xl md:text-7xl lg:text-8xl font-semibold tracking-tight mb-6"
+            className="text-7xl md:text-9xl lg:text-[12rem] font-bold tracking-tighter leading-none mb-4"
             {...fadeInUp}
           >
             2026
           </motion.h2>
           <motion.p
-            className="text-3xl md:text-4xl text-gradient-accent font-medium mb-16"
+            className="text-4xl md:text-6xl lg:text-7xl text-gradient-accent font-semibold mb-20"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
@@ -416,8 +407,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <button className="btn-primary text-lg">
-              点击这里，感受未来
+            <button className="group relative px-12 py-5 text-xl md:text-2xl font-medium rounded-full bg-white text-black hover:bg-[#f5f5f7] transition-all duration-300 hover:scale-105">
+              点击试用，感受未来
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#2997ff]/20 to-[#64d2ff]/20 blur-xl -z-10" />
             </button>
           </motion.div>
         </div>
