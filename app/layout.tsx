@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Providers } from "./providers";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +14,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Psygo - AI劳动力",
-  description: "全球首个AI劳动力",
+  description: "忘记AI智能体。迎接AI劳动力。",
 };
 
 export default function RootLayout({
@@ -24,16 +23,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        <Providers>
-          {children}
-          <div className="pt-20 border-t border-white/5 text-default-400 text-sm flex flex-col md:flex-row justify-center items-center max-w-7xl mx-auto px-6">
-            <p>© 2025 创意考拉 Psygo AI 劳动力 / 鄂ICP备2025165530号</p>
+    <html lang="zh-CN">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+        {children}
+        <footer className="py-12 border-t border-white/5">
+          <div className="max-w-5xl mx-auto px-6 text-center">
+            <p className="text-sm text-[#86868b]">
+              © 2025 创意考拉 Psygo AI 劳动力
+            </p>
+            <p className="text-xs text-[#86868b]/60 mt-2">
+              鄂ICP备2025165530号
+            </p>
           </div>
-        </Providers>
+        </footer>
       </body>
     </html>
   );
