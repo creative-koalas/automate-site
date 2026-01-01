@@ -59,9 +59,9 @@ export default function Home() {
             variants={fadeInUp}
             className="text-4xl md:text-6xl font-bold tracking-tight mb-8 text-default-600"
           >
-            <p className="mb-6">“给我一个git链接，还你一个生产级项目。”</p>
+            <p className="mb-6">“忘记AI智能体。迎接AI劳动力。”</p>
             <p className="text-3xl md:text-5xl">
-              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">—— Psygo，地球上最省心的AI程序员</span>
+              <span className="bg-gradient-to-r from-purple-400 to-pink-600 bg-clip-text text-transparent">—— Psygo，全球首个AI劳动力</span>
             </p>
           </motion.div>
         </motion.div>
@@ -99,15 +99,11 @@ export default function Home() {
             className="order-1"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-              <span className="text-purple-400">“交给我吧，你不管了。”</span>
+              <span className="text-purple-400">“我，永不失忆。”</span>
             </h2>
-            <p className="text-lg text-default-500 mb-8">
-              作为新一代AI生命体，Psygo可以独立完成大型项目从产品设计、开发调试再到部署上线全流程，
-              并能像人一样通过Gitee等方式协作。
-              <br/>
-              <br/>
-              <span className="font-bold text-xl">正如Psygo所说的：“给我一个git链接，还你一个生产级项目。”</span>
-            </p>
+            <div className="text-lg text-default-500 mb-8">
+              <span className="font-bold text-xl">与AI Agent不同，AI劳动力支持无限上下文。</span>
+            </div>
             <div className="flex gap-2">
                 <div className="h-1 w-24 bg-purple-500 rounded-full" />
                 <div className="h-1 w-12 bg-default-200 rounded-full" />
@@ -193,7 +189,7 @@ export default function Home() {
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-cyan-400">
-                “我不是工具，我是工人！”
+                “不是你找我。是我找你。”
               </span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
@@ -218,7 +214,7 @@ export default function Home() {
             className="order-1"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-              <span className="text-pink-400">“我可不只会写代码。”</span>
+              <span className="text-pink-400">“我，会一直自我革命。”</span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
               Psygo是AI程序员，而不是只会写代码的AI编程工具。
@@ -306,7 +302,7 @@ export default function Home() {
             className="order-1 md:order-2"
           >
             <h2 className="text-3xl md:text-5xl font-bold mb-6 leading-tight">
-              <span className="text-orange-400">“我们一起成长。”</span>
+              <span className="text-orange-400">“别的AI，没有时间概念。”</span>
             </h2>
             <p className="text-lg text-default-500 mb-8">
               Psygo会在每一次工作中总结经验教训，变得越来越会干活，也和你越来越有默契。
