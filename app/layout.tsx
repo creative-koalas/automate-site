@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "AutoMate - Let AI work for you",
-  description: "The dawn of AGI starts with AutoMate.",
+  title: "Psygo - AI劳动力",
+  description: "全球首个AI劳动力",
 };
 
 export default function RootLayout({
