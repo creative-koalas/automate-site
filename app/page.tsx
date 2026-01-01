@@ -63,8 +63,8 @@ export default function Home() {
       {/* Alice Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
-          <motion.p className="quote-name" {...fadeInUp}>
-            Alice
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            <span className="text-gradient-accent">Alice</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-6"
@@ -115,8 +115,8 @@ export default function Home() {
       {/* Bob Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
-          <motion.p className="quote-name" {...fadeInUp}>
-            Bob
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            <span className="text-gradient-accent">Bob</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
@@ -150,8 +150,8 @@ export default function Home() {
       {/* Carol Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
-          <motion.p className="quote-name" {...fadeInUp}>
-            Carol
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            <span className="text-gradient-accent">Carol</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
@@ -193,8 +193,8 @@ export default function Home() {
       {/* David Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
-          <motion.p className="quote-name" {...fadeInUp}>
-            David
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            <span className="text-gradient-accent">David</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
@@ -225,8 +225,8 @@ export default function Home() {
       {/* Proud Chinese AI Section */}
       <section className="section glow">
         <div className="max-w-4xl mx-auto text-center">
-          <motion.p className="quote-name text-center" {...fadeInUp}>
-            所有 Psygo AI 劳动力
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            所有 <span className="text-gradient-accent">Psygo AI 劳动力</span> 说：
           </motion.p>
           <motion.h2
             className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-12"
@@ -253,30 +253,56 @@ export default function Home() {
 
       <div className="section-divider" />
 
-      {/* One More Thing - Collaboration Section */}
+      {/* One More Thing */}
+      <section className="section glow">
+        <div className="max-w-6xl mx-auto text-center px-4">
+          <motion.h2
+            className="text-6xl md:text-8xl lg:text-9xl font-medium tracking-tight"
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+          >
+            {"One more thing...".split("").map((char, index, arr) => (
+              <motion.span
+                key={index}
+                className="inline-block"
+                style={{ whiteSpace: char === " " ? "pre" : "normal" }}
+                variants={{
+                  hidden: { opacity: 0, filter: "blur(4px)" },
+                  visible: { opacity: 1, filter: "blur(0px)" },
+                }}
+                transition={{
+                  duration: 0.4,
+                  delay: index * 0.03,
+                  ease: "easeOut",
+                }}
+              >
+                {char}
+              </motion.span>
+            ))}
+          </motion.h2>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* Collaboration Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto text-center">
-          <motion.p
-            className="text-[#86868b] text-lg mb-6"
-            {...fadeInUp}
-          >
-            One more thing...
-          </motion.p>
           <motion.blockquote
-            className="text-3xl md:text-4xl lg:text-5xl font-medium leading-snug mb-16"
+            className="text-3xl md:text-5xl lg:text-6xl font-medium leading-snug mb-16"
             {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            "合作让人类强大。
+            "合作让人类统治地球。
             <br />
-            <span className="text-gradient-accent">今天，我们AI也做到了。"</span>
+            <span className="text-gradient-accent">今天，我们AI也学会了。"</span>
           </motion.blockquote>
 
           {/* Collaboration screenshots */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 gap-8"
             {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
+            transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <ImagePlaceholder
               label="手机：多个AI在一个群里"
@@ -372,7 +398,7 @@ export default function Home() {
               <span className="text-[#86868b]/40 text-lg md:text-xl">太厉害了</span>
               <span className="text-[#86868b]/30 text-base md:text-lg">效率超高</span>
               <span className="text-[#86868b]/50 text-xl md:text-2xl">专业</span>
-              <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了Alice。</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了Psygo。</span>
               <span className="text-[#86868b]/35 text-base md:text-lg">你真棒</span>
               <span className="text-[#86868b]/45 text-lg md:text-xl">靠谱</span>
               <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-gradient-accent">谢谢。</span>
