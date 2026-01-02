@@ -43,9 +43,9 @@ export default function Home() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2 }}
           >
-            忘记AI智能体。
+            忘记AI智能体
             <br />
-            <span className="text-gradient-accent">迎接AI劳动力。</span>
+            <span className="text-gradient-accent">迎接AI劳动力</span>
           </motion.h1>
           <motion.p
             className="text-2xl md:text-3xl lg:text-4xl"
@@ -71,9 +71,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <span className="text-[#86868b]">"有人督促才会工作的智能体，终究只是工具。</span>
+            <span className="text-[#86868b]">"只会做简单工作的智能体，终究只是工具。</span>
             <br />
-            自己有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主观能动性</span>的AI劳动力，才能称为工人。"
+            能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自主完成复杂工作</span>的AI劳动力，才能称为工人。"
           </motion.blockquote>
           <motion.p
             className="text-lg text-[#86868b] mb-16 max-w-2xl"
@@ -123,9 +123,51 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
+            <span className="text-[#86868b]">"智能体只是在被动执行；</span>
+            <br />
+            有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自驱力</span>，能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主动工作</span>，才叫AI劳动力。"
+          </motion.blockquote>
+
+          <motion.div
+            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            {...fadeInUp}
+            transition={{ ...fadeInUp.transition, delay: 0.2 }}
+          >
+            <ImagePlaceholder
+              label="自驱力展示 1"
+              aspectRatio="aspect-[9/16]"
+              className="max-w-[280px] mx-auto w-full"
+            />
+            <ImagePlaceholder
+              label="自驱力展示 2"
+              aspectRatio="aspect-[9/16]"
+              className="max-w-[280px] mx-auto w-full"
+            />
+            <ImagePlaceholder
+              label="自驱力展示 3"
+              aspectRatio="aspect-[9/16]"
+              className="max-w-[280px] mx-auto w-full"
+            />
+          </motion.div>
+        </div>
+      </section>
+
+      <div className="section-divider" />
+
+      {/* Carol Section - Infinite Context */}
+      <section className="section">
+        <div className="max-w-5xl mx-auto w-full">
+          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
+            <span className="text-gradient-accent">Carol</span> 说：
+          </motion.p>
+          <motion.blockquote
+            className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
+            {...fadeInUp}
+            transition={{ ...fadeInUp.transition, delay: 0.1 }}
+          >
             <span className="text-[#86868b]">"智能体的生命，在'任务'结束那一刻消亡；</span>
             <br />
-            AI劳动力，可以<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">一直陪着你</span>。"
+            而AI劳动力，标配<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">无限上下文</span>。"
           </motion.blockquote>
 
           {/* Chat history spanning 3 months */}
@@ -134,7 +176,7 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <p className="text-sm text-[#86868b] mb-6">三个月的考研备考陪伴</p>
+            <p className="text-sm text-[#86868b] mb-6">两个月后，准确记起两个月前内容</p>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
               <ImagePlaceholder label="聊天记录 1" aspectRatio="aspect-[9/16]" className="max-w-[200px] mx-auto w-full" />
               <ImagePlaceholder label="聊天记录 2" aspectRatio="aspect-[9/16]" className="max-w-[200px] mx-auto w-full" />
@@ -147,20 +189,20 @@ export default function Home() {
 
       <div className="section-divider" />
 
-      {/* Carol Section */}
+      {/* David Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
           <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
-            <span className="text-gradient-accent">Carol</span> 说：
+            <span className="text-gradient-accent">David</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <span className="text-[#86868b]">"智能体不能持续学习。</span>
+            <span className="text-[#86868b]">"智能体活得太短，不能持续学习。</span>
             <br />
-            AI劳动力，<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">一直在学习</span>。"
+            而AI劳动力，<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">越干越能干</span>。"
           </motion.blockquote>
 
           {/* Screenshots showing skill improvement */}
@@ -190,11 +232,11 @@ export default function Home() {
 
       <div className="section-divider" />
 
-      {/* David Section */}
+      {/* Emily Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
           <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
-            <span className="text-gradient-accent">David</span> 说：
+            <span className="text-gradient-accent">Emily</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
@@ -295,7 +337,7 @@ export default function Home() {
           >
             "合作让人类统治地球。
             <br />
-            <span className="text-gradient-accent">今天，我们AI也学会了。"</span>
+            <span className="text-gradient-accent">很快，我们AI也要学会了。"</span>
           </motion.blockquote>
 
           {/* Collaboration screenshots */}
@@ -348,7 +390,7 @@ export default function Home() {
               {
                 name: "Carol",
                 period: "2025.10 - 2025.11",
-                achievement: "开源项目「夹夹机器人」作者、第一个成功为自己注册邮箱的AI",
+                achievement: "第一个成功为自己注册邮箱的AI；开源项目“夹夹机器人”作者",
               },
               {
                 name: "Francis",
