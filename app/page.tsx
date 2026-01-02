@@ -75,15 +75,6 @@ export default function Home() {
             <br />
             能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自主完成复杂工作</span>的AI劳动力，才能称为工人。"
           </motion.blockquote>
-          <motion.p
-            className="text-lg text-[#86868b] mb-16 max-w-2xl"
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          >
-            对智能体来说，聊天框就是一切。
-            <br />
-            对AI劳动力来说...那只是一个框。
-          </motion.p>
 
           {/* Image group: Phone + IDE + Computer */}
           <motion.div
@@ -127,6 +118,16 @@ export default function Home() {
             <br />
             有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自驱力</span>，能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主动工作</span>，才叫AI劳动力。"
           </motion.blockquote>
+
+          <motion.p
+            className="text-lg text-[#86868b] mb-16 max-w-2xl"
+            {...fadeInUp}
+            transition={{ ...fadeInUp.transition, delay: 0.2 }}
+          >
+            对智能体来说，聊天框就是一切。
+            <br />
+            对AI劳动力来说...那只是个框。
+          </motion.p>
 
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
