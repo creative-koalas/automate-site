@@ -83,16 +83,16 @@ export default function Home() {
             transition={{ ...fadeInUp.transition, delay: 0.3 }}
           >
             <ul className="space-y-4 md:space-y-5 text-base md:text-xl lg:text-2xl text-[#86868b]">
-              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">1小时</span>，上线一个AI应用</li>
-              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">不是玩具</span>，而是一个<span className="text-white">生产级、有用的AI应用</span></li>
-              <li>从产品设计到<span className="text-white">部署上线</span>，<span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">全程无人类干预</span></li>
-              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">AI自主接入AI</span>、<span className="text-white">设计AI工作流</span>、<span className="text-white">接入数据库</span>、<span className="text-white">调试前后端</span>、<span className="text-white">上云部署</span></li>
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-[#1d1d1f] font-bold">1小时</span>，上线一个AI应用</li>
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-[#1d1d1f] font-bold">不是玩具</span>，而是一个<span className="text-[#1d1d1f]">生产级、有用的AI应用</span></li>
+              <li>从产品设计到<span className="text-[#1d1d1f]">部署上线</span>，<span className="text-xl md:text-3xl lg:text-4xl text-[#1d1d1f] font-bold">全程无人类干预</span></li>
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-[#1d1d1f] font-bold">AI自主接入AI</span>、<span className="text-[#1d1d1f]">设计AI工作流</span>、<span className="text-[#1d1d1f]">接入数据库</span>、<span className="text-[#1d1d1f]">调试前后端</span>、<span className="text-[#1d1d1f]">上云部署</span></li>
             </ul>
             <div className="flex flex-col items-center lg:items-end">
-              <p className="text-base md:text-lg font-medium text-white mb-4 text-center lg:text-right max-w-[300px]">
+              <p className="text-base md:text-lg font-medium text-[#1d1d1f] mb-4 text-center lg:text-right max-w-[300px]">
                 "Psygo，做一个AI八字分析App，接入DeepSeek，发布到网上"
               </p>
-              <div className="aspect-[9/16] max-w-[300px] w-full rounded-2xl overflow-hidden bg-black/20">
+              <div className="aspect-[9/16] max-w-[300px] w-full rounded-2xl overflow-hidden bg-black/5">
                 <video
                   className="w-full h-full object-cover"
                   autoPlay
@@ -483,9 +483,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <button className="group relative px-12 py-5 text-xl md:text-2xl font-medium rounded-full bg-white text-black hover:bg-[#f5f5f7] transition-all duration-300 hover:scale-105">
+            <button className="group relative px-12 py-5 text-xl md:text-2xl font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-all duration-300 hover:scale-105">
               点击试用，感受未来
-              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#2997ff]/20 to-[#64d2ff]/20 blur-xl -z-10" />
+              <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#0071e3]/30 to-[#64d2ff]/30 blur-xl -z-10" />
             </button>
           </motion.div>
         </div>

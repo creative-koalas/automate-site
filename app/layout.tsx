@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="zh-CN">
       <body className={`${inter.variable} antialiased`}>
         {children}
-        <footer className="py-12 border-t border-white/5">
+        <footer className="py-12 border-t border-black/5">
           <div className="max-w-5xl mx-auto px-6 text-center">
             <p className="text-sm text-[#86868b]">
               © 2026 创意考拉 Psygo AI 劳动力
