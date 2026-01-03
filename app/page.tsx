@@ -89,12 +89,9 @@ export default function Home() {
               <li><span className="text-xl md:text-3xl lg:text-4xl text-[#1d1d1f] font-bold">AI自主接入AI</span>、<span className="text-[#1d1d1f]">设计AI工作流</span>、<span className="text-[#1d1d1f]">接入数据库</span>、<span className="text-[#1d1d1f]">调试前后端</span>、<span className="text-[#1d1d1f]">上云部署</span></li>
             </ul>
             <div className="flex flex-col items-center lg:items-end">
-              <p className="text-base md:text-lg font-medium text-[#1d1d1f] mb-4 text-center lg:text-right max-w-[300px]">
-                "Psygo，做一个AI八字分析App，接入DeepSeek，发布到网上"
-              </p>
-              <div className="aspect-[9/16] max-w-[300px] w-full rounded-2xl overflow-hidden bg-black/5">
+              <div className="max-w-[220px] w-full rounded-2xl overflow-hidden bg-black/5">
                 <video
-                  className="w-full h-full object-cover"
+                  className="w-full h-auto"
                   autoPlay
                   loop
                   muted
@@ -103,6 +100,9 @@ export default function Home() {
                   <source src="/videos/alice-demo.mp4" type="video/mp4" />
                 </video>
               </div>
+              <p className="text-base md:text-lg font-medium text-[#1d1d1f] mt-6 text-center lg:text-right max-w-[300px]">
+                "Psygo，做一个AI八字分析App，接入DeepSeek，发布到网上"
+              </p>
             </div>
           </motion.div>
         </div>
@@ -126,36 +126,31 @@ export default function Home() {
             有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自驱力</span>，能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主动工作</span>，才叫AI劳动力。"
           </motion.blockquote>
 
-          <motion.p
-            className="text-lg text-[#86868b] mb-16 max-w-2xl"
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          >
-            对智能体来说，聊天框就是一切。
-            <br />
-            对AI劳动力来说...那只是个框。
-          </motion.p>
-
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <ImagePlaceholder
-              label="自驱力展示 1"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
-            <ImagePlaceholder
-              label="自驱力展示 2"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
-            <ImagePlaceholder
-              label="自驱力展示 3"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/passive-ai.jpg"
+                alt="传统AI截图"
+                className="max-w-[240px] w-full rounded-2xl"
+              />
+              <p className="text-lg md:text-xl lg:text-2xl text-[#86868b] mt-6 text-center">
+                以往的AI，需要你不断下命令
+              </p>
+            </div>
+            <div className="flex flex-col items-center">
+              <img
+                src="/images/active-ai.jpg"
+                alt="Psygo AI截图"
+                className="max-w-[240px] w-full rounded-2xl"
+              />
+              <p className="text-lg md:text-xl lg:text-2xl text-[#86868b] mt-6 text-center">
+                懂事的AI，会<span className="text-xl md:text-2xl lg:text-3xl text-[#1d1d1f] font-bold">自己找事做</span>
+              </p>
+            </div>
           </motion.div>
         </div>
       </section>
