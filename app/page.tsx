@@ -76,27 +76,30 @@ export default function Home() {
             能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自主完成复杂工作</span>的AI劳动力，才能称为工人。"
           </motion.blockquote>
 
-          {/* Image group: Phone + IDE + Computer */}
+          {/* Narrative + GIF */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-6"
+            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.3 }}
           >
-            <ImagePlaceholder
-              label="手机：任务发送后...AI交付结果"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
-            <ImagePlaceholder
-              label="IDE/浏览器：工作过程"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
-            <ImagePlaceholder
-              label="电脑：最终结果"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
+            <ul className="space-y-4 text-lg md:text-xl text-[#86868b]">
+              <li><span className="text-2xl md:text-3xl text-white font-bold">1小时</span>，上线一个AI应用</li>
+              <li><span className="text-2xl md:text-3xl text-white font-bold">不是玩具</span>，而是一个<span className="text-white">生产级、有用的AI应用</span></li>
+              <li>从产品设计到<span className="text-white">部署上线</span>，<span className="text-2xl md:text-3xl text-white font-bold">全程无人类干预</span></li>
+              <li><span className="text-2xl md:text-3xl text-white font-bold">AI自主接入AI</span>、<span className="text-white">设计AI工作流</span>、<span className="text-white">接入数据库</span>、<span className="text-white">调试前后端</span>、<span className="text-white">上云部署</span></li>
+            </ul>
+            <div className="aspect-[9/16] max-w-[300px] mx-auto lg:mx-0 lg:ml-auto w-full rounded-2xl overflow-hidden bg-black/20">
+              {/* Replace src with actual video path */}
+              <video
+                className="w-full h-full object-cover"
+                autoPlay
+                loop
+                muted
+                playsInline
+              >
+                <source src="/videos/alice-demo.mp4" type="video/mp4" />
+              </video>
+            </div>
           </motion.div>
         </div>
       </section>
