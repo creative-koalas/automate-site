@@ -78,27 +78,31 @@ export default function Home() {
 
           {/* Narrative + GIF */}
           <motion.div
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            className="grid grid-cols-1 lg:grid-cols-[1fr_auto] gap-8 items-center"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.3 }}
           >
-            <ul className="space-y-4 text-lg md:text-xl text-[#86868b]">
-              <li><span className="text-2xl md:text-3xl text-white font-bold">1小时</span>，上线一个AI应用</li>
-              <li><span className="text-2xl md:text-3xl text-white font-bold">不是玩具</span>，而是一个<span className="text-white">生产级、有用的AI应用</span></li>
-              <li>从产品设计到<span className="text-white">部署上线</span>，<span className="text-2xl md:text-3xl text-white font-bold">全程无人类干预</span></li>
-              <li><span className="text-2xl md:text-3xl text-white font-bold">AI自主接入AI</span>、<span className="text-white">设计AI工作流</span>、<span className="text-white">接入数据库</span>、<span className="text-white">调试前后端</span>、<span className="text-white">上云部署</span></li>
+            <ul className="space-y-4 md:space-y-5 text-base md:text-xl lg:text-2xl text-[#86868b]">
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">1小时</span>，上线一个AI应用</li>
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">不是玩具</span>，而是一个<span className="text-white">生产级、有用的AI应用</span></li>
+              <li>从产品设计到<span className="text-white">部署上线</span>，<span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">全程无人类干预</span></li>
+              <li><span className="text-xl md:text-3xl lg:text-4xl text-white font-bold">AI自主接入AI</span>、<span className="text-white">设计AI工作流</span>、<span className="text-white">接入数据库</span>、<span className="text-white">调试前后端</span>、<span className="text-white">上云部署</span></li>
             </ul>
-            <div className="aspect-[9/16] max-w-[300px] mx-auto lg:mx-0 lg:ml-auto w-full rounded-2xl overflow-hidden bg-black/20">
-              {/* Replace src with actual video path */}
-              <video
-                className="w-full h-full object-cover"
-                autoPlay
-                loop
-                muted
-                playsInline
-              >
-                <source src="/videos/alice-demo.mp4" type="video/mp4" />
-              </video>
+            <div className="flex flex-col items-center lg:items-end">
+              <p className="text-base md:text-lg font-medium text-white mb-4 text-center lg:text-right max-w-[300px]">
+                "Psygo，做一个AI八字分析App，接入DeepSeek，发布到网上"
+              </p>
+              <div className="aspect-[9/16] max-w-[300px] w-full rounded-2xl overflow-hidden bg-black/20">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                >
+                  <source src="/videos/alice-demo.mp4" type="video/mp4" />
+                </video>
+              </div>
             </div>
           </motion.div>
         </div>
