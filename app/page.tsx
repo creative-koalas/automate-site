@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 
@@ -28,6 +29,135 @@ function ImagePlaceholder({
   return (
     <div className={`image-placeholder ${aspectRatio} flex items-center justify-center ${className}`}>
       <span className="text-[#86868b] text-sm">{label}</span>
+    </div>
+  );
+}
+
+function ToolCompareSlider({
+  leftImage,
+  rightImage,
+  userMessage,
+  leftAssistantMessage,
+  rightAssistantMessage,
+  leftLabel,
+  rightLabel,
+  className = "",
+}: {
+  leftImage: string;
+  rightImage: string;
+  userMessage: string;
+  leftAssistantMessage: string;
+  rightAssistantMessage: string;
+  leftLabel?: string;
+  rightLabel?: string;
+  className?: string;
+}) {
+  const [sliderPosition, setSliderPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const isDragging = useRef(false);
+
+  const handleMove = useCallback((clientX: number) => {
+    if (!containerRef.current) return;
+    const rect = containerRef.current.getBoundingClientRect();
+    const x = clientX - rect.left;
+    const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+    setSliderPosition(percentage);
+  }, []);
+
+  const handleMouseDown = () => { isDragging.current = true; };
+  const handleMouseUp = () => { isDragging.current = false; };
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (isDragging.current) handleMove(e.clientX);
+  };
+  const handleTouchMove = (e: React.TouchEvent) => {
+    handleMove(e.touches[0].clientX);
+  };
+
+  return (
+    <div
+      ref={containerRef}
+      className={`relative select-none cursor-ew-resize ${className}`}
+      onMouseMove={handleMouseMove}
+      onMouseUp={handleMouseUp}
+      onMouseLeave={handleMouseUp}
+      onClick={(e) => handleMove(e.clientX)}
+    >
+      {/* Image comparison */}
+      <div className="relative overflow-hidden rounded-2xl">
+        {/* Right image (bottom layer) */}
+        <img src={rightImage} alt={rightLabel || ""} className="w-full h-auto block" draggable={false} />
+
+        {/* Left image (top layer, clipped) */}
+        <div className="absolute inset-0" style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}>
+          <img src={leftImage} alt={leftLabel || ""} className="w-full h-auto block" draggable={false} />
+        </div>
+
+        {/* Chat messages overlay */}
+        <div className="absolute inset-0 flex flex-col items-center justify-center gap-2 md:gap-4 pointer-events-none">
+          {/* User message bubble - centered, bottom-right corner sharp */}
+          <div className="w-[180px] md:w-[420px] lg:w-[520px] bg-[#0071e3]/60 backdrop-blur-sm text-white px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-br-sm shadow-lg">
+            <p className="text-xs md:text-xl lg:text-2xl font-medium text-center">{userMessage}</p>
+          </div>
+
+          {/* Assistant messages - full width, clipped by same slider position */}
+          <div className="w-full relative flex justify-center">
+            {/* Right assistant message (AI劳动力) - bottom layer, bottom-left corner sharp */}
+            <div
+              className="w-[180px] md:w-[420px] lg:w-[520px] bg-white/50 backdrop-blur-sm text-[#1d1d1f] px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-bl-sm shadow-lg"
+              style={{ opacity: sliderPosition < 100 ? 1 : 0 }}
+            >
+              <p className="text-xs md:text-xl lg:text-2xl font-medium text-center">{rightAssistantMessage}</p>
+            </div>
+
+            {/* Left assistant message (智能体) - top layer, clipped at same position as image */}
+            <div
+              className="absolute inset-0 flex justify-center"
+              style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
+            >
+              <div className="w-[180px] md:w-[420px] lg:w-[520px] bg-white/50 backdrop-blur-sm text-[#1d1d1f] px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-bl-sm shadow-lg">
+                <p className="text-xs md:text-xl lg:text-2xl font-medium text-center">{leftAssistantMessage}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Slider line */}
+        <div
+          className="absolute top-0 bottom-0 w-0.5 bg-white/80 shadow-lg"
+          style={{ left: `${sliderPosition}%`, transform: "translateX(-50%)" }}
+        >
+          {/* Slider handle */}
+          <div
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center cursor-ew-resize pointer-events-auto"
+            onMouseDown={handleMouseDown}
+            onTouchStart={handleMouseDown}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleMouseUp}
+          >
+            <svg className="w-5 h-5 text-[#1d1d1f]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 9l4-4 4 4M8 15l4 4 4-4" />
+            </svg>
+          </div>
+        </div>
+
+        {/* Labels */}
+        {leftLabel && (
+          <div
+            className="absolute top-4 left-4 px-3 py-1.5 md:px-4 md:py-2 bg-black/50 backdrop-blur-sm rounded-full text-white text-sm md:text-base lg:text-lg transition-opacity duration-200"
+            style={{ opacity: sliderPosition > 10 ? 1 : 0 }}
+          >
+            {leftLabel}
+          </div>
+        )}
+        {rightLabel && (
+          <div
+            className="absolute top-4 right-4 px-3 py-1.5 md:px-4 md:py-2 bg-black/50 backdrop-blur-sm rounded-full text-white text-sm md:text-base lg:text-lg transition-opacity duration-200"
+            style={{ opacity: sliderPosition < 90 ? 1 : 0 }}
+          >
+            {rightLabel}
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -252,14 +382,19 @@ export default function Home() {
             而AI劳动力，天然就可以使用和创造<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">任何工具</span>。"
           </motion.blockquote>
 
-          {/* App icons grid */}
+          {/* Tool comparison slider */}
           <motion.div
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
-            <ImagePlaceholder
-              label="各种App图标"
-              aspectRatio="aspect-[21/9]"
+            <ToolCompareSlider
+              leftImage="/images/mcp-gearbox.webp"
+              rightImage="/images/macos-desktop.jpeg"
+              userMessage="“你都支持哪些工具？”"
+              leftAssistantMessage="“我支持git，filesystem和fetch三个工具。”"
+              rightAssistantMessage="“这你不用担心。告诉我做什么就好，缺什么我自己装。”"
+              leftLabel="AI智能体"
+              rightLabel="AI劳动力"
               className="max-w-3xl mx-auto w-full"
             />
           </motion.div>
