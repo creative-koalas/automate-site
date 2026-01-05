@@ -81,14 +81,20 @@ function SuccessContent() {
           </motion.div>
 
           <motion.div
-            className="text-center mt-12"
+            className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 0.5, delay: 0.4 }}
           >
             <Link
+              href="/download"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-colors whitespace-nowrap"
+            >
+              下载Psygo管理员App
+            </Link>
+            <Link
               href="/"
-              className="inline-block px-8 py-4 text-lg font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-colors"
+              className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium rounded-full bg-[#f5f5f7] text-[#1d1d1f] hover:bg-[#e8e8ed] transition-colors whitespace-nowrap"
             >
               返回首页
             </Link>
