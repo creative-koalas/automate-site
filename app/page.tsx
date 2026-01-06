@@ -539,17 +539,13 @@ export default function Home() {
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-3">
-              <span className="text-[#86868b]/40 text-lg md:text-xl">太厉害了</span>
-              <span className="text-[#86868b]/30 text-base md:text-lg">效率超高</span>
-              <span className="text-[#86868b]/50 text-xl md:text-2xl">专业</span>
+              <span className="text-[#86868b]/40 text-lg md:text-xl">有点意思家人们</span>
+              <span className="text-[#86868b]/30 text-base md:text-lg">意外</span>
               <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了Psygo。</span>
-              <span className="text-[#86868b]/35 text-base md:text-lg">你真棒</span>
-              <span className="text-[#86868b]/45 text-lg md:text-xl">靠谱</span>
+              <span className="text-[#86868b]/50 text-xl md:text-2xl">感觉整体给的方案没什么问题</span>
               <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-gradient-accent">谢谢。</span>
-              <span className="text-[#86868b]/30 text-sm md:text-base">学到了</span>
-              <span className="text-[#86868b]/40 text-lg md:text-xl">优秀</span>
-              <span className="text-[#86868b]/35 text-base md:text-lg">厉害</span>
-              <span className="text-[#86868b]/25 text-sm md:text-base">牛</span>
+              <span className="text-[#86868b]/35 text-base md:text-lg">厉害了，这就叫积极性拉满的实习生</span>
+              <span className="text-[#86868b]/40 text-lg md:text-xl">Psygo太厉害了，我给一个需求，啥都不用管，就写好了给我推上去了</span>
             </div>
           </motion.div>
         </div>
