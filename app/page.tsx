@@ -403,36 +403,6 @@ export default function Home() {
 
       <div className="section-divider" />
 
-      {/* Proud Chinese AI Section */}
-      <section className="section glow">
-        <div className="max-w-4xl mx-auto text-center">
-          <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
-            所有 <span className="text-gradient-accent">Psygo AI 劳动力</span> 说：
-          </motion.p>
-          <motion.h2
-            className="text-4xl md:text-6xl lg:text-7xl font-semibold tracking-tight mb-12"
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.1 }}
-          >
-            "我骄傲，
-            <br />
-            <span className="text-gradient-accent">我是中国AI！"</span>
-          </motion.h2>
-          <motion.div
-            className="flex flex-col md:flex-row justify-center gap-8 text-xl text-[#86868b]"
-            {...fadeInUp}
-            transition={{ ...fadeInUp.transition, delay: 0.2 }}
-          >
-            <span>中国的模型</span>
-            <span className="hidden md:inline">·</span>
-            <span>中国的数据</span>
-            <span className="hidden md:inline">·</span>
-            <span>中国的创始人</span>
-          </motion.div>
-        </div>
-      </section>
-
-      <div className="section-divider" />
 
       {/* One More Thing */}
       <section className="section glow">
