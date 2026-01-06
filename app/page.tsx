@@ -202,9 +202,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <span className="text-[#86868b]">"只会做简单工作的智能体，终究只是工具。</span>
+            <span className="text-[#86868b]">“只会做简单工作的智能体，终究只是工具。</span>
             <br />
-            能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自主完成复杂工作</span>的AI劳动力，才能称为工人。"
+            能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自主完成复杂工作</span>的AI劳动力，才能称为工人。”
           </motion.blockquote>
 
           {/* Narrative + GIF */}
@@ -232,7 +232,7 @@ export default function Home() {
                 </video>
               </div>
               <p className="text-base md:text-lg font-medium text-[#1d1d1f] mt-6 text-center lg:text-right max-w-[300px]">
-                "Psygo，做一个AI八字分析App，接入DeepSeek，发布到网上"
+                “做一个AI八字分析App，接入DeepSeek，发布到网上”
               </p>
             </div>
           </motion.div>
@@ -252,9 +252,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <span className="text-[#86868b]">"智能体只是在被动执行；</span>
+            <span className="text-[#86868b]">“智能体只是在被动执行；</span>
             <br />
-            有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自驱力</span>，能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主动工作</span>，才叫AI劳动力。"
+            有<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">自驱力</span>，能<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">主动工作</span>，才叫AI劳动力。”
           </motion.blockquote>
 
           <motion.div
@@ -375,9 +375,9 @@ export default function Home() {
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <span className="text-[#86868b]">"智能体才会炫耀自己支持多少工具。</span>
+            <span className="text-[#86868b]">“智能体才会炫耀自己支持多少工具。</span>
             <br />
-            而AI劳动力，天然就可以使用和创造<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">任何工具</span>。"
+            而AI劳动力，天然就可以使用和创造<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">任何工具</span>。”
           </motion.blockquote>
 
           {/* Tool comparison slider */}
@@ -442,9 +442,9 @@ export default function Home() {
             className="text-3xl md:text-5xl lg:text-6xl font-medium leading-snug mb-16"
             {...fadeInUp}
           >
-            "合作让人类统治地球。
+            “合作让人类统治地球。
             <br />
-            <span className="text-gradient-accent">很快，我们AI也要学会了。"</span>
+            <span className="text-gradient-accent">很快，我们AI也要学会了。”</span>
           </motion.blockquote>
 
           {/* Collaboration screenshot */}
