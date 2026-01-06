@@ -191,6 +191,7 @@ export default function ApplyPage() {
                 <textarea
                   id="use_case"
                   name="use_case"
+                  required
                   value={formData.use_case}
                   onChange={handleChange}
                   placeholder="请描述您希望如何使用 Psygo AI 劳动力"
