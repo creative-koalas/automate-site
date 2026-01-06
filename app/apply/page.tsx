@@ -140,6 +140,7 @@ export default function ApplyPage() {
                   type="text"
                   id="company"
                   name="company"
+                  required
                   value={formData.company}
                   onChange={handleChange}
                   placeholder="例如：创意考拉"
@@ -155,6 +156,7 @@ export default function ApplyPage() {
                   <select
                     id="job_title"
                     name="job_title"
+                    required
                     value={formData.job_title}
                     onChange={handleChange}
                     className="w-full px-4 py-3 text-lg rounded-xl border border-black/10 bg-white focus:outline-none focus:border-[#0071e3] focus:ring-1 focus:ring-[#0071e3] transition-colors appearance-none cursor-pointer pr-10"
