@@ -41,7 +41,7 @@ export default function ApplyPage() {
         use_case: formData.use_case,
       };
 
-      const response = await fetch("https://psygoai.com/api/website/apply", {
+      const response = await fetch("https://api.psygoai.com/assistant/api/website/apply", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
