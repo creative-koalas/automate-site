@@ -289,7 +289,7 @@ export default function Home() {
       <div className="section-divider" />
 
       {/* Carol Section - Infinite Context */}
-      <section className="section">
+      {/* <section className="section">
         <div className="max-w-5xl mx-auto w-full">
           <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
             <span className="text-gradient-accent">Carol</span> 说：
@@ -304,7 +304,6 @@ export default function Home() {
             而AI劳动力，标配<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">无限上下文</span>。"
           </motion.blockquote>
 
-          {/* Chat history spanning 3 months */}
           <motion.div
             className="space-y-4"
             {...fadeInUp}
@@ -321,10 +320,10 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider" />
+      <div className="section-divider" /> */}
 
       {/* David Section */}
-      <section className="section">
+      {/* <section className="section">
         <div className="max-w-5xl mx-auto w-full">
           <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
             <span className="text-gradient-accent">David</span> 说：
@@ -339,7 +338,6 @@ export default function Home() {
             而AI劳动力，<span className="text-5xl md:text-7xl lg:text-8xl font-semibold">越干越能干</span>。"
           </motion.blockquote>
 
-          {/* Screenshots showing skill improvement */}
           <motion.div
             className="grid grid-cols-1 md:grid-cols-3 gap-6"
             {...fadeInUp}
@@ -364,13 +362,13 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="section-divider" />
+      <div className="section-divider" /> */}
 
       {/* Emily Section */}
       <section className="section">
         <div className="max-w-5xl mx-auto w-full">
           <motion.p className="text-2xl md:text-3xl lg:text-4xl font-medium mb-6" {...fadeInUp}>
-            <span className="text-gradient-accent">Emily</span> 说：
+            <span className="text-gradient-accent">Carol</span> 说：
           </motion.p>
           <motion.blockquote
             className="text-lg md:text-xl lg:text-2xl font-medium leading-relaxed mb-16"
