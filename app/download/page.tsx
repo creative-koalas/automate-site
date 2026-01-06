@@ -8,7 +8,7 @@ export default function DownloadPage() {
     {
       platform: "Windows",
       file: ".exe",
-      requirement: "Windows 10及以上",
+      requirement: "Windows 11及以上",
       url: "https://release.psygoai.com/release/windows/Psygo_Setup_latest.exe",
     },
     {
