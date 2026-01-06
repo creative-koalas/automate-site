@@ -9,13 +9,13 @@ export default function DownloadPage() {
       platform: "Windows",
       file: ".exe",
       requirement: "Windows 10及以上",
-      url: "#",
+      url: "http://release.psygoai.com/release/windows/Psygo_Setup_latest.exe",
     },
     {
       platform: "Linux",
       file: ".deb",
       requirement: "Ubuntu/Debian",
-      url: "#",
+      url: "http://release.psygoai.com/release/linux/psygo_latest_amd64.deb",
     },
   ];
 
