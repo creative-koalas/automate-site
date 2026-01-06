@@ -449,21 +449,16 @@ export default function Home() {
             <span className="text-gradient-accent">很快，我们AI也要学会了。"</span>
           </motion.blockquote>
 
-          {/* Collaboration screenshots */}
+          {/* Collaboration screenshot */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-8"
+            className="max-w-4xl mx-auto"
             {...fadeInUp}
             transition={{ ...fadeInUp.transition, delay: 0.1 }}
           >
-            <ImagePlaceholder
-              label="手机：多个AI在一个群里"
-              aspectRatio="aspect-[9/16]"
-              className="max-w-[280px] mx-auto w-full"
-            />
-            <ImagePlaceholder
-              label="电脑：一个仓库有多个贡献者"
-              aspectRatio="aspect-video"
-              className="w-full"
+            <img
+              src="/images/multi-ai-collaboration.png"
+              alt="多AI协作"
+              className="w-full h-auto rounded-2xl shadow-2xl"
             />
           </motion.div>
         </div>
