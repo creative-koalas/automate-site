@@ -120,6 +120,38 @@ Psygo 是一款自动化智能系统。在你授权的范围内，我们可能�
 
 我们可能会不时更新本隐私政策。更新后你继续使用服务的，即视为你接受更新后的隐私政策。
 
+## 十一、第三方SDK说明
+
+为实现相关功能，我们的应用集成了以下第三方SDK：
+
+### 支付类
+
+| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
+|---|---|---|---|---|
+| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | 查看 |
+
+### 一键登录类
+
+| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
+|---|---|---|---|---|
+| 号码认证-android | 阿里巴巴云计算（北京）有限公司 | 一键登录 | 手机号码、设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html) |
+| 移动认证SDK | 中移互联网有限公司 | 一键登录（移动网络） | 手机号码、设备信息、网络信息 | [查看](https://wap.cmpassport.com/resources/html/contract.html) |
+| 联通认证SDK | 联通在线信息科技有限公司 | 一键登录（联通网络） | 手机号码、设备信息、网络信息 | [查看](https://msv6.wosms.cn/html/oauth/protocol2.html) |
+| 电信认证SDK | 天翼数字生活科技有限公司 | 一键登录（电信网络） | 手机号码、设备信息、网络信息 | [查看](https://e.189.cn/sdk/agreement/detail.do?hiession=) |
+
+### 消息推送类
+
+| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
+|---|---|---|---|---|
+| 移动推送-android | 杭州阿里云智能科技有限公司 | 消息推送 | 设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html) |
+| 华为推送SDK | 华为软件技术有限公司 | 消息推送（华为设备） | 设备信息、网络信息 | [查看](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-security-0000001050042177) |
+| 小米推送 | 北京小米移动软件有限公司 | 消息推送（小米设备） | 设备信息、网络信息 | [查看](https://dev.mi.com/console/doc/detail?pId=1822) |
+| OPPO PUSH 客户端SDK | 广东欢太科技有限公司 | 消息推送（OPPO设备） | 设备信息、网络信息 | [查看](https://open.oppomobile.com/new/developmentDoc/info?id=11228) |
+| vivo推送SDK | 维沃移动通信有限公司 | 消息推送（vivo设备） | 设备信息、网络信息 | [查看](https://dev.vivo.com.cn/documentCenter/doc/878) |
+| 荣耀推送SDK | 深圳荣耀软件技术有限公司 | 消息推送（荣耀设备） | 设备信息、网络信息 | [查看](https://developer.honor.com/cn/docs/11002/guides/sdk-data-security) |
+| 魅族推送SDK | 珠海星纪魅族信息技术有限公司 | 消息推送（魅族设备） | 设备信息、网络信息 | [查看](https://open.flyme.cn/docs?id=202) |
+| 性能加速库 | 华为软件技术有限公司 | 性能优化 | 设备信息、网络信息 | [查看](https://developer.huawei.com/consumer/cn/doc/development/graphics-Guides/sdk-data-security-0000001050700772) |
+
 ## 十一、联系我们
 
 如你对本隐私政策有任何疑问、意见或建议，可通过以下方式联系我们：

@@ -14,3 +14,59 @@ h1, h2, h3 {
 p {
   margin: 0.75em 0;
 }
+
+/* --- Tables --- */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 1.25rem 0;
+  font-size: 0.95em;
+}
+
+thead th {
+  text-align: left;
+  font-weight: 600;
+  border-bottom: 2px solid #ddd;
+  padding: 0.6rem 0.75rem;
+  vertical-align: bottom;
+}
+
+tbody td {
+  border-bottom: 1px solid #eee;
+  padding: 0.6rem 0.75rem;
+  vertical-align: top;
+}
+
+tbody tr:nth-child(even) {
+  background: #fafafa;
+}
+
+tbody tr:hover {
+  background: #f3f4f6;
+}
+
+caption {
+  caption-side: top;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+/* Keep code-ish cells readable if you have them */
+td code, th code {
+  font-size: 0.95em;
+}
+
+/* Mobile friendliness: allow horizontal scroll instead of breaking layout */
+table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Optional: align common numeric columns more nicely if you add class="num" */
+td.num, th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
