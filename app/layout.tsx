@@ -23,12 +23,25 @@ export default function RootLayout({
         {children}
         <footer className="py-12 border-t border-black/5">
           <div className="max-w-5xl mx-auto px-6 text-center">
-            <p className="text-sm text-[#86868b]">
-              © 2026 创意考拉 Psygo AI 劳动力
-            </p>
-            <p className="text-xs text-[#86868b]/60 mt-2">
-              鄂ICP备2025165530号
-            </p>
+            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#86868b]/60">
+              <p>© 2026 创意考拉 Psygo AI 劳动力</p>
+              <span className="hidden sm:inline">·</span>
+              <p>鄂ICP备2025165530号</p>
+              <span className="hidden sm:inline">·</span>
+              <a
+                href=" "
+                rel="noreferrer"
+                target="_blank"
+                className="flex items-center gap-1 hover:text-[#86868b] transition-colors"
+              >
+                <img
+                  src="/icons/public-security-icon.png"
+                  alt="公安备案"
+                  className="w-4 h-4"
+                />
+                鄂公网安备42010302002808号
+              </a>
+            </div>
           </div>
         </footer>
       </body>
