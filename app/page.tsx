@@ -101,15 +101,22 @@ function ToolCompareSlider({
 
           {/* Assistant messages - full width, clipped by same slider position */}
           <div className="w-full relative flex justify-center">
-            {/* Right assistant message (AI劳动力) - bottom layer, bottom-left corner sharp */}
-            <div
-              className="w-[180px] md:w-[420px] lg:w-[520px] bg-white/50 backdrop-blur-sm text-[#1d1d1f] px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-bl-sm shadow-lg"
-              style={{ opacity: sliderPosition < 100 ? 1 : 0 }}
-            >
+            {/* Invisible placeholder to maintain height */}
+            <div className="w-[180px] md:w-[420px] lg:w-[520px] bg-white/50 backdrop-blur-sm text-[#1d1d1f] px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-bl-sm shadow-lg invisible">
               <p className="text-xs md:text-xl lg:text-2xl font-medium text-center">{rightAssistantMessage}</p>
             </div>
 
-            {/* Left assistant message (智能体) - top layer, clipped at same position as image */}
+            {/* Right assistant message (AI劳动力) - bottom layer, clipped from left */}
+            <div
+              className="absolute inset-0 flex justify-center"
+              style={{ clipPath: `inset(0 0 0 ${sliderPosition}%)` }}
+            >
+              <div className="w-[180px] md:w-[420px] lg:w-[520px] bg-white/50 backdrop-blur-sm text-[#1d1d1f] px-3 py-2 md:px-6 md:py-4 rounded-xl md:rounded-2xl rounded-bl-sm shadow-lg">
+                <p className="text-xs md:text-xl lg:text-2xl font-medium text-center">{rightAssistantMessage}</p>
+              </div>
+            </div>
+
+            {/* Left assistant message (智能体) - top layer, clipped from right */}
             <div
               className="absolute inset-0 flex justify-center"
               style={{ clipPath: `inset(0 ${100 - sliderPosition}% 0 0)` }}
