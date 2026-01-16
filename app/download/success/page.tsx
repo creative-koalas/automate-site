@@ -57,7 +57,7 @@ function SuccessContent() {
             Psygo管理员App ({platform}) 正在下载中
           </p>
           <p className="text-sm text-[#86868b]">
-            Psygo与其他AI产品有本质差异，建议您提前阅读用户指南，获得更好的使用体验
+            Psygo与其他AI产品有本质差异，建议您提前查看用户指南，获得更好的使用体验
           </p>
         </motion.div>
 
@@ -72,7 +72,7 @@ function SuccessContent() {
             href="https://docs.psygoai.com/docs/intro"
             className="inline-block px-12 py-4 text-lg font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-colors"
           >
-            阅读用户指南
+            查看用户指南
           </Link>
           <div className="flex items-center gap-4 text-sm">
             <Link
