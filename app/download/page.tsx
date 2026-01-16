@@ -2,8 +2,11 @@
 
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 export default function DownloadPage() {
+  const router = useRouter();
+
   const downloads = [
     {
       platform: "Windows",
@@ -18,6 +21,15 @@ export default function DownloadPage() {
       url: "https://release.psygoai.com/release/linux/psygo_latest_amd64.deb",
     },
   ];
+
+  const handleDownload = (download: typeof downloads[0]) => {
+    // Trigger the download
+    window.location.href = download.url;
+    // Redirect to success page
+    setTimeout(() => {
+      router.push(`/download/success?platform=${download.platform}`);
+    }, 100);
+  };
 
   return (
     <div className="min-h-screen bg-[#ffffff] text-[#1d1d1f]">
@@ -47,19 +59,19 @@ export default function DownloadPage() {
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch">
             {downloads.map((download, index) => (
-              <motion.a
+              <motion.button
                 key={download.platform}
-                href={download.url}
+                onClick={() => handleDownload(download)}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center justify-center px-16 py-8 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-full text-3xl font-medium transition-colors duration-200 min-w-[280px]"
+                className="flex flex-col items-center justify-center px-16 py-8 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-full text-3xl font-medium transition-colors duration-200 min-w-[280px] cursor-pointer"
               >
                 <span>{download.platform}</span>
                 <span className="text-sm opacity-70 mt-2">
                   {download.requirement}
                 </span>
-              </motion.a>
+              </motion.button>
             ))}
           </div>
         </div>
