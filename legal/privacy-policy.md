@@ -128,22 +128,20 @@ Psygo 是一款自动化智能系统。在你授权的范围内，我们可能�
 
 | SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
 |---|---|---|---|---|
-| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | 查看 |
+| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | 查看(https://opendocs.alipay.com/open/54/01g6qm#%E6%94%AF%E4%BB%98%E5%AE%9D%20App%20%E6%94%AF%E4%BB%98%E5%AE%A2%E6%88%B7%E7%AB%AF%20SDK%20%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96) |
 
 ### 一键登录类
 
 | SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
 |---|---|---|---|---|
-| 号码认证-android | 阿里巴巴云计算（北京）有限公司 | 一键登录 | 手机号码、设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html) |
-| 移动认证SDK | 中移互联网有限公司 | 一键登录（移动网络） | 手机号码、设备信息、网络信息 | [查看](https://wap.cmpassport.com/resources/html/contract.html) |
+| 号码认证-android | 阿里巴巴云计算（北京）有限公司 | 一键登录 | 手机号码、设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html?spm=a2c4g.11186623.0.0.727039eb0HflH4) |
 | 联通认证SDK | 联通在线信息科技有限公司 | 一键登录（联通网络） | 手机号码、设备信息、网络信息 | [查看](https://msv6.wosms.cn/html/oauth/protocol2.html) |
-| 电信认证SDK | 天翼数字生活科技有限公司 | 一键登录（电信网络） | 手机号码、设备信息、网络信息 | [查看](https://e.189.cn/sdk/agreement/detail.do?hiession=) |
 
 ### 消息推送类
 
 | SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
 |---|---|---|---|---|
-| 移动推送-android | 杭州阿里云智能科技有限公司 | 消息推送 | 设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html) |
+| 移动推送-android | 杭州阿里云智能科技有限公司 | 消息推送 | 设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html?spm=a2c4g.434217.0.0.6f663e68ZeueeL) |
 | 华为推送SDK | 华为软件技术有限公司 | 消息推送（华为设备） | 设备信息、网络信息 | [查看](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-security-0000001050042177) |
 | 小米推送 | 北京小米移动软件有限公司 | 消息推送（小米设备） | 设备信息、网络信息 | [查看](https://dev.mi.com/console/doc/detail?pId=1822) |
 | OPPO PUSH 客户端SDK | 广东欢太科技有限公司 | 消息推送（OPPO设备） | 设备信息、网络信息 | [查看](https://open.oppomobile.com/new/developmentDoc/info?id=11228) |
