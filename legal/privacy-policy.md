@@ -128,7 +128,7 @@ Psygo 是一款自动化智能系统。在你授权的范围内，我们可能�
 
 | SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
 |---|---|---|---|---|
-| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | 查看(https://opendocs.alipay.com/open/54/01g6qm#%E6%94%AF%E4%BB%98%E5%AE%9D%20App%20%E6%94%AF%E4%BB%98%E5%AE%A2%E6%88%B7%E7%AB%AF%20SDK%20%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96) |
+| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | [查看](https://opendocs.alipay.com/open/54/01g6qm#%E6%94%AF%E4%BB%98%E5%AE%9D%20App%20%E6%94%AF%E4%BB%98%E5%AE%A2%E6%88%B7%E7%AB%AF%20SDK%20%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96) |
 
 ### 一键登录类
 
