@@ -132,29 +132,43 @@ Psygo 是一款自动化智能系统。在你授权的范围内，我们可能�
 
 ### 支付类
 
-| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
-|---|---|---|---|---|
-| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 | [查看](https://opendocs.alipay.com/open/54/01g6qm#%E6%94%AF%E4%BB%98%E5%AE%9D%20App%20%E6%94%AF%E4%BB%98%E5%AE%A2%E6%88%B7%E7%AB%AF%20SDK%20%E9%9A%90%E7%A7%81%E6%94%BF%E7%AD%96) |
+| SDK名称 | 开发者 | 用途 | 收集信息 |
+|---|---|---|---|
+| APP支付客户端SDK | 支付宝(杭州)信息技术有限公司 | 支付功能 | 设备信息、网络信息 |
 
 ### 一键登录类
 
-| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
-|---|---|---|---|---|
-| 号码认证-android | 阿里巴巴云计算（北京）有限公司 | 一键登录 | 手机号码、设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html?spm=a2c4g.11186623.0.0.727039eb0HflH4) |
-| 联通认证SDK | 联通在线信息科技有限公司 | 一键登录（联通网络） | 手机号码、设备信息、网络信息 | [查看](https://msv6.wosms.cn/html/oauth/protocol2.html) |
+| SDK名称 | 开发者 | 用途 | 收集信息 |
+|---|---|---|---|
+| 号码认证-android | 阿里巴巴云计算（北京）有限公司 | 一键登录 | 手机号码、设备信息、网络信息 |
+| 联通认证SDK | 联通在线信息科技有限公司 | 一键登录（联通网络） | 手机号码、设备信息、网络信息 |
 
 ### 消息推送类
 
-| SDK名称 | 开发者 | 用途 | 收集信息 | 隐私政策 |
-|---|---|---|---|---|
-| 移动推送-android | 杭州阿里云智能科技有限公司 | 消息推送 | 设备信息、网络信息 | [查看](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html?spm=a2c4g.434217.0.0.6f663e68ZeueeL) |
-| 华为推送SDK | 华为软件技术有限公司 | 消息推送（华为设备） | 设备信息、网络信息 | [查看](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-security-0000001050042177) |
-| 小米推送 | 北京小米移动软件有限公司 | 消息推送（小米设备） | 设备信息、网络信息 | [查看](https://dev.mi.com/console/doc/detail?pId=1822) |
-| OPPO PUSH 客户端SDK | 广东欢太科技有限公司 | 消息推送（OPPO设备） | 设备信息、网络信息 | [查看](https://open.oppomobile.com/new/developmentDoc/info?id=11228) |
-| vivo推送SDK | 维沃移动通信有限公司 | 消息推送（vivo设备） | 设备信息、网络信息 | [查看](https://dev.vivo.com.cn/documentCenter/doc/878) |
-| 荣耀推送SDK | 深圳荣耀软件技术有限公司 | 消息推送（荣耀设备） | 设备信息、网络信息 | [查看](https://developer.honor.com/cn/docs/11002/guides/sdk-data-security) |
-| 魅族推送SDK | 珠海星纪魅族信息技术有限公司 | 消息推送（魅族设备） | 设备信息、网络信息 | [查看](https://open.flyme.cn/docs?id=202) |
-| 性能加速库 | 华为软件技术有限公司 | 性能优化 | 设备信息、网络信息 | [查看](https://developer.huawei.com/consumer/cn/doc/development/graphics-Guides/sdk-data-security-0000001050700772) |
+| SDK名称 | 开发者 | 用途 | 收集信息 |
+|---|---|---|---|
+| 移动推送-android | 杭州阿里云智能科技有限公司 | 消息推送 | 设备信息、网络信息 |
+| 华为推送SDK | 华为软件技术有限公司 | 消息推送（华为设备） | 设备信息、网络信息 |
+| 小米推送 | 北京小米移动软件有限公司 | 消息推送（小米设备） | 设备信息、网络信息 |
+| OPPO PUSH 客户端SDK | 广东欢太科技有限公司 | 消息推送（OPPO设备） | 设备信息、网络信息 |
+| vivo推送SDK | 维沃移动通信有限公司 | 消息推送（vivo设备） | 设备信息、网络信息 |
+| 荣耀推送SDK | 深圳荣耀软件技术有限公司 | 消息推送（荣耀设备） | 设备信息、网络信息 |
+| 魅族推送SDK | 珠海星纪魅族信息技术有限公司 | 消息推送（魅族设备） | 设备信息、网络信息 |
+| 性能加速库 | 华为软件技术有限公司 | 性能优化 | 设备信息、网络信息 |
+
+### SDK隐私政策链接
+
+*   **APP支付客户端SDK:** [https://opendocs.alipay.com/open/01g6qm](https://opendocs.alipay.com/open/01g6qm)
+*   **号码认证-android:** [https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html?spm=a2c4g.11186623.0.0.727039eb0HflH4](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112211045_86198.html?spm=a2c4g.11186623.0.0.727039eb0HflH4)
+*   **联通认证SDK:** [https://msv6.wosms.cn/html/oauth/protocol2.html](https://msv6.wosms.cn/html/oauth/protocol2.html)
+*   **移动推送-android:** [https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html?spm=a2c4g.434217.0.0.6f663e68ZeueeL](https://terms.aliyun.com/legal-agreement/terms/suit_bu1_ali_cloud/suit_bu1_ali_cloud202112071754_83380.html?spm=a2c4g.434217.0.0.6f663e68ZeueeL)
+*   **华为推送SDK:** [https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-security-0000001050042177](https://developer.huawei.com/consumer/cn/doc/HMSCore-Guides/sdk-data-security-0000001050042177)
+*   **小米推送:** [https://dev.mi.com/console/doc/detail?pId=1822](https://dev.mi.com/console/doc/detail?pId=1822)
+*   **OPPO PUSH 客户端SDK:** [https://open.oppomobile.com/new/developmentDoc/info?id=11228](https://open.oppomobile.com/new/developmentDoc/info?id=11228)
+*   **vivo推送SDK:** [https://dev.vivo.com.cn/documentCenter/doc/878](https://dev.vivo.com.cn/documentCenter/doc/878)
+*   **荣耀推送SDK:** [https://developer.honor.com/cn/docs/11002/guides/sdk-data-security](https://developer.honor.com/cn/docs/11002/guides/sdk-data-security)
+*   **魅族推送SDK:** [https://open.flyme.cn/docs?id=202](https://open.flyme.cn/docs?id=202)
+*   **性能加速库:** [https://developer.huawei.com/consumer/cn/doc/development/graphics-Guides/sdk-data-security-0000001050700772](https://developer.huawei.com/consumer/cn/doc/development/graphics-Guides/sdk-data-security-0000001050700772)
 
 ## 十三、联系我们
 
