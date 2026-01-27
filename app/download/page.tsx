@@ -42,7 +42,7 @@ export default function DownloadPage() {
             className="text-center mb-12"
           >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold mb-6">
-              下载Psygo管理员App
+              下载Psygo控制台App
             </h1>
           </motion.div>
 
