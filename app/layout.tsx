@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 
+import { Providers } from "./providers"; // adjust path if different
+
 const inter = Inter({
   variable: "--font-inter",
   subsets: ["latin"],
@@ -18,32 +20,34 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="zh-CN">
+    <html lang="zh-CN" suppressHydrationWarning>
       <body className={`${inter.variable} antialiased`}>
-        {children}
-        <footer className="py-12 border-t border-black/5">
-          <div className="max-w-5xl mx-auto px-6 text-center">
-            <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#86868b]/60">
-              <p>© 2026 创意考拉 Psygo AI 劳动力</p>
-              <span className="hidden sm:inline">·</span>
-              <p>鄂ICP备2025165530号</p>
-              <span className="hidden sm:inline">·</span>
-              <a
-                href=" "
-                rel="noreferrer"
-                target="_blank"
-                className="flex items-center gap-1 hover:text-[#86868b] transition-colors"
-              >
-                <img
-                  src="/icons/public-security-icon.png"
-                  alt="公安备案"
-                  className="w-4 h-4"
-                />
-                鄂公网安备42010302002808号
-              </a>
+        <Providers>
+          {children}
+          <footer className="py-12 border-t border-black/5">
+            <div className="max-w-5xl mx-auto px-6 text-center">
+              <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#86868b]/60">
+                <p>© 2026 创意考拉 Psygo AI 劳动力</p>
+                <span className="hidden sm:inline">·</span>
+                <p>鄂ICP备2025165530号</p>
+                <span className="hidden sm:inline">·</span>
+                <a
+                  href=" "
+                  rel="noreferrer"
+                  target="_blank"
+                  className="flex items-center gap-1 hover:text-[#86868b] transition-colors"
+                >
+                  <img
+                    src="/icons/public-security-icon.png"
+                    alt="公安备案"
+                    className="w-4 h-4"
+                  />
+                  鄂公网安备42010302002808号
+                </a>
+              </div>
             </div>
-          </div>
-        </footer>
+          </footer>
+        </Providers>
       </body>
     </html>
   );
