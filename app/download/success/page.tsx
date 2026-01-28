@@ -51,7 +51,7 @@ function SuccessContent() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="space-y-4 mb-12"
+          className="space-y-4 mb-10"
         >
           <p className="text-lg text-[#86868b]">
             Psygo管理员App ({platform}) 正在下载中
@@ -65,7 +65,7 @@ function SuccessContent() {
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.5 }}
           className="flex flex-col items-center gap-6"
         >
           <Link
@@ -88,6 +88,27 @@ function SuccessContent() {
             >
               下载其他版本
             </Link>
+          </div>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.6 }}
+          className="mt-12 rounded-3xl border border-[#e8e8ed] bg-[#f5f5f7] p-6 md:p-8"
+        >
+          <p className="text-lg md:text-xl font-medium text-[#1d1d1f]">
+            加入技术支持微信群
+          </p>
+          <p className="text-sm md:text-base text-[#86868b] mt-2">
+            扫码加入，获取最新进展与使用支持
+          </p>
+          <div className="mt-6 flex justify-center">
+            <img
+              src="/images/group-qr.png"
+              alt="Alpha用户测试微信群二维码"
+              className="w-40 h-40 md:w-48 md:h-48 rounded-2xl border border-white bg-white p-2 shadow-sm"
+            />
           </div>
         </motion.div>
       </div>

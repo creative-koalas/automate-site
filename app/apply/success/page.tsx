@@ -99,6 +99,27 @@ function SuccessContent() {
               返回首页
             </Link>
           </motion.div>
+
+          <motion.div
+            className="mt-12 rounded-3xl border border-[#e8e8ed] bg-[#f5f5f7] p-6 md:p-8 text-center"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.5 }}
+          >
+            <p className="text-lg md:text-xl font-medium text-[#1d1d1f]">
+              加入技术支持微信群
+            </p>
+            <p className="text-sm md:text-base text-[#86868b] mt-2">
+              扫码加入，获取最新进展与使用支持
+            </p>
+            <div className="mt-6 flex justify-center">
+              <img
+                src="/images/group-qr.png"
+                alt="Alpha用户测试微信群二维码"
+                className="w-40 h-40 md:w-48 md:h-48 rounded-2xl border border-white bg-white p-2 shadow-sm"
+              />
+            </div>
+          </motion.div>
         </div>
       </section>
     </main>
