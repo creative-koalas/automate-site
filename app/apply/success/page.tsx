@@ -76,7 +76,7 @@ function SuccessContent() {
             </p>
             <p className="text-base md:text-lg text-[#86868b]">
               为保证每个用户都能获得平等的试用机会，
-              <strong className="text-[#1d1d1f]">内测资格有效期为6小时，从发送邮件开始计时，到期将自动销毁您的Psygo AI劳动力，请您在收到邮件后尽快试用。</strong>
+              <strong className="text-[#1d1d1f]">内测资格有效期为18小时，从发送邮件开始计时，到期将自动销毁您的Psygo AI劳动力，请您在收到邮件后尽快试用。</strong>
             </p>
           </motion.div>
 
