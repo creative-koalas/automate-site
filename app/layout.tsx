@@ -29,7 +29,7 @@ export default function RootLayout({
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#86868b]/60">
                 <p>© 2026 创意考拉 Psygo AI 劳动力</p>
                 <span className="hidden sm:inline">·</span>
-                <p>鄂ICP备2025165530号</p>
+                <a href="https://beian.miit.gov.cn/">鄂ICP备2025165530号</a>
                 <span className="hidden sm:inline">·</span>
                 <a
                   href=" "
