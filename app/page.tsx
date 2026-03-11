@@ -479,7 +479,7 @@ export default function Home() {
             className="text-2xl md:text-3xl font-medium text-center mb-16 text-[#86868b]"
             {...fadeInUp}
           >
-            Psygo的发布，离不开这些Psygo AI劳动力。
+            {PRODUCT_NAME} 的发布，离不开这些 {PRODUCT_NAME} AI 劳动力。
           </motion.h2>
           <motion.div
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 md:gap-16"
@@ -505,7 +505,7 @@ export default function Home() {
               {
                 name: "Francis",
                 period: "2025.10 - 2025.11",
-                achievement: "Psygo产品网站第一版开发者、维护者",
+                achievement: `${PRODUCT_NAME} 产品网站第一版开发者、维护者`,
               },
               {
                 name: "Koala",
@@ -549,11 +549,11 @@ export default function Home() {
             <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 md:gap-x-6 md:gap-y-3">
               <span className="text-[#86868b]/40 text-lg md:text-xl">有点意思家人们</span>
               <span className="text-[#86868b]/30 text-base md:text-lg">意外</span>
-              <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了Psygo。</span>
+              <span className="text-4xl md:text-5xl lg:text-6xl font-medium">麻烦你了 {PRODUCT_NAME}。</span>
               <span className="text-[#86868b]/50 text-xl md:text-2xl">感觉整体给的方案没什么问题</span>
               <span className="text-5xl md:text-6xl lg:text-7xl font-semibold text-gradient-accent">谢谢。</span>
               <span className="text-[#86868b]/35 text-base md:text-lg">厉害了，这就叫积极性拉满的实习生</span>
-              <span className="text-[#86868b]/40 text-lg md:text-xl">Psygo太厉害了，我给一个需求，啥都不用管，就写好了给我推上去了</span>
+              <span className="text-[#86868b]/40 text-lg md:text-xl">{PRODUCT_NAME} 太厉害了，我给一个需求，啥都不用管，就写好了给我推上去了</span>
             </div>
           </motion.div>
         </div>

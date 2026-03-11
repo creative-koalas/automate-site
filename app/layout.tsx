@@ -1,14 +1,8 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "./providers"; // adjust path if different
 import { PRODUCT_NAME, PRODUCT_WORKFORCE_NAME } from "@/lib/brand";
-
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   title: `${PRODUCT_NAME} - AI劳动力`,
@@ -22,7 +16,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="zh-CN" suppressHydrationWarning>
-      <body className={`${inter.variable} antialiased`}>
+      <body className="antialiased">
         <Providers>
           {children}
           <footer className="py-12 border-t border-black/5">
