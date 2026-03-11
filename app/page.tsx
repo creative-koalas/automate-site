@@ -3,6 +3,7 @@
 import { useState, useRef, useCallback } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { PRODUCT_NAME } from "@/lib/brand";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -191,7 +192,7 @@ export default function Home() {
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.6 }}
           >
-            —— Alice，第一个 <span className="text-5xl md:text-7xl lg:text-8xl text-gradient-accent font-semibold">Psygo</span> AI 劳动力
+            —— Alice，第一个 <span className="text-5xl md:text-7xl lg:text-8xl text-gradient-accent font-semibold">{PRODUCT_NAME}</span> AI 劳动力
           </motion.p>
         </div>
       </section>
@@ -282,7 +283,7 @@ export default function Home() {
             <div className="flex flex-col items-center">
               <img
                 src="/images/active-ai.jpg"
-                alt="Psygo AI截图"
+                alt={`${PRODUCT_NAME} AI截图`}
                 className="max-w-[240px] w-full rounded-2xl"
               />
               <p className="text-lg md:text-xl lg:text-2xl text-[#86868b] mt-6 text-center">
@@ -584,7 +585,7 @@ export default function Home() {
               href="/download"
               className="group relative inline-block px-12 py-5 text-xl md:text-2xl font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-all duration-300 hover:scale-105"
             >
-              立即下载，开始使用
+              查看支持平台
               <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#0071e3]/30 to-[#64d2ff]/30 blur-xl -z-10" />
             </Link>
           </motion.div>

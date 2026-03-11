@@ -1,3 +1,5 @@
+PRODUCT_NAME := PsyGo
+
 SRC_DIR := legal
 OUT_DIR := public/legal
 
@@ -19,10 +21,14 @@ $(CSS_OUT): $(CSS_SRC) | $(OUT_DIR)
 
 # Convert each Markdown file into HTML in public/legal/
 $(OUT_DIR)/%.html: $(SRC_DIR)/%.md $(CSS_OUT) | $(OUT_DIR)
-	pandoc $< \
-		--standalone \
-		--css style.css \
-		-o $@
+	title=$$(PRODUCT_NAME="$(PRODUCT_NAME)" perl -ne 'if ($$. == 1) { s/^#\s+//; s/\{\{PRODUCT_NAME\}\}/$$ENV{PRODUCT_NAME}/g; chomp; print; exit }' $<); \
+	PRODUCT_NAME="$(PRODUCT_NAME)" perl -pe 's/\{\{PRODUCT_NAME\}\}/$$ENV{PRODUCT_NAME}/g' $< | \
+		pandoc \
+			--from markdown \
+			--standalone \
+			--metadata title="$$title" \
+			--css style.css \
+			-o $@
 
 .PHONY: clean
 clean:

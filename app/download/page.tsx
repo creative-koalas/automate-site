@@ -1,35 +1,33 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useRouter } from "next/navigation";
+import { PRODUCT_APP_NAME, PRODUCT_NAME } from "@/lib/brand";
+
+type DownloadOption = {
+  platform: string;
+  requirement: string;
+  note: string;
+};
+
+const downloads: DownloadOption[] = [
+  {
+    platform: "Windows",
+    requirement: "Windows 11 及以上",
+    note: "适用于 Windows 电脑",
+  },
+  {
+    platform: "安卓手机",
+    requirement: "安卓 10 及以上",
+    note: "适用于大多数安卓手机",
+  },
+  {
+    platform: "Linux",
+    requirement: "Ubuntu / Debian",
+    note: "适用于 Linux 电脑",
+  },
+];
 
 export default function DownloadPage() {
-  const router = useRouter();
-
-  const downloads = [
-    {
-      platform: "Windows",
-      requirement: "Windows 11及以上",
-      url: "https://release.psygoai.com/release/windows/Psygo_Setup_latest.exe",
-    },
-    {
-      platform: "Linux",
-      requirement: "Ubuntu/Debian",
-      url: "https://release.psygoai.com/release/linux/psygo_latest_amd64.deb",
-    },
-  ];
-
-  const handleDownload = (download: typeof downloads[0]) => {
-    const link = document.createElement("a");
-    link.href = download.url;
-    link.rel = "noopener";
-    link.click();
-
-    setTimeout(() => {
-      router.push(`/download/success?platform=${download.platform}`);
-    }, 100);
-  };
-
   return (
     <div className="min-h-screen bg-[#ffffff] text-[#1d1d1f]">
       <main className="pt-32 pb-16 px-4 sm:px-6 lg:px-8">
@@ -41,8 +39,11 @@ export default function DownloadPage() {
             className="text-center mb-12"
           >
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-semibold mb-6">
-              下载Psygo控制台App
+              下载 {PRODUCT_APP_NAME}
             </h1>
+            <p className="text-lg text-[#86868b]">
+              安装包暂未开放下载，正式发布后统一开启。
+            </p>
           </motion.div>
 
           <motion.div
@@ -52,24 +53,33 @@ export default function DownloadPage() {
             className="max-w-3xl mx-auto mb-16 p-6 bg-[#fbfbfd] border border-[#d2d2d7] rounded-xl"
           >
             <p className="text-[#6e6e73] text-sm leading-relaxed">
-              请注意，您所下载的Psygo App主要用于管理Psygo AI劳动力，而非一般意义上的“客户端App”。App提供基本的聊天软件功能，但<strong className="text-[#1d1d1f]">Psygo并非聊天机器人</strong>；我们建议您<strong className="text-[#1d1d1f]">仅将此App作为联络Psygo的工具</strong>，对于复杂任务的交付与协同，建议您与您的Psygo AI劳动力<strong className="text-[#1d1d1f]">使用gitee/传压缩包等人类常规工作方式</strong>。
+              请注意，您所下载的 {PRODUCT_APP_NAME} 主要用于管理 {PRODUCT_NAME} AI 劳动力，而非一般意义上的“客户端App”。App 提供基本的聊天软件功能，但<strong className="text-[#1d1d1f]">{PRODUCT_NAME} 并非聊天机器人</strong>；我们建议您<strong className="text-[#1d1d1f]">仅将此 App 作为联络 {PRODUCT_NAME} 的工具</strong>，对于复杂任务的交付与协同，建议您与您的 {PRODUCT_NAME} AI 劳动力<strong className="text-[#1d1d1f]">使用 gitee / 传压缩包等人类常规工作方式</strong>。
+            </p>
+            <p className="mt-4 text-sm leading-relaxed text-[#86868b]">
+              当前页面仅展示首批支持的平台，下载入口将在公开发布时启用。
             </p>
           </motion.div>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-stretch">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
             {downloads.map((download, index) => (
               <motion.button
                 key={download.platform}
-                onClick={() => handleDownload(download)}
+                disabled
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center justify-center px-16 py-8 bg-[#0071e3] hover:bg-[#0077ed] text-white rounded-full text-3xl font-medium transition-colors duration-200 min-w-[280px] cursor-pointer"
+                className="flex min-h-[220px] flex-col justify-between rounded-[2rem] border border-[#d2d2d7] bg-[#f5f5f7] px-8 py-8 text-left text-[#1d1d1f] opacity-90"
               >
-                <span>{download.platform}</span>
-                <span className="text-sm opacity-70 mt-2">
-                  {download.requirement}
-                </span>
+                <div>
+                  <p className="text-sm text-[#86868b]">即将开放</p>
+                  <p className="mt-4 text-3xl font-medium">{download.platform}</p>
+                </div>
+                <div className="mt-6">
+                  <p className="text-sm text-[#1d1d1f]">{download.note}</p>
+                  <p className="mt-2 text-sm text-[#86868b]">
+                    {download.requirement}
+                  </p>
+                </div>
               </motion.button>
             ))}
           </div>

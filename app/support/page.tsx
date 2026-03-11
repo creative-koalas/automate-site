@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
+import { PRODUCT_NAME, PRODUCT_WORKFORCE_NAME } from "@/lib/brand";
 
 const fadeInUp = {
   initial: { opacity: 0, y: 40 },
@@ -13,14 +14,14 @@ const fadeInUp = {
 
 const faqs = [
   {
-    question: "PsyGo 不回复我的消息？",
+    question: `${PRODUCT_NAME} 不回复我的消息？`,
     answer:
-      "PsyGo 被设计为 AI 劳动力，而非聊天机器人。10–60 秒的响应时间属于正常范围。在首次交互或长时间未使用后，响应时间可能更长，因为 AI 劳动力需要启动计算机。",
+      `${PRODUCT_NAME} 被设计为 AI 劳动力，而非聊天机器人。10–60 秒的响应时间属于正常范围。在首次交互或长时间未使用后，响应时间可能更长，因为 AI 劳动力需要启动计算机。`,
   },
   {
-    question: "PsyGo 能做什么？",
+    question: `${PRODUCT_NAME} 能做什么？`,
     answer:
-      "PsyGo 被设计为通用型 AI 劳动力，基本上可以完成人类在电脑上能做的一切工作，例如设计、开发和部署应用程序，进行调研，以及制作 Word/PDF/PPT 文档。",
+      `${PRODUCT_NAME} 被设计为通用型 AI 劳动力，基本上可以完成人类在电脑上能做的一切工作，例如设计、开发和部署应用程序，进行调研，以及制作 Word/PDF/PPT 文档。`,
   },
   {
     question: "如何进行多智能体协作？",
@@ -30,7 +31,7 @@ const faqs = [
   {
     question: "关闭 App 后 AI 会停止工作吗？",
     answer:
-      "不会。所有 PsyGo AI 劳动力都独立存在和行动。只要您没有明确解雇它们，AI 劳动力即使在您关闭/退出 App、卸载 App 甚至摔坏手机之后，仍然会继续存在并工作。请放心关闭 App 去做自己的事，让 AI 在后台工作——这正是我们所设计的使用方式。",
+      `不会。所有 ${PRODUCT_WORKFORCE_NAME} 都独立存在和行动。只要您没有明确解雇它们，AI 劳动力即使在您关闭/退出 App、卸载 App 甚至摔坏手机之后，仍然会继续存在并工作。请放心关闭 App 去做自己的事，让 AI 在后台工作——这正是我们所设计的使用方式。`,
   },
 ];
 
@@ -51,7 +52,7 @@ export default function SupportPage() {
           支持与帮助
         </h1>
         <p className="text-lg text-[#86868b] mb-16">
-          常见问题解答，助您快速上手 PsyGo AI 劳动力。
+          常见问题解答，助您快速上手 {PRODUCT_WORKFORCE_NAME}。
         </p>
 
         {/* FAQ Accordion */}

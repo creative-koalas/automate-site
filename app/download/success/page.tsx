@@ -4,6 +4,7 @@ import { useSearchParams } from "next/navigation";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { Suspense } from "react";
+import { PRODUCT_APP_NAME, PRODUCT_NAME } from "@/lib/brand";
 
 function SuccessContent() {
   const searchParams = useSearchParams();
@@ -54,10 +55,10 @@ function SuccessContent() {
           className="space-y-4 mb-10"
         >
           <p className="text-lg text-[#86868b]">
-            Psygo管理员App ({platform}) 正在下载中
+            {PRODUCT_APP_NAME}（{platform}）正在下载中
           </p>
           <p className="text-sm text-[#86868b]">
-            Psygo与其他AI产品有本质差异，建议您提前查看用户指南，获得更好的使用体验
+            {PRODUCT_NAME} 与其他 AI 产品有本质差异，建议您提前查看用户指南，获得更好的使用体验
           </p>
         </motion.div>
 

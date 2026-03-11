@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { Providers } from "./providers"; // adjust path if different
+import { PRODUCT_NAME, PRODUCT_WORKFORCE_NAME } from "@/lib/brand";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -10,7 +11,7 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Psygo - AI劳动力",
+  title: `${PRODUCT_NAME} - AI劳动力`,
   description: "忘记AI智能体。迎接AI劳动力。",
 };
 
@@ -27,7 +28,7 @@ export default function RootLayout({
           <footer className="py-12 border-t border-black/5">
             <div className="max-w-5xl mx-auto px-6 text-center">
               <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-2 text-xs text-[#86868b]/60">
-                <p>© 2026 创意考拉 Psygo AI 劳动力</p>
+                <p>© 2026 创意考拉 {PRODUCT_WORKFORCE_NAME}</p>
                 <span className="hidden sm:inline">·</span>
                 <a href="https://beian.miit.gov.cn/">鄂ICP备2025165530号</a>
                 <span className="hidden sm:inline">·</span>
