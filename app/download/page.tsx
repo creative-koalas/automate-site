@@ -1,7 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function DownloadPage() {
@@ -10,22 +9,22 @@ export default function DownloadPage() {
   const downloads = [
     {
       platform: "Windows",
-      file: ".exe",
       requirement: "Windows 11及以上",
       url: "https://release.psygoai.com/release/windows/Psygo_Setup_latest.exe",
     },
     {
       platform: "Linux",
-      file: ".deb",
       requirement: "Ubuntu/Debian",
       url: "https://release.psygoai.com/release/linux/psygo_latest_amd64.deb",
     },
   ];
 
   const handleDownload = (download: typeof downloads[0]) => {
-    // Trigger the download
-    window.location.href = download.url;
-    // Redirect to success page
+    const link = document.createElement("a");
+    link.href = download.url;
+    link.rel = "noopener";
+    link.click();
+
     setTimeout(() => {
       router.push(`/download/success?platform=${download.platform}`);
     }, 100);
@@ -53,7 +52,7 @@ export default function DownloadPage() {
             className="max-w-3xl mx-auto mb-16 p-6 bg-[#fbfbfd] border border-[#d2d2d7] rounded-xl"
           >
             <p className="text-[#6e6e73] text-sm leading-relaxed">
-              请注意，您所下载的Psygo App主要用于管理Psygo AI劳动力，而非一般意义上的"客户端App"。App提供基本的聊天软件功能，但<strong className="text-[#1d1d1f]">Psygo并非聊天机器人</strong>；我们建议您<strong className="text-[#1d1d1f]">仅将此App作为联络Psygo的工具</strong>，对于复杂任务的交付与协同，建议您与您的Psygo AI劳动力<strong className="text-[#1d1d1f]">使用gitee/传压缩包等人类常规工作方式</strong>。
+              请注意，您所下载的Psygo App主要用于管理Psygo AI劳动力，而非一般意义上的“客户端App”。App提供基本的聊天软件功能，但<strong className="text-[#1d1d1f]">Psygo并非聊天机器人</strong>；我们建议您<strong className="text-[#1d1d1f]">仅将此App作为联络Psygo的工具</strong>，对于复杂任务的交付与协同，建议您与您的Psygo AI劳动力<strong className="text-[#1d1d1f]">使用gitee/传压缩包等人类常规工作方式</strong>。
             </p>
           </motion.div>
 

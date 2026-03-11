@@ -581,10 +581,10 @@ export default function Home() {
             transition={{ ...fadeInUp.transition, delay: 0.2 }}
           >
             <Link
-              href="/apply"
+              href="/download"
               className="group relative inline-block px-12 py-5 text-xl md:text-2xl font-medium rounded-full bg-[#0071e3] text-white hover:bg-[#0077ed] transition-all duration-300 hover:scale-105"
             >
-              点击试用，感受未来
+              立即下载，开始使用
               <span className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 bg-gradient-to-r from-[#0071e3]/30 to-[#64d2ff]/30 blur-xl -z-10" />
             </Link>
           </motion.div>
