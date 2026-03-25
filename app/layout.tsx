@@ -18,31 +18,31 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "AI劳动力 — 产品主页",
-    template: "%s | AI劳动力",
+    default: "PsyGo — AI 劳动力平台",
+    template: "%s | PsyGo",
   },
   description:
-    "面向企业的AI劳动力，省心、懂你、自然，AutoMate...s 让人与AI同事协作无界。",
-  applicationName: "AI劳动力",
+    "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
+  applicationName: "PsyGo",
   metadataBase: new URL("https://ai-workforce.example.com"),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "AI劳动力 — 省心·懂你·自然·AutoMate...s",
+    title: "PsyGo — AI 劳动力平台",
     description:
-      "面向企业的AI劳动力，省心、懂你、自然，AutoMate...s 让人与AI同事协作无界。",
+      "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
     url: "https://ai-workforce.example.com",
-    siteName: "AI劳动力",
+    siteName: "PsyGo",
     images: [
-      { url: "/og.svg", width: 1200, height: 630, alt: "AI劳动力" },
+      { url: "/og.svg", width: 1200, height: 630, alt: "PsyGo" },
     ],
     locale: "zh_CN",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "AI劳动力 — 省心·懂你·自然·AutoMate...s",
+    title: "PsyGo — AI 劳动力平台",
     description:
-      "面向企业的AI劳动力，省心、懂你、自然，AutoMate...s 让人与AI同事协作无界。",
+      "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
     images: ["/og.svg"],
   },
   icons: { icon: "/favicon.svg" }
@@ -51,8 +51,8 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#0b1220",
-  colorScheme: "dark light",
+  themeColor: "#f5f5f7",
+  colorScheme: "light dark",
 };
 
 export default function RootLayout({

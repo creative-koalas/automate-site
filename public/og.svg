@@ -1,14 +1,15 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630">
   <defs>
     <linearGradient id="bg" x1="0" x2="1" y1="0" y2="1">
-      <stop offset="0%" stop-color="#0b1220" />
-      <stop offset="100%" stop-color="#05080f" />
+      <stop offset="0%" stop-color="#fbfbfd" />
+      <stop offset="100%" stop-color="#eef2f7" />
     </linearGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#bg)"/>
-  <g fill="none" stroke="#3B82F6" stroke-width="8" transform="translate(600,315)">
+  <g fill="none" stroke="#0071E3" stroke-width="8" transform="translate(600,315)">
     <circle r="160"/>
-    <circle r="6" fill="#60A5FA" stroke="none"/>
+    <circle r="6" fill="#0071E3" stroke="none"/>
   </g>
-  <text x="600" y="420" font-size="56" fill="#e5e7eb" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">AI劳动力 · 省心 · 懂你 · 自然 · AutoMate...s</text>
+  <text x="600" y="382" font-size="82" fill="#1d1d1f" font-family="Arial, Helvetica, sans-serif" font-weight="700" text-anchor="middle">PsyGo</text>
+  <text x="600" y="448" font-size="34" fill="#6e6e73" font-family="Arial, Helvetica, sans-serif" text-anchor="middle">让 AI 成为你的同事</text>
 </svg>

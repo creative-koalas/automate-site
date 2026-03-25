@@ -2,10 +2,10 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "AI劳动力",
-    short_name: "AI劳动力",
+    name: "PsyGo",
+    short_name: "PsyGo",
     description:
-      "面向企业的AI劳动力，省心、懂你、自然，AutoMate...s 让人与AI同事协作无界。",
+      "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持智能网页生成、定时任务执行与多智能体协作。",
     start_url: "/",
     display: "standalone",
     background_color: "#0b1220",

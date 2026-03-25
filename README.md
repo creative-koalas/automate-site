@@ -8,7 +8,19 @@
 开发
 - 安装依赖：pnpm i
 - 本地运行：pnpm dev
+  默认监听 `0.0.0.0:3000`，同一局域网设备可通过 `http://你的局域网IP:3000` 访问
+  如果只想本机访问，可用：pnpm dev:local
 - 构建：pnpm build；预览：pnpm preview
+  `pnpm preview` 同样默认监听 `0.0.0.0:3000`；如需仅本机访问可用：pnpm preview:local
+
+局域网访问
+- 查看本机局域网 IP：
+  Linux 可用 `hostname -I`
+  macOS 可用 `ipconfig getifaddr en0`（Wi-Fi）或 `ipconfig getifaddr en1`
+- 启动后，在其它设备浏览器访问：`http://你的局域网IP:3000`
+- 若本机开了系统代理、Clash、Surge、v2rayN 等代理工具，记得把局域网 IP 或私有网段加入 `NO_PROXY` / 代理绕过规则；否则本机自测 `http://你的局域网IP:3000` 可能会被错误地走代理
+- 命令行自测可绕过代理：`curl --noproxy '*' -I http://你的局域网IP:3000`
+- 若无法访问，优先检查本机防火墙或路由器 AP 隔离是否拦截了 `3000` 端口
 
 测试
 - 单元测试：pnpm test（Vitest + Testing Library；已含 jsdom polyfills 与路径别名）

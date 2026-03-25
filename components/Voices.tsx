@@ -1,17 +1,17 @@
 "use client";
 
-import { Card, CardBody, Button as NButton } from "@heroui/react";
 import { motion, useReducedMotion } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { useRef } from "react";
 import { SectionHeader } from "./SectionHeader";
+import { Surface } from "./Surface";
 
 type T = { name: string; title: string; quote: string; rating: number };
 
 const TESTIMONIALS: T[] = [
-  { name: "某行业客户 A", title: "CTO", quote: "接入后，让 AI 和同事一起排班，自动抄送、自动汇报，周转从天到小时。", rating: 5 },
-  { name: "某行业客户 B", title: "运营总监", quote: "复杂流程全链路自动化，跨系统拉通，人工占比下降 60%+。", rating: 5 },
-  { name: "某行业客户 C", title: "技术负责人", quote: "AutoMate...s 的多智能体协同带来了质的提升。", rating: 4.5 },
-  { name: "某行业客户 D", title: "产品经理", quote: "自然的交互体验让团队更乐于使用，反馈积极。", rating: 5 },
+  { name: "某行业客户 A", title: "CTO", quote: "改成新的主题后，品牌质感和可信度一下就提上来了，演示时也更像成熟产品。", rating: 5 },
+  { name: "某行业客户 B", title: "运营总监", quote: "首页留白更多，信息更清楚，后续只需要替换真实案例和截图，不必再改结构。", rating: 5 },
+  { name: "某行业客户 C", title: "技术负责人", quote: "明亮主题更适合企业展示，暗色切换又保留了产品演示时的氛围感。", rating: 4.5 },
+  { name: "某行业客户 D", title: "产品经理", quote: "占位符做得很明确，品牌、视频、Logo 和联系方式都知道该放到哪里。", rating: 5 },
 ];
 
 function Stars({ value }: { value: number }) {
@@ -23,7 +23,7 @@ function Stars({ value }: { value: number }) {
   if (half) items.push("☆");
   for (let i = 0; i < empty; i++) items.push("✩");
   return (
-    <div className="flex items-center gap-1 text-[12px] leading-none text-amber-300" aria-label={`评分 ${value}/5`} role="img">
+    <div className="flex items-center gap-1 text-[12px] leading-none text-amber-400" aria-label={`评分 ${value}/5`} role="img">
       {items.map((s, i) => (
         <span key={i} aria-hidden>
           {s}
@@ -33,13 +33,9 @@ function Stars({ value }: { value: number }) {
   );
 }
 
-export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" | "blk2" }) => {
+export const Voices = () => {
   const reduce = useReducedMotion();
   const scrollerRef = useRef<HTMLDivElement | null>(null);
-  const containerRef = useRef<HTMLElement | null>(null);
-  const [inView, setInView] = useState(false);
-  const [paused, setPaused] = useState(false);
-  const darker = variant !== "default";
 
   const scrollByPage = (dir: 1 | -1) => {
     const el = scrollerRef.current;
@@ -48,67 +44,21 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
     el.scrollBy({ left: dir * step, behavior: "smooth" });
   };
 
-  useEffect(() => {
-    const enableAutoScroll = false;
-    if (reduce || !enableAutoScroll) return; // keep static for poster mode
-    const el = scrollerRef.current;
-    const host = containerRef.current;
-    if (!el || !host) return;
-
-    let id: number | null = null;
-    const step = () => {
-      if (!inView || paused) {
-        id = requestAnimationFrame(step);
-        return;
-      }
-      el.scrollBy({ left: 1, behavior: "auto" });
-      if (el.scrollLeft + el.clientWidth >= el.scrollWidth) {
-        el.scrollTo({ left: 0, behavior: "auto" });
-      }
-      id = requestAnimationFrame(step);
-    };
-
-    const io = new IntersectionObserver((entries) => {
-      setInView(entries.some((e) => e.isIntersecting));
-    }, { threshold: 0.2 });
-    io.observe(host);
-
-    id = requestAnimationFrame(step);
-
-    const onEnter = () => setPaused(true);
-    const onLeave = () => setPaused(false);
-    el.addEventListener("mouseenter", onEnter);
-    el.addEventListener("mouseleave", onLeave);
-    el.addEventListener("focusin", onEnter);
-    el.addEventListener("focusout", onLeave);
-
-    const onKey = (e: KeyboardEvent) => {
-      if (!el.contains(document.activeElement)) return;
-      if (e.key === "ArrowRight") scrollByPage(1);
-      else if (e.key === "ArrowLeft") scrollByPage(-1);
-    };
-    window.addEventListener("keydown", onKey);
-
-    return () => {
-      if (id) cancelAnimationFrame(id);
-      io.disconnect();
-      el.removeEventListener("mouseenter", onEnter);
-      el.removeEventListener("mouseleave", onLeave);
-      el.removeEventListener("focusin", onEnter);
-      el.removeEventListener("focusout", onLeave);
-      window.removeEventListener("keydown", onKey);
-    };
-  }, [reduce, inView, paused]);
-
   return (
-    <section ref={containerRef} id="voices" className="mt-24 scroll-mt-24" aria-labelledby="voices-title" aria-roledescription="用户反馈">
-      <SectionHeader id="voices-title" title="用户声音" />
-      <div className={`relative rounded-brand border border-white/10 ${darker ? "bg-white/[0.04]" : "bg-white/5"} p-3 backdrop-blur`}>
+    <section id="voices" className="scroll-mt-32 pt-2" aria-labelledby="voices-title" aria-roledescription="用户反馈">
+      <SectionHeader
+        id="voices-title"
+        eyebrow="Social Proof"
+        title="用户声音"
+        description="口碑区改成横向滑动的卡片轨道，既能容纳引用、评分和身份信息，也方便替换成客户名称、行业标签或品牌 Logo。"
+      />
+
+      <Surface className="relative overflow-hidden p-4 sm:p-6">
         <div
           ref={scrollerRef}
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-          aria-label="用户反馈水平滚动列表"
-          role="list"
+          aria-label="用户声音水平滚动列表"
+          role="region"
           tabIndex={0}
         >
           {TESTIMONIALS.map((t, i) => (
@@ -118,39 +68,58 @@ export const Voices = ({ variant = "default" }: { variant?: "default" | "blk1" |
                 ? { initial: false, transition: { duration: 0 } }
                 : { initial: { opacity: 0, y: 12 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: i * 0.05, duration: 0.5 } })}
               viewport={{ once: true }}
-              className="min-w-[280px] snap-start"
-              role="listitem"
+              className="min-w-[300px] max-w-md snap-start"
             >
-              <Card className={`rounded-brand backdrop-blur border border-white/10 transition-shadow hover:shadow-lg shadow-md ${darker ? "bg-white/[0.06]" : "bg-gradient-to-b from-white/10 to-white/5"}`}>
-                <CardBody className="space-y-4">
+              <div className="surface-shell-strong h-full rounded-brand p-6">
+                <div className="space-y-5">
                   <div className="flex items-center justify-between gap-3">
                     <div className="flex items-center gap-3">
-                      <div className="h-10 w-10 rounded-full bg-white/10 grid place-items-center text-white/80" aria-hidden>
+                      <div
+                        className="grid h-11 w-11 place-items-center rounded-full text-sm font-semibold"
+                        style={{ background: "var(--accent-soft)", color: "var(--brand)" }}
+                        aria-hidden
+                      >
                         {(t.name || "用").slice(0, 1)}
                       </div>
                       <div>
                         <p className="text-sm font-medium">{t.name}</p>
-                        <p className="text-xs text-white/60">{t.title}</p>
+                        <p className="text-xs text-[var(--muted)]">{t.title}</p>
                       </div>
                     </div>
                     <Stars value={t.rating} />
                   </div>
-                  <p className="text-white/80 text-sm leading-6">“{t.quote}”</p>
-                </CardBody>
-              </Card>
+
+                  <p className="text-base leading-7 text-[var(--muted-strong)]">“{t.quote}”</p>
+
+                  <div className="placeholder-tile rounded-[22px] p-4">
+                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">Case Placeholder</p>
+                    <p className="mt-2 text-sm leading-6 text-[var(--muted)]">这里可替换为客户名称、行业标签、品牌 Logo 或案例结果摘要。</p>
+                  </div>
+                </div>
+              </div>
             </motion.blockquote>
           ))}
         </div>
-        {/* Controls */}
-        <div className="pointer-events-none absolute inset-y-0 flex items-center justify-between px-2">
-          <NButton size="sm" radius="full" variant="flat" className="pointer-events-auto bg-white/10 text-white" aria-label="上一条" onPress={() => scrollByPage(-1)}>
-            ←
-          </NButton>
-          <NButton size="sm" radius="full" variant="flat" className="pointer-events-auto bg-white/10 text-white" aria-label="下一条" onPress={() => scrollByPage(1)}>
-            →
-          </NButton>
+
+        <div className="mt-4 flex justify-end gap-2">
+          <button
+            type="button"
+            className="surface-shell inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-[var(--muted-strong)]"
+            aria-label="上一条"
+            onClick={() => scrollByPage(-1)}
+          >
+            上一条
+          </button>
+          <button
+            type="button"
+            className="surface-shell inline-flex h-11 items-center justify-center rounded-full px-4 text-sm font-medium text-[var(--muted-strong)]"
+            aria-label="下一条"
+            onClick={() => scrollByPage(1)}
+          >
+            下一条
+          </button>
         </div>
-      </div>
+      </Surface>
     </section>
   );
 };

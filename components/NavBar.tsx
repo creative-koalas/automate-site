@@ -26,8 +26,8 @@ export const Navbar = () => {
       aria-label="主导航"
     >
       <NavbarBrand className="gap-3">
-        <Image src="/logo.svg" alt="AI劳动力 Logo（占位）" width={28} height={28} className="invert" />
-        <span className="text-lg font-semibold tracking-tight">AI劳动力</span>
+        <Image src="/logo.svg" alt="PsyGo Logo（占位）" width={28} height={28} className="invert" />
+        <span className="text-lg font-semibold tracking-tight">PsyGo</span>
       </NavbarBrand>
       <NavbarContent justify="end" className="hidden sm:flex">
         <NavbarItem>

@@ -1,11 +1,28 @@
 @import "tailwindcss";
 
 :root {
-  --background: #030712;
-  --foreground: #e5e7eb;
-  --brand: #38bdf8; /* sky-400 */
-  --radius: 14px;
-  --header-h: 56px;
+  --background: #f5f5f7;
+  --foreground: #1d1d1f;
+  --muted: #6e6e73;
+  --muted-strong: #3a3a3c;
+  --brand: #0071e3;
+  --line: rgba(15, 23, 42, 0.08);
+  --line-strong: rgba(15, 23, 42, 0.14);
+  --surface-0: rgba(255, 255, 255, 0.72);
+  --surface-1: rgba(255, 255, 255, 0.92);
+  --surface-2: #ffffff;
+  --surface-inset: rgba(242, 242, 247, 0.9);
+  --accent: #0071e3;
+  --accent-strong: #005bbb;
+  --accent-soft: rgba(0, 113, 227, 0.12);
+  --shadow-soft: 0 18px 50px rgba(15, 23, 42, 0.08);
+  --shadow-strong: 0 30px 90px rgba(15, 23, 42, 0.12);
+  --radius: 30px;
+  --header-h: 88px;
+  --page-bg:
+    radial-gradient(circle at top, rgba(180, 207, 255, 0.45), transparent 32%),
+    radial-gradient(circle at 20% 12%, rgba(255, 255, 255, 0.92), transparent 28%),
+    linear-gradient(180deg, #fbfbfd 0%, #eef2f7 42%, #f5f5f7 100%);
 }
 
 @theme inline {
@@ -15,37 +32,196 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #000000;
-    --foreground: #e5e7eb;
-  }
+.dark {
+  --background: #0b0b0f;
+  --foreground: #f5f5f7;
+  --muted: #a1a1aa;
+  --muted-strong: #d4d4d8;
+  --brand: #2997ff;
+  --line: rgba(255, 255, 255, 0.1);
+  --line-strong: rgba(255, 255, 255, 0.18);
+  --surface-0: rgba(18, 18, 22, 0.76);
+  --surface-1: rgba(24, 24, 29, 0.92);
+  --surface-2: #101114;
+  --surface-inset: rgba(255, 255, 255, 0.03);
+  --accent: #2997ff;
+  --accent-strong: #58adff;
+  --accent-soft: rgba(41, 151, 255, 0.18);
+  --shadow-soft: 0 24px 64px rgba(0, 0, 0, 0.3);
+  --shadow-strong: 0 36px 120px rgba(0, 0, 0, 0.42);
+  --page-bg:
+    radial-gradient(circle at top, rgba(36, 75, 145, 0.36), transparent 30%),
+    radial-gradient(circle at 80% 0%, rgba(255, 255, 255, 0.08), transparent 22%),
+    linear-gradient(180deg, #111114 0%, #08090c 46%, #06070a 100%);
 }
 
-html, body { height: 100%; }
+html,
+body {
+  height: 100%;
+}
 
-html { scroll-behavior: smooth; }
+html {
+  scroll-behavior: smooth;
+  background: var(--background);
+  color-scheme: light;
+}
+
+html.dark {
+  color-scheme: dark;
+}
 
 body {
-  background: radial-gradient(ellipse at top, rgba(56,189,248,0.1), transparent 50%), linear-gradient(to bottom,#020617 0%,#000 100%);
+  background: var(--page-bg);
   color: var(--foreground);
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system;
+  font-family: "SF Pro Text", "SF Pro Display", -apple-system, BlinkMacSystemFont, var(--font-geist-sans), "Segoe UI", sans-serif;
   padding-bottom: env(safe-area-inset-bottom);
 }
 
-/* rounded tokens */
-.rounded-brand { border-radius: var(--radius); }
+.rounded-brand {
+  border-radius: var(--radius);
+}
 
-/* Accessibility: Skip link */
-.skip-link { position: absolute; left: -10000px; top: auto; width: 1px; height: 1px; overflow: hidden; }
-.skip-link:focus { left: 1rem; top: 1rem; width: auto; height: auto; padding: 0.5rem 0.75rem; background: #111827; color: #fff; border-radius: 0.5rem; z-index: 50; }
+.surface-shell {
+  border: 1px solid var(--line);
+  background: var(--surface-0);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(28px);
+}
 
-/* Focus visible baseline for keyboard users */
-:focus-visible { outline: 2px solid #7dd3fc; /* sky-300 */ outline-offset: 2px; }
+.surface-shell-strong {
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(30px);
+}
 
-/* Reduce motion preference: disable snapping and animations */
+.section-shell {
+  border: 1px solid var(--line);
+  background: linear-gradient(180deg, var(--surface-1), var(--surface-0));
+  box-shadow: var(--shadow-strong);
+  backdrop-filter: blur(32px);
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  padding: 0.45rem 0.9rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.apple-button,
+.apple-button-secondary,
+.apple-button-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 9999px;
+  padding: 0.9rem 1.4rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  transition:
+    transform 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.apple-button {
+  background: var(--accent);
+  color: #ffffff;
+  box-shadow: 0 12px 32px rgba(0, 113, 227, 0.22);
+}
+
+.apple-button:hover {
+  transform: translateY(-1px);
+  background: var(--accent-strong);
+}
+
+.apple-button-secondary {
+  border: 1px solid var(--line);
+  background: var(--surface-1);
+  color: var(--foreground);
+  box-shadow: var(--shadow-soft);
+}
+
+.apple-button-secondary:hover,
+.apple-button-ghost:hover {
+  transform: translateY(-1px);
+}
+
+.apple-button-ghost {
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--muted-strong);
+}
+
+.placeholder-tile {
+  border: 1px dashed var(--line-strong);
+  background: linear-gradient(180deg, var(--surface-inset), var(--surface-0));
+}
+
+.hero-grid {
+  background-image:
+    linear-gradient(to right, var(--line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--line) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0.36), transparent 92%);
+}
+
+a,
+button {
+  transition:
+    color 180ms ease,
+    background-color 180ms ease,
+    border-color 180ms ease,
+    opacity 180ms ease;
+}
+
+.skip-link {
+  position: absolute;
+  left: -10000px;
+  top: auto;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.skip-link:focus {
+  left: 1rem;
+  top: 1rem;
+  width: auto;
+  height: auto;
+  padding: 0.6rem 0.9rem;
+  background: var(--foreground);
+  color: var(--background);
+  border-radius: 9999px;
+  z-index: 60;
+}
+
+:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--accent) 72%, white 28%);
+  outline-offset: 3px;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--foreground);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;

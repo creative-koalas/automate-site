@@ -21,7 +21,7 @@ export const IMMERSIVE_SLIDES: Slide[] = [
   { kind: "feature", ...CORE_FEATURES[1] },
   { kind: "feature", ...CORE_FEATURES[2] },
   { kind: "interstitial", key: "omg" },
-  { kind: "final", key: "automate", title: "不是一个 AI，而是一群 AI", desc: "AutoMate...s：人管AI、AI管AI、AI也能提醒人。", icon: "∞" },
+  { kind: "final", key: "automate", title: "不是一个 AI，而是一套工作流", desc: "PsyGo：让人和 AI 在同一条工作流里协作。", icon: "∞" },
   { kind: "voices", key: "voices" },
   { kind: "footer", key: "footer" },
 ];

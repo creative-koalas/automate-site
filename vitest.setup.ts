@@ -4,8 +4,7 @@ import "@testing-library/jest-dom/vitest";
 if (typeof window !== "undefined") {
   // matchMedia
   if (!window.matchMedia) {
-    // @ts-expect-error jsdom patch
-    window.matchMedia = () => ({
+    window.matchMedia = (() => ({
       matches: false,
       media: "",
       onchange: null,
@@ -14,7 +13,7 @@ if (typeof window !== "undefined") {
       addEventListener: () => {},
       removeEventListener: () => {},
       dispatchEvent: () => false,
-    });
+    })) as typeof window.matchMedia;
   }
 }
 
@@ -27,8 +26,6 @@ class MockIntersectionObserver {
   takeRecords(): IntersectionObserverEntry[] { return []; }
 }
 
-// @ts-expect-error jsdom patch
 if (typeof globalThis.IntersectionObserver === "undefined") {
-  // @ts-expect-error jsdom patch
   globalThis.IntersectionObserver = MockIntersectionObserver as unknown as typeof IntersectionObserver;
 }

@@ -21,7 +21,7 @@ export const OneMoreThing = () => {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2 text-left">
               <h3 className="text-2xl sm:text-3xl font-bold">
-                AutoMate...s 多智能体协作，让效率突飞猛进
+                PsyGo 让 AI 更自然地进入团队协作
               </h3>
               <p className="text-white/70 max-w-prose">
                 不是一个 AI，而是一群 AI，加上一群人。人管 AI、AI 管 AI、AI 也能提醒人。
