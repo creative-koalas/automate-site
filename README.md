@@ -12,6 +12,7 @@
   如果只想本机访问，可用：pnpm dev:local
 - 构建：pnpm build；预览：pnpm preview
   `pnpm preview` 同样默认监听 `0.0.0.0:3000`；如需仅本机访问可用：pnpm preview:local
+- 如需启用 PostHog：本地或部署环境中增加 `NEXT_PUBLIC_POSTHOG_KEY` 与 `NEXT_PUBLIC_POSTHOG_HOST`；未配置时页面不会初始化埋点
 
 局域网访问
 - 查看本机局域网 IP：
@@ -37,6 +38,7 @@
   再次部署生产可使用：npx vercel --prod --token $VERCEL_TOKEN（若报权限需将提交者加入项目或改用 Git 集成）
 - Vercel Git 集成（推荐）：在 Vercel 连接 GitHub 仓库 creative-koalas/automate-site，开启自动预览与生产部署
 - GitHub PAT 推送：PAT 需包含 workflow scope 才能推送 .github/workflows/**
+- 如需启用 PostHog 页面访问跟踪，同时在 Vercel 环境变量中配置 `NEXT_PUBLIC_POSTHOG_KEY`、`NEXT_PUBLIC_POSTHOG_HOST`
 
 结构
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
