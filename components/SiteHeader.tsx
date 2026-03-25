@@ -22,9 +22,6 @@ export function SiteHeader() {
           <a href="#scenarios" className="hover:text-[var(--foreground)]">
             场景
           </a>
-          <a href="#video" className="hover:text-[var(--foreground)]">
-            视频
-          </a>
           <a href="#download" className="hover:text-[var(--foreground)]">
             下载
           </a>

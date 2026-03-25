@@ -4,7 +4,6 @@ import Image, { type StaticImageData } from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
 import { Footer } from "./Footer";
 import { Hero } from "./Hero";
-import { VideoSection } from "./VideoSection";
 import pptShot from "@/static/ppt任务.jpg";
 import scheduleShot from "@/static/定时任务.jpg";
 import smartPageShot from "@/static/智能页具体.jpg";
@@ -222,10 +221,6 @@ export const FeatureScroller = () => {
           })}
         </div>
       </section>
-
-      <div className="mt-20 sm:mt-28">
-        <VideoSection />
-      </div>
 
       <section id="download" className="mt-20 sm:mt-28">
         <div className="border-t border-[var(--line)] pt-10 sm:pt-14">

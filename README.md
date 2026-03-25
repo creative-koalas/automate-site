@@ -42,12 +42,11 @@
 - app/layout.tsx: 元数据、Provider、JSON-LD、manifest 链接
 - app/page.tsx: 页面入口，拆分为 components/*；附 BackToTop 与 #top 锚点
 - app/robots.ts, app/sitemap.ts, app/manifest.ts, app/not-found.tsx
-- components: NavBar(ScrollSpy 高亮), Hero(Surface右侧占位), VideoSection(Surface/SectionHeader/Skeleton/fallback), Features(Surface/SectionHeader), OneMoreThing(Surface/SectionHeader), Voices(水平滚动/Surface/SectionHeader), Footer(Surface), JsonLd, ThemeToggle, BackToTop, Surface, SectionHeader
+- components: NavBar(ScrollSpy 高亮), Hero(Surface右侧占位), Features(Surface/SectionHeader), OneMoreThing(Surface/SectionHeader), Voices(水平滚动/Surface/SectionHeader), Footer(Surface), JsonLd, ThemeToggle, BackToTop, Surface, SectionHeader
 - public: favicon.svg, logo.svg, og.svg
 
 占位替换清单
 - Logo: /public/logo.svg 或 NavBar 中 Image 源
-- 视频: components/VideoSection.tsx 的 src/poster
 - 特性文案: components/Features.tsx 的 FEATURES 常量
 - 用户声音: components/Voices.tsx 的 TESTIMONIALS 常量
 - SEO: app/layout.tsx 的 metadata/OG/Twitter/canonical；robots/sitemap/manifest 基础域名
@@ -59,5 +58,5 @@
 
 注意
 - 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效；支持 prefers-reduced-motion；导航自动高亮当前锚点；支持返回顶部按钮
-- E2E 覆盖：锚点跳转、移动端菜单、响应式、Voices 横向滚动、视频失败 fallback、nav 高亮、返回顶部、CTA 跳转
+- E2E 覆盖：锚点跳转、移动端菜单、响应式、Voices 横向滚动、nav 高亮、返回顶部、CTA 跳转
 - 推荐部署：Vercel（自动预览/环境变量/域名）
