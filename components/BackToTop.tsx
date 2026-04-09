@@ -25,7 +25,7 @@ export const BackToTop = () => {
       animate={controls}
       transition={{ duration: reduce ? 0 : 0.2 }}
       aria-label="返回顶部"
-      className={`fixed bottom-6 right-6 z-50 rounded-full bg-white/10 text-white backdrop-blur px-4 py-2 shadow-lg border border-white/10 ${
+      className={`fixed bottom-24 right-3 z-40 rounded-full border border-[var(--line)] bg-[color:var(--surface-1)] px-4 py-2 text-[var(--foreground)] shadow-[var(--shadow-soft)] backdrop-blur-xl sm:bottom-24 sm:right-6 ${
         visible ? "pointer" : "pointer-events-none"
       }`}
     >

@@ -3,6 +3,7 @@
 import { useEffect } from "react";
 import { FeatureScroller } from "@/components/FeatureScroller";
 import { BackToTop } from "@/components/BackToTop";
+import { CustomerServiceChat } from "@/components/CustomerServiceChat";
 import { SiteHeader } from "@/components/SiteHeader";
 
 export default function Home() {
@@ -20,6 +21,7 @@ export default function Home() {
         <FeatureScroller />
       </main>
       <BackToTop />
+      <CustomerServiceChat />
     </div>
   );
 }
