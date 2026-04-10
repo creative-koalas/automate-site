@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -20,6 +21,7 @@ import {
   type CustomerServiceDoneEvent,
   streamCustomerServiceReply,
 } from "@/lib/customer-service";
+import logoImage from "@/static/logo.png";
 
 type ChatMessage = {
   content: string;
@@ -32,8 +34,7 @@ type ChatMessage = {
 const INITIAL_MESSAGE: ChatMessage = {
   id: "assistant-welcome",
   role: "assistant",
-  content:
-    "你好，我是 PsyGo 的 AI 客服助手。你可以直接问我产品能力、部署方式、下载使用或合作流程。",
+  content: "你好有什么可以帮你的？",
   status: "idle",
 };
 
@@ -92,7 +93,7 @@ function getRuntimeErrorMessage(error: unknown) {
     return error.message;
   }
 
-  return "暂时无法连接客服服务，请稍后再试。";
+  return "暂时无法连接 PsyGo 服务，请稍后再试。";
 }
 
 function AssistantMarkdown({ content }: { content: string }) {
@@ -118,10 +119,6 @@ export function CustomerServiceChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([
     INITIAL_MESSAGE,
   ]);
-
-  const endpointLabel = customerServiceConfig.apiBaseUrl
-    ? customerServiceConfig.apiBaseUrl.replace(/^https?:\/\//, "")
-    : "当前站点";
 
   useEffect(() => {
     const nextSessionId = getOrCreateSessionId();
@@ -168,23 +165,6 @@ export function CustomerServiceChat() {
     const nextSessionId = getOrCreateSessionId();
     setSessionId(nextSessionId);
     return nextSessionId;
-  };
-
-  const handleResetConversation = () => {
-    abortControllerRef.current?.abort();
-    abortControllerRef.current = null;
-
-    const nextSessionId = createSessionId();
-    window.localStorage.setItem(
-      customerServiceConfig.sessionStorageKey,
-      nextSessionId,
-    );
-
-    setSessionId(nextSessionId);
-    setMessages([INITIAL_MESSAGE]);
-    setInputValue("");
-    setErrorMessage(null);
-    setIsStreaming(false);
   };
 
   const handleToggle = () => {
@@ -258,7 +238,7 @@ export function CustomerServiceChat() {
         },
         onError: (payload) => {
           streamErrorMessage =
-            payload.message || "客服服务暂时不可用。";
+            payload.message || "PsyGo 服务暂时不可用。";
         },
       });
 
@@ -281,7 +261,7 @@ export function CustomerServiceChat() {
         updateMessage(assistantMessageId, {
           content:
             streamedAnswer ||
-            "抱歉，我暂时没能连上客服服务。请确认后端接口已启动后再试。",
+            "抱歉，我暂时没能连上 PsyGo 服务。请确认后端接口已启动后再试。",
           note: message,
           status: "error",
         });
@@ -315,7 +295,7 @@ export function CustomerServiceChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: reduceMotion ? 0 : 0.22 }}
-            aria-label="AI 客服对话框"
+            aria-label="PsyGo支持对话框"
             aria-modal="false"
             className="section-shell flex max-h-[min(72vh,42rem)] w-full flex-col overflow-hidden rounded-[30px]"
             id="customer-service-panel"
@@ -324,25 +304,15 @@ export function CustomerServiceChat() {
             <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] px-4 py-4 sm:px-5">
               <div>
                 <p className="text-sm font-semibold tracking-[-0.02em]">
-                  AI 客服
-                </p>
-                <p className="mt-1 text-xs text-[var(--muted)]">
-                  流式应答已开启 · {endpointLabel}
+                  PsyGo支持
                 </p>
               </div>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  className="apple-button-ghost px-0 py-0 text-xs"
-                  onClick={handleResetConversation}
-                >
-                  新对话
-                </button>
-                <button
-                  type="button"
                   className="apple-button-ghost h-9 w-9 px-0 py-0 text-lg"
                   onClick={handleToggle}
-                  aria-label="关闭客服对话框"
+                  aria-label="关闭支持对话框"
                 >
                   x
                 </button>
@@ -369,7 +339,7 @@ export function CustomerServiceChat() {
                   >
                     <div className="max-w-[88%]">
                       <p className="mb-1 px-1 text-[11px] font-medium text-[var(--muted)]">
-                        {isAssistant ? "PsyGo AI" : "你"}
+                        {isAssistant ? "PsyGo" : "你"}
                       </p>
                       <div
                         className={`${bubbleClassName} px-4 py-3 text-sm leading-6 whitespace-pre-wrap break-words`}
@@ -412,7 +382,7 @@ export function CustomerServiceChat() {
               ) : null}
               <form className="space-y-3" onSubmit={handleSubmit}>
                 <label className="sr-only" htmlFor={inputId}>
-                  输入你想咨询的问题
+                  输入你的问题
                 </label>
                 <textarea
                   id={inputId}
@@ -421,7 +391,7 @@ export function CustomerServiceChat() {
                   value={inputValue}
                   onChange={(event) => setInputValue(event.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="输入你想咨询的问题，例如：怎么部署本地服务？"
+                  placeholder="有什么可以帮您的?"
                   className="surface-shell-strong min-h-[108px] w-full resize-none rounded-[24px] px-4 py-3 text-sm leading-6 text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none"
                 />
                 <div className="flex items-center justify-between gap-3">
@@ -468,12 +438,12 @@ export function CustomerServiceChat() {
           <>
             <motion.span
               aria-hidden
-              className="pointer-events-none absolute inset-[-10px] rounded-full bg-[radial-gradient(circle,rgba(0,113,227,0.30),rgba(0,113,227,0)_72%)] blur-2xl"
+              className="chat-fab-grain-halo pointer-events-none absolute inset-[-12px] rounded-full"
               animate={
                 reduceMotion
                   ? undefined
                   : {
-                      opacity: [0.32, 0.72, 0.32],
+                      opacity: [0.26, 0.56, 0.26],
                       scale: [0.94, 1.08, 0.94],
                     }
               }
@@ -489,13 +459,13 @@ export function CustomerServiceChat() {
             />
             <motion.span
               aria-hidden
-              className="pointer-events-none absolute inset-[-4px] rounded-full border border-[color:rgba(77,163,255,0.24)]"
+              className="chat-fab-grain-noise pointer-events-none absolute inset-[-6px] rounded-full"
               animate={
                 reduceMotion
                   ? undefined
                   : {
-                      opacity: [0.16, 0.4, 0.16],
-                      scale: [0.98, 1.03, 0.98],
+                      opacity: [0.08, 0.18, 0.08],
+                      scale: [0.97, 1.04, 0.97],
                     }
               }
               transition={
@@ -516,49 +486,25 @@ export function CustomerServiceChat() {
           onClick={handleToggle}
           aria-controls="customer-service-panel"
           aria-expanded={isOpen}
-          aria-label={isOpen ? "收起 AI 客服" : "打开 AI 客服"}
+          aria-label={isOpen ? "收起 PsyGo" : "打开 PsyGo"}
           whileHover={
             reduceMotion
               ? undefined
-              : { y: -3, scale: 1.01 }
+              : { y: -3, scale: 1.02 }
           }
           whileTap={reduceMotion ? undefined : { scale: 0.985 }}
-          className="group relative overflow-hidden rounded-full border border-white/18 bg-[linear-gradient(135deg,#0b84ff_0%,#0567db_46%,#0447a1_100%)] px-3.5 py-2.5 text-white shadow-[0_22px_52px_rgba(0,113,227,0.34)] backdrop-blur-xl"
+          className="group relative h-[4.15rem] w-[4.15rem] overflow-hidden rounded-full border border-white/18 bg-[linear-gradient(135deg,#0b84ff_0%,#0567db_46%,#0447a1_100%)] p-0 text-white shadow-[0_22px_52px_rgba(0,113,227,0.34)] backdrop-blur-xl"
         >
           <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.34),transparent_42%),linear-gradient(135deg,rgba(255,255,255,0.10),transparent_55%)]" />
-          <span className="pointer-events-none absolute inset-x-4 top-1.5 h-px rounded-full bg-white/45" />
 
-          <span className="relative flex items-center gap-2.5">
-            <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/20 bg-white/14 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur">
-              <span className="text-[11px] font-semibold tracking-[0.22em] text-white">
-                AI
-              </span>
-            </span>
-
-            <span className="flex items-center gap-2 pr-0.5">
-              <span className="text-sm font-semibold tracking-[-0.02em] text-white">
-                AI 客服
-              </span>
-              <motion.span
-                aria-hidden
-                className="h-2.5 w-2.5 rounded-full bg-[#8af5ae] shadow-[0_0_14px_rgba(138,245,174,0.82)]"
-                animate={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        opacity: [0.7, 1, 0.7],
-                        scale: [0.92, 1.12, 0.92],
-                      }
-                }
-                transition={
-                  reduceMotion
-                    ? undefined
-                    : {
-                        duration: 2,
-                        ease: "easeInOut",
-                        repeat: Number.POSITIVE_INFINITY,
-                      }
-                }
+          <span className="relative flex h-full w-full items-center justify-center">
+            <span className="flex h-[3.2rem] w-[3.2rem] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/14 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur">
+              <Image
+                src={logoImage}
+                alt="PsyGo"
+                width={52}
+                height={52}
+                className="h-full w-full object-cover"
               />
             </span>
           </span>

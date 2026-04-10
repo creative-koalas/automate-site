@@ -1,24 +1,120 @@
 "use client";
 
-import Image from "next/image";
 import { motion, useReducedMotion } from "framer-motion";
-import heroShot from "@/static/psygo_home.png";
+import { ScenarioCompare } from "./ScenarioCompare";
+
+const HERO_LINES = [
+  { text: "你的 AI 牛马，", accent: false },
+  { text: "直接干活，不讲虚的。", accent: true },
+];
+
+const SUPPORT_LINES = [
+  "把任务交给它，关掉 App。",
+  "回来，就有结果。",
+];
 
 const STRIP_ITEMS = [
-  "AI 劳动力平台",
-  "智能网页交付",
-  "定时任务执行",
+  "打开就能用",
+  "后台持续推进",
+  "回来交付结果",
 ];
+
+const SMOOTH_EASE = [0.22, 1, 0.36, 1] as const;
+const AGENT_COMPARE_IMAGE = "https://home.psygoai.com/images/mcp-gearbox.webp";
+const WORKFORCE_COMPARE_IMAGE = "https://home.psygoai.com/images/macos-desktop.jpeg";
+
+const ComparisonImagePanel = ({
+  imageUrl,
+  alt,
+  badge,
+  title,
+  description,
+  overlayTone = "dark",
+}: {
+  imageUrl: string;
+  alt: string;
+  badge: string;
+  title: string;
+  description: string;
+  overlayTone?: "dark" | "light";
+}) => (
+  <div className="relative h-full w-full overflow-hidden">
+    <img
+      src={imageUrl}
+      alt={alt}
+      draggable={false}
+      className="absolute inset-0 h-full w-full object-cover object-center"
+    />
+
+    <div
+      className={
+        overlayTone === "dark"
+          ? "absolute inset-0 bg-[linear-gradient(180deg,rgba(8,10,14,0.18),rgba(8,10,14,0.34))]"
+          : "absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.02),rgba(255,255,255,0.12))]"
+      }
+    />
+
+    <div className="absolute inset-0 z-10 flex items-center justify-center px-5 sm:px-6">
+      <div
+        className={`flex w-[min(78%,620px)] flex-col items-center rounded-[28px] px-5 py-5 text-center shadow-[0_22px_48px_rgba(15,23,42,0.14)] backdrop-blur-xl sm:px-7 sm:py-6 ${
+          overlayTone === "dark"
+            ? "bg-[rgba(7,9,14,0.62)] text-white"
+            : "bg-[rgba(255,251,246,0.8)] text-[#1d1d1f]"
+        }`}
+      >
+        <span
+          className={`rounded-full px-3 py-1.5 text-[11px] font-semibold uppercase tracking-[0.18em] shadow-[0_10px_24px_rgba(15,23,42,0.12)] ${
+            overlayTone === "dark"
+              ? "border border-white/14 bg-[rgba(255,255,255,0.08)] text-white/82"
+              : "border border-white/60 bg-[rgba(255,255,255,0.72)] text-[#244267]"
+          }`}
+        >
+          {badge}
+        </span>
+
+        <p className="mt-4 text-[clamp(1.4rem,2.35vw,2.2rem)] font-semibold leading-tight tracking-[-0.05em]">
+          {title}
+        </p>
+        <p
+          className={`mt-4 max-w-[34rem] text-sm leading-6 sm:text-[15px] ${
+            overlayTone === "dark" ? "text-white/72" : "text-[#3a3a3c]"
+          }`}
+        >
+          {description}
+        </p>
+      </div>
+    </div>
+  </div>
+);
 
 export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "blk2" }) => {
   const reduce = useReducedMotion();
-  const enter = reduce
-    ? { initial: false, whileInView: undefined, transition: { duration: 0 } }
-    : {
-        initial: { opacity: 0, y: 22 },
-        whileInView: { opacity: 1, y: 0 },
-        transition: { duration: variant === "default" ? 0.55 : 0.35 },
-      };
+
+  const immediate = (delay = 0, y = 22) =>
+    reduce
+      ? { initial: false, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, y, filter: "blur(12px)" },
+          animate: { opacity: 1, y: 0, filter: "blur(0px)" },
+          transition: {
+            duration: variant === "default" ? 0.72 : 0.42,
+            delay,
+            ease: SMOOTH_EASE,
+          },
+        };
+
+  const enter = (delay = 0, y = 22) =>
+    reduce
+      ? { initial: false, transition: { duration: 0 } }
+      : {
+          initial: { opacity: 0, y, filter: "blur(12px)" },
+          whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
+          transition: {
+            duration: variant === "default" ? 0.58 : 0.35,
+            delay,
+            ease: SMOOTH_EASE,
+          },
+        };
 
   return (
     <section className="relative overflow-hidden pt-10 sm:pt-14 lg:pt-18">
@@ -29,73 +125,116 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
 
       <div className="mx-auto max-w-[82rem]">
         <div className="mx-auto max-w-4xl text-center">
-          <motion.span {...enter} viewport={{ once: true }} className="eyebrow">
-            AI Workforce Platform
+          <motion.span {...immediate(0)} className="eyebrow">
+            PsyGo / AI Workforce
           </motion.span>
 
-          <motion.h1
-            {...enter}
-            viewport={{ once: true }}
-            className="mx-auto mt-7 max-w-4xl text-4xl font-semibold tracking-[-0.045em] sm:text-6xl lg:text-[5.25rem] lg:leading-[0.94]"
-          >
-            把 AI 从工具，
-            <br className="hidden sm:block" />
-            升级为可协作的劳动力。
-          </motion.h1>
+          <h1 className="mx-auto mt-7 max-w-5xl text-4xl font-semibold tracking-[-0.055em] sm:text-6xl lg:text-[5.35rem] lg:leading-[0.92]">
+            {HERO_LINES.map((line, index) => (
+              <motion.span
+                key={line.text}
+                {...immediate(0.12 + index * 0.1, 28)}
+                className="block overflow-hidden"
+              >
+                <span className={line.accent ? "hero-gradient-text hero-shimmer-text" : undefined}>
+                  {line.text}
+                </span>
+              </motion.span>
+            ))}
+          </h1>
 
-          <motion.p
-            {...(reduce
-              ? enter
-              : { initial: { opacity: 0, y: 14 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: 0.05, duration: 0.5 } })}
-            viewport={{ once: true }}
-            className="mx-auto mt-7 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg"
-          >
-            PsyGo 让企业拥有一支可招聘、可调度、可追踪的 AI 劳动力团队。它能进入真实业务流程，承担智能网页生成、定时任务执行、资料整理、内容生产与多角色协作。
-          </motion.p>
+          <div className="mx-auto mt-7 max-w-3xl space-y-2 text-lg leading-8 text-[var(--muted-strong)] sm:text-[1.35rem]">
+            {SUPPORT_LINES.map((line, index) => (
+              <motion.p key={line} {...immediate(0.34 + index * 0.1, 18)}>
+                {line}
+              </motion.p>
+            ))}
+          </div>
 
           <motion.div
-            {...(reduce
-              ? enter
-              : { initial: { opacity: 0, y: 14 }, whileInView: { opacity: 1, y: 0 }, transition: { delay: 0.1, duration: 0.5 } })}
-            viewport={{ once: true }}
-            className="mt-9 flex flex-wrap items-center justify-center gap-4"
+            {...immediate(0.56, 16)}
+            className="mx-auto mt-10 max-w-4xl"
+          >
+            <p className="hero-quote text-2xl font-medium tracking-[-0.045em] text-[var(--muted)] sm:text-4xl lg:text-[3.45rem] lg:leading-[1.04]">
+              它不是在陪你聊天，
+              <br className="hidden sm:block" />
+              <span className="hero-gradient-text">是在替你干活。</span>
+            </p>
+          </motion.div>
+
+          <motion.div
+            {...immediate(0.66, 16)}
+            className="mt-10 flex flex-wrap items-center justify-center gap-4"
           >
             <a href="/PsyGo-download.txt" download className="apple-button">
               下载 PsyGo
             </a>
             <a href="#scenarios" className="apple-button-ghost">
-              查看实际场景
+              看它能做什么
             </a>
           </motion.div>
         </div>
 
         <motion.div
           {...(reduce
-            ? enter
-            : { initial: { opacity: 0, scale: 0.985, y: 20 }, whileInView: { opacity: 1, scale: 1, y: 0 }, transition: { delay: 0.12, duration: 0.55 } })}
+            ? { initial: false, transition: { duration: 0 } }
+            : {
+                initial: { opacity: 0, scale: 0.985, y: 20, filter: "blur(10px)" },
+                whileInView: { opacity: 1, scale: 1, y: 0, filter: "blur(0px)" },
+                transition: { delay: 0.78, duration: 0.7, ease: SMOOTH_EASE },
+              })}
           viewport={{ once: true }}
           className="relative mt-12 sm:mt-14 lg:mt-16"
         >
           <div className="surface-shell-strong relative overflow-hidden rounded-[32px] p-3 sm:p-4">
             <div className="absolute inset-0 bg-[linear-gradient(to_right,rgba(15,23,42,0.05)_1px,transparent_1px),linear-gradient(to_bottom,rgba(15,23,42,0.05)_1px,transparent_1px)] bg-[size:34px_34px] opacity-30 dark:opacity-15" />
             <div className="relative overflow-hidden rounded-[30px] border border-white/70 bg-[linear-gradient(180deg,rgba(246,248,238,0.92),rgba(241,246,233,0.86))] p-2 dark:border-white/10 dark:bg-[linear-gradient(180deg,rgba(17,19,20,0.94),rgba(10,12,14,0.94))]">
-              <div className="flex items-center justify-between rounded-[22px] border border-black/5 bg-white/80 px-4 py-3 text-xs text-[var(--muted)] shadow-[0_16px_38px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
-                <div className="flex items-center gap-2">
-                  <span className="h-2.5 w-2.5 rounded-full bg-[#56c271]" />
-                  <span>多智能体工作台</span>
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-black/5 bg-white/80 px-4 py-3 text-xs text-[var(--muted)] shadow-[0_16px_38px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
+                <div className="flex items-center gap-2 rounded-full border border-black/6 bg-black/[0.03] px-3 py-1.5 dark:border-white/10 dark:bg-white/[0.03]">
+                  <span className="h-2.5 w-2.5 rounded-full bg-white/70 shadow-[0_0_0_4px_rgba(255,255,255,0.12)] dark:bg-white/60" />
+                  <span>左侧：AI 劳动力</span>
                 </div>
-                <span>实时协作中</span>
+                <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                  Capability Compare
+                </span>
+                <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300">
+                  <span className="hero-status-dot h-2.5 w-2.5" />
+                  <span>右侧：AI 智能体</span>
+                </div>
               </div>
 
-              <div className="relative mt-3 aspect-[2238/1323] overflow-hidden rounded-[26px] border border-black/5 bg-[#edf4e7] dark:border-white/10 dark:bg-[#0d1114]">
-                <Image
-                  src={heroShot}
-                  alt="PsyGo AI 劳动力工作台界面"
-                  fill
-                  priority
-                  quality={95}
-                  sizes="(min-width: 1536px) 1480px, (min-width: 1024px) 1312px, 100vw"
-                  className="object-contain object-center"
+              <div className="relative mt-3 overflow-hidden rounded-[26px] border border-black/5 bg-[#edf4e7] dark:border-white/10 dark:bg-[#0d1114]">
+                <ScenarioCompare
+                  comparison={{
+                    leftPanel: (
+                      <ComparisonImagePanel
+                        imageUrl={AGENT_COMPARE_IMAGE}
+                        alt="AI 劳动力工具管理界面"
+                        badge="AI 劳动力"
+                        title="自带工具，但工具有限。"
+                        description="更像固定能力的劳动力工作台。工具先给你配好，但能做什么基本取决于这套现成工具。"
+                        overlayTone="dark"
+                      />
+                    ),
+                    rightPanel: (
+                      <ComparisonImagePanel
+                        imageUrl={WORKFORCE_COMPARE_IMAGE}
+                        alt="AI 智能体动态补工具桌面"
+                        badge="AI 智能体"
+                        title="没有预制工具，需要什么就创造什么。"
+                        description="更像一个解决问题的数字人。缺什么工具，就主动下载什么工具，再继续往下做。"
+                        overlayTone="light"
+                      />
+                    ),
+                    leftLabel: "AI 劳动力",
+                    rightLabel: "AI 智能体",
+                    leftCaption: "AI 劳动力：自带工具，但工具有限，边界基本跟着预置能力走。",
+                    rightCaption: "AI 智能体：没有预制工具，需要什么就创造什么，缺什么工具就主动下载什么。",
+                    hint: "左右拖动看差距",
+                    aspectClassName: "aspect-[2238/1323]",
+                    showGlobalLabels: false,
+                    showGlobalCaptions: false,
+                  }}
                 />
               </div>
             </div>
@@ -103,11 +242,9 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
         </motion.div>
 
         <motion.div
-          {...(reduce
-            ? enter
-            : { initial: { opacity: 0 }, whileInView: { opacity: 1 }, transition: { delay: 0.18, duration: 0.5 } })}
+          {...enter(0.06, 12)}
           viewport={{ once: true }}
-          className="mt-8 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-[var(--muted)]"
+          className="mt-10 flex flex-wrap items-center justify-center gap-x-6 gap-y-3 text-sm text-[var(--muted)]"
         >
           {STRIP_ITEMS.map((item) => (
             <div key={item} className="flex items-center gap-3">

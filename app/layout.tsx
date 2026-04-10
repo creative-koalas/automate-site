@@ -45,7 +45,15 @@ export const metadata: Metadata = {
       "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
     images: ["/og.svg"],
   },
-  icons: { icon: "/favicon.svg" }
+  icons: {
+    icon: [
+      { url: "/favicon.png?v=2", type: "image/png", sizes: "1024x1024" },
+    ],
+    shortcut: "/favicon.png?v=2",
+    apple: [
+      { url: "/apple-touch-icon.png?v=2", sizes: "180x180", type: "image/png" },
+    ],
+  },
 };
 
 export const viewport: Viewport = {
@@ -62,7 +70,7 @@ export default function RootLayout({
     <html lang="zh-CN" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://interactive-examples.mdn.mozilla.net" crossOrigin="anonymous" />
-        <link rel="preload" href="/favicon.svg" as="image" type="image/svg+xml" />
+        <link rel="preload" href="/favicon.png" as="image" type="image/png" />
         <link rel="preload" href="/og.svg" as="image" type="image/svg+xml" />
         <link rel="manifest" href="/manifest.webmanifest" />
         <JsonLd />
