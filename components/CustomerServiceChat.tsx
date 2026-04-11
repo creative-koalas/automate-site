@@ -16,7 +16,6 @@ import {
   type FormEvent,
   type KeyboardEvent,
 } from "react";
-import { customerServiceConfig } from "@/config/customer-service";
 import {
   type CustomerServiceDoneEvent,
   streamCustomerServiceReply,
@@ -38,28 +37,53 @@ const INITIAL_MESSAGE: ChatMessage = {
   status: "idle",
 };
 
-function createSessionId() {
-  if (typeof crypto !== "undefined" && "randomUUID" in crypto) {
-    return crypto.randomUUID();
+function hashString(value: string) {
+  let hash = 5381;
+
+  for (let index = 0; index < value.length; index += 1) {
+    hash = (hash * 33) ^ value.charCodeAt(index);
   }
 
-  return `web-session-${Date.now()}`;
+  return (hash >>> 0).toString(36);
 }
 
-function getOrCreateSessionId() {
-  const saved = window.localStorage.getItem(
-    customerServiceConfig.sessionStorageKey,
-  );
-  if (saved) {
-    return saved;
+function createBrowserFingerprint() {
+  if (typeof window === "undefined") {
+    return "browser-unknown";
   }
 
-  const nextId = createSessionId();
-  window.localStorage.setItem(
-    customerServiceConfig.sessionStorageKey,
-    nextId,
-  );
-  return nextId;
+  const { navigator, screen } = window;
+  const deviceMemory =
+    "deviceMemory" in navigator
+      ? String(
+          (
+            navigator as Navigator & {
+              deviceMemory?: number;
+            }
+          ).deviceMemory ?? "",
+        )
+      : "";
+
+  const source = [
+    navigator.userAgent,
+    navigator.language,
+    navigator.languages.join(","),
+    navigator.platform,
+    navigator.hardwareConcurrency,
+    deviceMemory,
+    navigator.maxTouchPoints,
+    screen.width,
+    screen.height,
+    screen.colorDepth,
+    window.devicePixelRatio,
+    Intl.DateTimeFormat().resolvedOptions().timeZone,
+  ].join("|");
+
+  return `browser-${hashString(source)}`;
+}
+
+function createSessionId(browserFingerprint: string, pageLoadTimestamp: number) {
+  return `${browserFingerprint}-${pageLoadTimestamp}`;
 }
 
 function buildGuardNote(payload: CustomerServiceDoneEvent) {
@@ -110,10 +134,16 @@ export function CustomerServiceChat() {
   const messagesEndRef = useRef<HTMLDivElement | null>(null);
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const abortControllerRef = useRef<AbortController | null>(null);
+  const browserFingerprintRef = useRef("");
+  const pageLoadTimestampRef = useRef<number | null>(null);
+  const sessionIdRef = useRef("");
+
+  if (pageLoadTimestampRef.current === null && typeof window !== "undefined") {
+    pageLoadTimestampRef.current = Date.now();
+  }
 
   const [isOpen, setIsOpen] = useState(false);
   const [isStreaming, setIsStreaming] = useState(false);
-  const [sessionId, setSessionId] = useState("");
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([
@@ -121,8 +151,16 @@ export function CustomerServiceChat() {
   ]);
 
   useEffect(() => {
-    const nextSessionId = getOrCreateSessionId();
-    setSessionId(nextSessionId);
+    if (!browserFingerprintRef.current) {
+      browserFingerprintRef.current = createBrowserFingerprint();
+    }
+
+    if (!sessionIdRef.current) {
+      sessionIdRef.current = createSessionId(
+        browserFingerprintRef.current,
+        pageLoadTimestampRef.current ?? Date.now(),
+      );
+    }
   }, []);
 
   useEffect(() => {
@@ -158,12 +196,19 @@ export function CustomerServiceChat() {
   };
 
   const ensureSessionId = () => {
-    if (sessionId) {
-      return sessionId;
+    if (sessionIdRef.current) {
+      return sessionIdRef.current;
     }
 
-    const nextSessionId = getOrCreateSessionId();
-    setSessionId(nextSessionId);
+    if (!browserFingerprintRef.current) {
+      browserFingerprintRef.current = createBrowserFingerprint();
+    }
+
+    const nextSessionId = createSessionId(
+      browserFingerprintRef.current,
+      pageLoadTimestampRef.current ?? Date.now(),
+    );
+    sessionIdRef.current = nextSessionId;
     return nextSessionId;
   };
 
@@ -338,7 +383,11 @@ export function CustomerServiceChat() {
                     }`}
                   >
                     <div className="max-w-[88%]">
-                      <p className="mb-1 px-1 text-[11px] font-medium text-[var(--muted)]">
+                      <p
+                        className={`mb-1 px-1 text-[11px] font-medium text-[var(--muted)] ${
+                          isAssistant ? "text-left" : "text-right"
+                        }`}
+                      >
                         {isAssistant ? "PsyGo" : "你"}
                       </p>
                       <div
@@ -391,26 +440,26 @@ export function CustomerServiceChat() {
                   value={inputValue}
                   onChange={(event) => setInputValue(event.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder="有什么可以帮您的?"
+                  placeholder="请输入....."
                   className="surface-shell-strong min-h-[108px] w-full resize-none rounded-[24px] px-4 py-3 text-sm leading-6 text-[var(--foreground)] placeholder:text-[var(--muted)] focus:outline-none"
                 />
-                <div className="flex items-center justify-between gap-3">
-                  <p className="text-xs text-[var(--muted)]">
+                <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="min-w-0 text-xs leading-5 text-[var(--muted)]">
                     Enter 发送，Shift + Enter 换行
                   </p>
-                  <div className="flex items-center gap-2">
+                  <div className="flex w-full shrink-0 items-center justify-end gap-2 sm:w-auto">
                     {isStreaming ? (
                       <>
                         <button
                           type="button"
-                          className="inline-flex h-10 items-center justify-center rounded-full border border-[var(--line)] bg-[color:var(--surface-1)] px-4 text-sm font-medium text-[var(--foreground)] shadow-[var(--shadow-soft)] transition-transform duration-200 hover:-translate-y-0.5"
+                          className="inline-flex h-10 min-w-[5rem] shrink-0 items-center justify-center whitespace-nowrap rounded-full border border-[var(--line)] bg-[color:var(--surface-1)] px-4 text-sm font-medium text-[var(--foreground)] shadow-[var(--shadow-soft)] transition-transform duration-200 hover:-translate-y-0.5"
                           onClick={() => abortControllerRef.current?.abort()}
                         >
                           停止
                         </button>
                         <div
                           aria-live="polite"
-                          className="inline-flex h-10 items-center gap-2 rounded-full border border-[color:rgba(0,113,227,0.16)] bg-[var(--accent-soft)] px-4 text-sm font-medium text-[var(--accent-strong)]"
+                          className="inline-flex h-10 min-w-[7rem] shrink-0 items-center justify-center gap-2 whitespace-nowrap rounded-full border border-[color:rgba(0,113,227,0.16)] bg-[var(--accent-soft)] px-4 text-sm font-medium text-[var(--accent-strong)]"
                         >
                           <span className="h-2 w-2 rounded-full bg-[var(--accent)] animate-pulse" />
                           正在回复
@@ -419,7 +468,7 @@ export function CustomerServiceChat() {
                     ) : (
                       <button
                         type="submit"
-                        className="apple-button px-5 py-2 text-sm"
+                        className="apple-button min-w-[5rem] whitespace-nowrap px-5 py-2 text-sm"
                         disabled={!inputValue.trim()}
                       >
                         发送

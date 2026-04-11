@@ -1,7 +1,6 @@
 export type CustomerServiceConfig = {
   apiBaseUrl: string;
   chatPath: string;
-  sessionStorageKey: string;
   requestDefaults: {
     stream: boolean;
     promptName?: string;
@@ -15,7 +14,6 @@ export const customerServiceConfig: CustomerServiceConfig = {
   // Same-origin deployment can use an empty string here.
   apiBaseUrl: "http://127.0.0.1:8000",
   chatPath: "/api/v1/chat/completions",
-  sessionStorageKey: "customer_service_session_id",
   requestDefaults: {
     stream: true,
     metadata: {
