@@ -12,7 +12,7 @@ export type CustomerServiceConfig = {
 
 export const customerServiceConfig: CustomerServiceConfig = {
   // Same-origin deployment can use an empty string here.
-  apiBaseUrl: "http://127.0.0.1:8000",
+  apiBaseUrl: "https://ai-cs-backend.psygoai.com/",
   chatPath: "/api/v1/chat/completions",
   requestDefaults: {
     stream: true,

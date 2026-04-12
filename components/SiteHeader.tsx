@@ -30,13 +30,13 @@ export function SiteHeader() {
           <a href="#scenarios" className="hover:text-[var(--foreground)]">
             场景
           </a>
-          <a href="#download" className="hover:text-[var(--foreground)]">
+          <a href="/download.html" className="hover:text-[var(--foreground)]">
             下载
           </a>
         </nav>
 
         <div className="flex items-center gap-3">
-          <a href="/PsyGo-download.txt" download className="apple-button px-4 py-2 text-sm">
+          <a href="/download.html" className="apple-button px-4 py-2 text-sm">
             下载 PsyGo
           </a>
         </div>

@@ -12,6 +12,7 @@
     "preview:local": "next start --hostname 127.0.0.1 -p 3000",
     "lint": "eslint",
     "test": "vitest run",
+    "test:backend": "node scripts/test-customer-service-backend.mjs",
     "test:ui": "vitest",
     "test:e2e": "playwright test",
     "test:e2e:headed": "playwright test --headed",

@@ -6,6 +6,14 @@ const nextConfig: NextConfig = {
     unoptimized: true,
     qualities: [75, 95],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/download.html",
+        destination: "/download",
+      },
+    ];
+  },
 };
 
 export default nextConfig;

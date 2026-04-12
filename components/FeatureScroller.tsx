@@ -345,11 +345,8 @@ export const FeatureScroller = () => {
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <a href="/PsyGo-download.txt" download className="apple-button min-w-[200px]">
+            <a href="/download.html" className="apple-button min-w-[200px]">
               下载 PsyGo
-            </a>
-            <a href="mailto:1234567890@qq.com" className="apple-button-secondary min-w-[200px]">
-              联系团队
             </a>
           </div>
         </div>
