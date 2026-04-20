@@ -19,7 +19,7 @@ export function SiteHeader() {
           />
           <div>
             <p className="font-semibold tracking-[-0.03em]">PsyGo</p>
-            <p className="text-xs text-[var(--muted)]">AI 劳动力平台</p>
+            <p className="text-xs text-[var(--muted)]">AI 助理</p>
           </div>
         </Link>
 

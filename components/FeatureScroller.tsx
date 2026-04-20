@@ -14,9 +14,9 @@ const CAPABILITIES: FeatureWallItem[] = [
   {
     eyebrow: "01",
     highlight: "开箱即用",
-    title: "点一下，就开工",
-    desc: "不需要配置，也不用学习。",
-    note: "不是 setup，不是教程，是直接开工。",
+    title: "下载就能开始",
+    desc: "不用配环境，不用看教程。打开 App，雇一个 AI 牛马，直接派活。",
+    note: "支持 iOS、Android、macOS、Windows、Linux。",
     startX: -760,
     startY: -420,
     startRotate: -15,
@@ -27,10 +27,10 @@ const CAPABILITIES: FeatureWallItem[] = [
   },
   {
     eyebrow: "02",
-    highlight: "说完就交",
-    title: "一句话，直接派单",
-    desc: "不是聊完就算，是马上开始执行。",
-    note: "输入不是提问，输入就是派单。",
+    highlight: "说完就做",
+    title: "聊天就是派活",
+    desc: "你说的每句话，它都当成一件要做的事。文档、代码、方案，聊完直接交付。",
+    note: "不用另外写文档，对话就是指令。",
     startX: 740,
     startY: -360,
     startRotate: 14,
@@ -42,9 +42,9 @@ const CAPABILITIES: FeatureWallItem[] = [
   {
     eyebrow: "03",
     highlight: "后台推进",
-    title: "你离开，它继续",
-    desc: "关掉 App，任务也不会暂停。",
-    note: "关掉 App，不等于工作停止。",
+    title: "关掉 App，它还在做",
+    desc: "任务在云端持续跑，你忙你的，它继续推进。",
+    note: "做完会推送通知告诉你。",
     startX: -720,
     startY: 220,
     startRotate: -11,
@@ -55,10 +55,10 @@ const CAPABILITIES: FeatureWallItem[] = [
   },
   {
     eyebrow: "04",
-    highlight: "一人成组",
-    title: "一个人，也像一整个组",
-    desc: "复杂任务也能拆开并行往前跑。",
-    note: "从单点执行，变成多角色推进。",
+    highlight: "主动汇报",
+    title: "做完了会找你",
+    desc: "有进展就主动告诉你，不用你追问。",
+    note: "随时更新进度，做完交结果。",
     startX: 680,
     startY: 320,
     startRotate: 8,
@@ -69,10 +69,10 @@ const CAPABILITIES: FeatureWallItem[] = [
   },
   {
     eyebrow: "05",
-    highlight: "越用越懂",
-    title: "越做越贴手",
-    desc: "习惯、偏好、节奏，会慢慢被记住。",
-    note: "越用越顺手，越聊越少废话。",
+    highlight: "一人成组",
+    title: "几个 AI 一起做",
+    desc: "复杂的事，它会拆给几个 AI 牛马同时跑，各管一摊。",
+    note: "你也可以拉朋友和他们的 AI 一起进群干活。",
     startX: 0,
     startY: 620,
     startRotate: -4,
@@ -103,12 +103,12 @@ const SCENARIOS: Array<{
 }> = [
   {
     eyebrow: "学术研究",
-    title: "文献、实验、论文，先交给它推进。",
-    desc: "把资料搜集、论文梳理、实验记录和结果整理交给它，你可以先去做别的，回来再接着往下走。",
+    title: "论文的前期工作，先交给它跑。",
+    desc: "搜文献、整理资料、搭论文框架，这些你可以先交给它。你去做别的，回来接着往下写。",
     bullets: [
-      "适合文献搜索、阅读归纳、参考资料整理",
-      "可以先帮你搭实验记录、论文框架和材料目录",
-      "把需要时间的查找和归纳先跑起来",
+      "帮你搜文献、归纳要点、整理参考资料",
+      "先搭好论文框架、实验记录和材料目录",
+      "整理完的内容直接输出成文档，不用你手动再排",
     ],
     image: researchShot,
     alt: "PsyGo 用于文献论文相关任务的示意截图",
@@ -119,12 +119,12 @@ const SCENARIOS: Array<{
   },
   {
     eyebrow: "复杂决策",
-    title: "留学、商业调研、方案制定，让它先把脏活累活跑完。",
-    desc: "需要时间的对比、调研和信息汇总，它可以先跑。你回来时，面对的会是一份已经整理过的候选方案。",
+    title: "留学选校、商业调研、方案对比，先让它把功课做了。",
+    desc: "对比、调研、信息汇总这些花时间的事，它可以先跑。你回来时，看到的是一份整理好的候选方案。",
     bullets: [
-      "适合留学规划、商业调研、采购比选、路线对比",
-      "先帮你铺底层信息，再把关键分歧点拎出来",
-      "最后会把汇总文件和明确结论一起回传",
+      "留学规划、采购比选、路线对比都能做",
+      "先铺好基础信息，再把关键差异点拎出来",
+      "最后把汇总文件和结论一起交给你",
     ],
     image: teamworkShot,
     alt: "PsyGo 用于复杂决策和协同办公的示意截图",
@@ -137,16 +137,16 @@ const SCENARIOS: Array<{
     detailImagePosition: "object-center",
     detailAspectClassName: "aspect-[1969/348]",
     detailEyebrow: "成果回传",
-    detailTitle: "不是只给建议，最后会把文件和结论一起交回来。",
+    detailTitle: "不只是给建议，文件和结论会一起交回来。",
   },
   {
     eyebrow: "后台执行",
-    title: "把任务交给它，关掉 App。回来，就有结果。",
-    desc: "真正值钱的不是即时回复，而是任务在后台持续推进。它适合那些需要时间的追踪、整理和交付。",
+    title: "交给它，关掉 App。回来就有结果。",
+    desc: "有些事不用你盯着，但需要有人一直在跑。追踪、整理、定时交付，这些它都能做。",
     bullets: [
-      "适合日报、周报、竞品跟踪、信息观察等任务",
-      "你离开之后，它还能继续往前跑",
-      "做完会回来找你，而不是等你盯着它",
+      "日报、周报、竞品跟踪、信息观察都能接",
+      "你离开之后，它在云端继续跑",
+      "做完了推送通知找你，不用你追着问",
     ],
     image: scheduleShot,
     alt: "PsyGo 在后台持续执行任务的示意截图",
@@ -208,7 +208,7 @@ export const FeatureScroller = () => {
             viewport={{ once: true }}
             className="mx-auto mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg"
           >
-            你的 AI 牛马，核心价值不是“回复得像不像人”，而是“能不能把活干出来”。PsyGo 想做的，是让结果先发生，再让你回来确认。
+            你的 AI 牛马，重点不是”回复得像不像人”，而是”能不能把活干出来”。你可以把花时间的事交给它，它会一直做下去，做完把文件交回来。
           </motion.p>
         </div>
 
@@ -230,16 +230,16 @@ export const FeatureScroller = () => {
             id="scenarios-title"
             className="mt-4 text-3xl font-semibold tracking-[-0.04em] sm:text-5xl"
           >
-            它适合先替你做的，
+            最适合交给它的，
             <br className="hidden sm:block" />
-            往往都是那些真正花时间的事。
+            都是那些真正花时间的事。
           </motion.h2>
           <motion.p
             {...fadeIn(reduce, 0.08)}
             viewport={{ once: true }}
             className="mx-auto mt-5 max-w-3xl text-base leading-8 text-[var(--muted)] sm:text-lg"
           >
-            学术研究、复杂决策、后台持续任务，这些都不是一句话能瞬间解决的事。它们恰好也是最适合交给 PsyGo 先跑起来的事情。
+            论文、留学方案、商业调研，这些事没法一句话搞定。你可以先交给 PsyGo 跑着，回来看结果。
           </motion.p>
         </div>
 
@@ -336,12 +336,10 @@ export const FeatureScroller = () => {
             viewport={{ once: true }}
             className="mx-auto mt-5 max-w-4xl text-4xl font-semibold tracking-[-0.05em] sm:text-6xl lg:text-[5.2rem] lg:leading-[0.95]"
           >
-            把任务交给它，
-            <br />
-            然后先去做别的。
+            试试雇一个 AI 牛马。
           </motion.h2>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-8 text-[var(--muted)] sm:text-lg">
-            PsyGo 不靠陪聊证明自己，结果会替它说话。先让它接住一个任务，再让它慢慢变成你手边最稳的执行者。
+            不用想太多，先让它帮你做一件事。做得好不好，看结果就知道了。
           </p>
 
           <div className="mt-10 flex flex-wrap items-center justify-center gap-3">

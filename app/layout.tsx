@@ -18,18 +18,18 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "PsyGo — AI 劳动力平台",
+    default: "PsyGo — 你的 AI 牛马",
     template: "%s | PsyGo",
   },
   description:
-    "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
+    "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
   applicationName: "PsyGo",
   metadataBase: new URL("https://ai-workforce.example.com"),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "PsyGo — AI 劳动力平台",
+    title: "PsyGo — 你的 AI 牛马",
     description:
-      "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
+      "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
     url: "https://ai-workforce.example.com",
     siteName: "PsyGo",
     images: [
@@ -40,9 +40,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PsyGo — AI 劳动力平台",
+    title: "PsyGo — 你的 AI 牛马",
     description:
-      "PsyGo 是面向企业协作与自动化场景的 AI 劳动力平台，支持 AI 劳动力、多智能体协作、智能网页生成与定时任务执行。",
+      "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
     images: ["/og.svg"],
   },
   icons: {

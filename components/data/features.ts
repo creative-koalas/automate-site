@@ -1,8 +1,8 @@
 export type CoreFeature = { title: string; desc: string; icon: string; key: string };
 export const CORE_FEATURES: CoreFeature[] = [
-  { key: "ease", title: "省心", desc: "无需指导，长时间连续工作，自主解决环境配置、API接入等问题。", icon: "🧠" },
-  { key: "understand", title: "懂你", desc: "自研类脑记忆系统，在工作中持续进化，逐渐与你心有灵犀。", icon: "🤝" },
-  { key: "natural", title: "自然", desc: "人类级交互体验，会发飞书、发邮件，甚至能联系你的领导。", icon: "💬" },
+  { key: "ease", title: "省心", desc: "不用教它怎么配环境、怎么开始，交代完就行了。", icon: "🧠" },
+  { key: "understand", title: "懂你", desc: "每个 AI 牛马都有独立记忆，用得越多，它越了解你的习惯和偏好。", icon: "🤝" },
+  { key: "natural", title: "自然", desc: "它会发飞书、发邮件，也能帮你联系同事。", icon: "💬" },
 ];
 
 export type Slide =
@@ -19,7 +19,7 @@ export const IMMERSIVE_SLIDES: Slide[] = [
   { kind: "feature", ...CORE_FEATURES[1] },
   { kind: "feature", ...CORE_FEATURES[2] },
   { kind: "interstitial", key: "omg" },
-  { kind: "final", key: "automate", title: "不是一个 AI，而是一套工作流", desc: "PsyGo：让人和 AI 在同一条工作流里协作。", icon: "∞" },
+  { kind: "final", key: "automate", title: "不是一个 AI，是一群 AI 牛马", desc: "PsyGo：帮你把事做完，不只是帮你聊天。", icon: "∞" },
   { kind: "voices", key: "voices" },
   { kind: "footer", key: "footer" },
 ];

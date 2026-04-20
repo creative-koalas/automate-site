@@ -21,10 +21,10 @@ export const OneMoreThing = () => {
           <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="space-y-2 text-left">
               <h3 className="text-2xl sm:text-3xl font-bold">
-                PsyGo 让 AI 更自然地进入团队协作
+                不是一个 AI，是一群 AI 牛马
               </h3>
               <p className="text-white/70 max-w-prose">
-                不是一个 AI，而是一群 AI，加上一群人。人管 AI、AI 管 AI、AI 也能提醒人。
+                你可以雇几个 AI 牛马，各管一摊。也可以拉朋友和他们的 AI 一起进群干活。你管它们，它们也会主动提醒你。
               </p>
             </div>
             <Button as={Link} href="#voices" color="primary" radius="full" size="lg">

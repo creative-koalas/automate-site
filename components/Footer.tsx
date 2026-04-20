@@ -23,7 +23,7 @@ export const Footer = () => {
         <div className="mx-auto max-w-2xl">
           <p className="text-2xl font-semibold tracking-[-0.04em]">PsyGo</p>
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
-            面向企业协作与自动化场景的 AI 劳动力平台，让 AI 以可调度、可执行、可追踪的方式进入真实工作流。
+            一个 AI 助理 App。雇佣 AI 牛马，把任务交给它们。它们会持续推进，做完主动交结果。支持 iOS、Android、macOS、Windows、Linux。
           </p>
           <div className="mt-5 space-y-1 text-sm text-[var(--muted)]">
             <p>公司：武汉创意考拉科技有限公司</p>

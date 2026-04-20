@@ -14,9 +14,9 @@ const SUPPORT_LINES = [
 ];
 
 const STRIP_ITEMS = [
-  "打开就能用",
+  "五端都能用",
   "后台持续推进",
-  "回来交付结果",
+  "做完主动交",
 ];
 
 const SMOOTH_EASE = [0.22, 1, 0.36, 1] as const;
@@ -192,14 +192,14 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
               <div className="flex flex-wrap items-center justify-between gap-3 rounded-[22px] border border-black/5 bg-white/80 px-4 py-3 text-xs text-[var(--muted)] shadow-[0_16px_38px_rgba(15,23,42,0.06)] dark:border-white/10 dark:bg-white/[0.04] dark:shadow-none">
                 <div className="flex items-center gap-2 rounded-full border border-black/6 bg-black/[0.03] px-3 py-1.5 dark:border-white/10 dark:bg-white/[0.03]">
                   <span className="h-2.5 w-2.5 rounded-full bg-white/70 shadow-[0_0_0_4px_rgba(255,255,255,0.12)] dark:bg-white/60" />
-                  <span>左侧：AI 智能体</span>
+                  <span>左侧：普通 AI 工具</span>
                 </div>
                 <span className="text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
                   Capability Compare
                 </span>
                 <div className="flex items-center gap-2 rounded-full border border-emerald-200 bg-emerald-50 px-3 py-1.5 text-emerald-700 dark:border-emerald-400/25 dark:bg-emerald-400/10 dark:text-emerald-300">
                   <span className="hero-status-dot h-2.5 w-2.5" />
-                  <span>右侧：AI 劳动力</span>
+                  <span>右侧：PsyGo</span>
                 </div>
               </div>
 
@@ -209,28 +209,28 @@ export const Hero = ({ variant = "default" }: { variant?: "default" | "blk1" | "
                     leftPanel: (
                       <ComparisonImagePanel
                         imageUrl={AGENT_COMPARE_IMAGE}
-                        alt="AI 智能体工具管理界面"
-                        badge="AI 智能体"
-                        title="自带工具，但工具有限。"
-                        description="更像固定能力的智能体工作台。工具先给你配好，但能做什么基本取决于这套现成工具。"
+                        alt="普通 AI 工具界面"
+                        badge="普通 AI 工具"
+                        title="能聊天，但做不了太多。"
+                        description="回答问题还行，但你让它持续做一件事、最后交个成果出来，就不太够用了。"
                         overlayTone="dark"
                       />
                     ),
                     rightPanel: (
                       <ComparisonImagePanel
                         imageUrl={WORKFORCE_COMPARE_IMAGE}
-                        alt="AI 劳动力动态补工具桌面"
-                        badge="AI 劳动力"
-                        title="没有预制工具，需要什么就创造什么。"
-                        description="更像一个能持续执行的数字劳动力。缺什么工具，就主动下载什么工具，再继续往下做。"
+                        alt="PsyGo 工作桌面"
+                        badge="PsyGo"
+                        title="不只是回答，是持续把事做完。"
+                        description="缺什么工具自己找，遇到问题自己想办法。做完了，把文件和结论一起交给你。"
                         overlayTone="light"
                       />
                     ),
-                    leftLabel: "AI 智能体",
-                    rightLabel: "AI 劳动力",
-                    leftCaption: "AI 智能体：自带工具，但工具有限，边界基本跟着预置能力走。",
-                    rightCaption: "AI 劳动力：没有预制工具，需要什么就创造什么，缺什么工具就主动下载什么。",
-                    hint: "左右拖动看差距",
+                    leftLabel: "普通 AI 工具",
+                    rightLabel: "PsyGo",
+                    leftCaption: "普通 AI 工具：能聊天，但做不了太多，能力跟着预设走。",
+                    rightCaption: "PsyGo：缺什么自己找，做完主动交结果。",
+                    hint: "左右拖动对比看看",
                     aspectClassName: "aspect-[2238/1323]",
                     showGlobalLabels: false,
                     showGlobalCaptions: false,
