@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>PsyGo · 你的 AI 牛马</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700;9..144,800;9..144,900&family=Noto+Sans+SC:wght@400;500;700;900&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* warm cream + olive + burnt-orange — new direction */
+    --cream:       #F6EFE3;
+    --cream-2:     #EFE5D2;
+    --cream-3:     #E7D9BE;
+    --ink:         #2B241E;
+    --ink-soft:    #5A4E43;
+    --ink-mute:    #8B7C6E;
+    --olive:       #5E6A3A;    /* deep olive */
+    --olive-2:     #7D8C4C;    /* lighter olive */
+    --olive-soft:  #C8D29B;    /* cards */
+    --orange:      #D96A2C;    /* burnt orange CTA */
+    --orange-soft: #F2C79A;
+    --terracotta:  #C24B2B;
+    --berry:       #7E3C52;
+    --live:        #65A030;
+    --line:        rgba(43,36,30,0.12);
+    --line-strong: rgba(43,36,30,0.22);
+    --paper:       #FBF7EE;
+    --shadow-soft: 0 8px 28px rgba(43,36,30,0.08);
+    --shadow-lift: 0 18px 44px rgba(43,36,30,0.14);
+    --shadow-stamp:0 4px 0 rgba(43,36,30,0.90);
+    --radius-sm: 14px;
+    --radius-md: 22px;
+    --radius-lg: 34px;
+    --radius-xl: 48px;
+    --radius-blob: 62% 38% 58% 42% / 55% 48% 52% 45%;
+    --ease-soft: cubic-bezier(0.22, 1, 0.36, 1);
+    --font-display: "Fraunces", "Noto Sans SC", Georgia, serif;
+    --font-sans: "Noto Sans SC", -apple-system, BlinkMacSystemFont, "PingFang SC", system-ui, sans-serif;
+    --font-hand: "Caveat", "Noto Sans SC", cursive;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-sans);
+    color: var(--ink);
+    background: var(--cream);
+    background-image:
+      radial-gradient(ellipse 900px 500px at 80% -5%, rgba(217,106,44,0.12), transparent 60%),
+      radial-gradient(ellipse 800px 500px at 0% 15%, rgba(94,106,58,0.10), transparent 55%);
+    min-height: 100vh;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: inherit; }
+  .wrap { max-width: 1280px; margin: 0 auto; padding: 0 28px; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-family: var(--font-sans);
+    font-size: 11px; font-weight: 700; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--olive);
+  }
+  .eyebrow::before {
+    content: ""; width: 22px; height: 2px; background: var(--olive); border-radius: 2px;
+  }
+  .hand { font-family: var(--font-hand); font-weight: 600; color: var(--terracotta); }
+  .serif { font-family: var(--font-display); }
+
+  /* Sticker button — fat, stamped */
+  .btn-sticker {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 14px 26px; border-radius: 999px;
+    background: var(--orange); color: #FFF9EE;
+    font-family: var(--font-sans); font-size: 15px; font-weight: 700;
+    letter-spacing: 0.02em;
+    border: 2px solid var(--ink); box-shadow: var(--shadow-stamp);
+    text-decoration: none; cursor: pointer;
+    transition: transform 140ms var(--ease-soft), box-shadow 140ms var(--ease-soft);
+  }
+  .btn-sticker:hover  { transform: translate(-1px, -2px); box-shadow: 0 6px 0 rgba(43,36,30,0.9); }
+  .btn-sticker:active { transform: translate(1px, 2px); box-shadow: 0 1px 0 rgba(43,36,30,0.9); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 12px 22px; border-radius: 999px;
+    background: transparent; color: var(--ink);
+    font-family: var(--font-sans); font-size: 15px; font-weight: 600;
+    border: 2px solid var(--ink); text-decoration: none; cursor: pointer;
+    transition: background 140ms var(--ease-soft);
+  }
+  .btn-ghost:hover { background: var(--cream-2); }
+
+  /* ---------- Header ---------- */
+  header.site {
+    position: sticky; top: 12px; z-index: 50;
+    margin: 12px auto 0; max-width: 1280px; padding: 0 28px;
+  }
+  .nav {
+    display: flex; align-items: center; justify-content: space-between; gap: 20px;
+    padding: 10px 14px 10px 22px; border-radius: 999px;
+    background: rgba(251,247,238,0.88); backdrop-filter: blur(14px);
+    border: 2px solid var(--ink); box-shadow: var(--shadow-stamp);
+  }
+  .brand { display: flex; align-items: center; gap: 12px; color: var(--ink); text-decoration: none; }
+  .brand-mark {
+    width: 36px; height: 36px; border-radius: 12px; border: 2px solid var(--ink);
+    background: var(--olive-soft);
+    display: grid; place-items: center; color: var(--ink);
+  }
+  .brand-name { font-family: var(--font-display); font-weight: 800; font-size: 22px; letter-spacing: -0.02em; }
+  .brand-sub  { font-size: 11px; color: var(--ink-soft); letter-spacing: 0.18em; text-transform: uppercase; margin-top: 1px; }
+  .nav nav { display: flex; gap: 28px; font-size: 14px; color: var(--ink-soft); font-weight: 500; }
+  .nav nav a { color: inherit; text-decoration: none; padding: 8px 0; }
+  .nav nav a:hover { color: var(--terracotta); }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; padding: 84px 0 32px; }
+  .hero-grid {
+    display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(280px, 1fr);
+    gap: 48px; align-items: center;
+  }
+  @media (max-width: 960px) { .hero-grid { grid-template-columns: 1fr; } }
+
+  .hero-tag {
+    display: inline-flex; align-items: center; gap: 10px;
+    padding: 8px 14px; border-radius: 999px;
+    background: var(--cream-2); border: 2px solid var(--ink);
+    font-size: 13px; font-weight: 700; letter-spacing: 0.02em;
+    box-shadow: 2px 2px 0 var(--ink);
+  }
+  .hero-tag .dot { width: 10px; height: 10px; border-radius: 999px; background: var(--live); box-shadow: 0 0 0 3px rgba(101,160,48,0.22); }
+
+  .hero h1 {
+    margin: 28px 0 0;
+    font-family: var(--font-display);
+    font-weight: 900;
+    font-size: clamp(42px, 6vw, 88px);
+    line-height: 1;
+    letter-spacing: -0.03em;
+    color: var(--ink);
+  }
+  .hero h1 .line { display: block; margin: 6px 0; }
+  .hero h1 .em {
+    display: inline-block;
+    background: var(--orange); color: #FFF9EE;
+    padding: 2px 18px 6px; border-radius: 18px;
+    transform: rotate(-1.5deg); box-shadow: 4px 4px 0 var(--ink);
+    border: 3px solid var(--ink);
+    margin: 4px 2px;
+    line-height: 1;
+  }
+  .hero h1 .u {
+    position: relative; display: inline-block;
+    color: var(--olive);
+    padding: 0 2px;
+  }
+  .hero h1 .u::after {
+    content: ""; position: absolute; left: -4px; right: -4px; bottom: 2px;
+    height: 10px; background: var(--orange-soft); z-index: -1; border-radius: 6px;
+  }
+
+  .hero-lead {
+    margin-top: 28px; max-width: 30em;
+    font-size: clamp(17px, 1.3vw, 19px); line-height: 1.7; color: var(--ink-soft);
+  }
+
+  .hero-cta { margin-top: 32px; display: flex; gap: 14px; flex-wrap: wrap; }
+
+  .hero-stats { margin-top: 36px; display: flex; gap: 28px; flex-wrap: wrap; }
+  .hero-stats .stat {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 13px; color: var(--ink-soft);
+  }
+  .hero-stats .stat strong { color: var(--ink); font-family: var(--font-display); font-size: 22px; font-weight: 800; line-height: 1; }
+
+  /* hero illustration card */
+  .hero-card {
+    position: relative;
+    aspect-ratio: 4/5; width: 100%;
+    border-radius: var(--radius-lg);
+    border: 2px solid var(--ink);
+    background: var(--paper);
+    box-shadow: var(--shadow-stamp);
+    overflow: hidden;
+    transform: rotate(1.5deg);
+  }
+  .hero-card .hero-sky {
+    position: absolute; inset: 0 0 42% 0;
+    background: linear-gradient(180deg, #EAD9B8, #E3C79A);
+  }
+  .hero-card .hero-ground {
+    position: absolute; inset: 58% 0 0 0;
+    background: linear-gradient(180deg, var(--olive-soft), #B3BF84);
+  }
+  .hero-card .horizon {
+    position: absolute; left: 0; right: 0; top: 58%; height: 2px; background: var(--ink);
+  }
+  .hero-card .sun {
+    position: absolute; top: 12%; right: 12%; width: 88px; height: 88px; border-radius: 999px;
+    background: #F4B24A; border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+  }
+  .hero-card .cloud {
+    position: absolute; background: var(--paper); border: 2px solid var(--ink); border-radius: 999px; height: 18px;
+  }
+  .hero-card .c1 { top: 18%; left: 10%; width: 64px; }
+  .hero-card .c2 { top: 32%; left: 42%; width: 48px; }
+
+  .niuma-stage {
+    position: absolute; left: 0; right: 0; bottom: 6%; display: flex; justify-content: center; gap: 10px;
+  }
+  .tag-speech {
+    position: absolute; left: 8%; top: 36%;
+    padding: 10px 14px; border-radius: 14px;
+    background: var(--paper); border: 2px solid var(--ink); box-shadow: 3px 3px 0 var(--ink);
+    font-family: var(--font-hand); font-size: 22px; color: var(--terracotta);
+    transform: rotate(-4deg);
+  }
+  .tag-speech.r { left: auto; right: 6%; top: 22%; transform: rotate(3deg); color: var(--olive); }
+
+  .dust {
+    position: absolute; bottom: 9%; width: 10px; height: 10px; border-radius: 999px;
+    border: 2px solid var(--ink); background: var(--paper);
+  }
+
+  /* stat-chip floating */
+  .chip {
+    position: absolute;
+    background: var(--paper); border: 2px solid var(--ink); border-radius: 14px;
+    padding: 10px 14px; box-shadow: 3px 3px 0 var(--ink);
+    font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 8px;
+  }
+  .chip.a { top: -14px; left: -18px; transform: rotate(-4deg); }
+  .chip.b { bottom: 8%; right: -20px; transform: rotate(3deg); }
+  .chip .ic { width: 22px; height: 22px; border-radius: 999px; background: var(--orange); display: grid; place-items: center; color: #FFF; font-size: 12px; font-weight: 800; border: 2px solid var(--ink); }
+
+  /* ---------- Marquee / ticker ---------- */
+  .ticker {
+    margin-top: 72px;
+    border-top: 2px dashed var(--line-strong);
+    border-bottom: 2px dashed var(--line-strong);
+    overflow: hidden; padding: 18px 0;
+    background: var(--cream-2);
+  }
+  .ticker-track { display: flex; gap: 48px; animation: tkr 28s linear infinite; white-space: nowrap; }
+  .ticker-track span { font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -0.01em; color: var(--ink); display: inline-flex; align-items: center; gap: 48px; }
+  .ticker-track .sep { color: var(--orange); font-weight: 900; }
+  @keyframes tkr { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+  /* ---------- Section header ---------- */
+  section.block { padding: 104px 0; }
+  section.block h2 {
+    margin: 12px 0 18px;
+    font-family: var(--font-display); font-weight: 900;
+    font-size: clamp(36px, 5vw, 64px); line-height: 1.02; letter-spacing: -0.025em;
+    max-width: 22ch;
+  }
+  section.block h2 .acc { color: var(--terracotta); }
+  section.block h2 em  { font-style: italic; color: var(--olive); }
+  section.block p.lead { max-width: 60ch; font-size: 17px; line-height: 1.75; color: var(--ink-soft); margin-top: 10px; }
+
+  /* ---------- Capability cards ---------- */
+  .caps { display: grid; grid-template-columns: repeat(12, 1fr); gap: 18px; margin-top: 56px; }
+  .cap  {
+    background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-stamp); padding: 26px; position: relative; overflow: hidden;
+    display: flex; flex-direction: column; gap: 14px; min-height: 280px;
+  }
+  .cap .num {
+    position: absolute; top: 16px; right: 20px;
+    font-family: var(--font-display); font-weight: 900; font-size: 54px; color: var(--ink-mute); opacity: 0.22; line-height: 1;
+  }
+  .cap h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 26px; line-height: 1.1; letter-spacing: -0.02em; color: var(--ink); }
+  .cap p  { margin: 0; font-size: 14px; line-height: 1.7; color: var(--ink-soft); }
+  .cap .illus { margin-top: auto; position: relative; min-height: 120px; }
+
+  .cap.c1 { grid-column: span 5; background: var(--cream-2); }
+  .cap.c2 { grid-column: span 7; background: var(--olive-soft); }
+  .cap.c3 { grid-column: span 7; background: var(--paper); }
+  .cap.c4 { grid-column: span 5; background: var(--orange-soft); }
+  .cap.c5 { grid-column: span 12; background: var(--cream-3); }
+  @media (max-width: 860px) { .cap { grid-column: span 12 !important; } }
+
+  /* ---------- Scenario row ---------- */
+  .scen-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; margin-top: 48px; }
+  @media (max-width: 860px) { .scen-grid { grid-template-columns: 1fr; } }
+  .scen {
+    position: relative;
+    background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-md);
+    padding: 28px; box-shadow: var(--shadow-stamp); display: flex; flex-direction: column; gap: 18px;
+  }
+  .scen .scn-tag {
+    display: inline-flex; align-items: center; gap: 8px; padding: 6px 12px;
+    background: var(--ink); color: #FFF9EE; border-radius: 999px;
+    font-size: 11px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase;
+    align-self: flex-start;
+  }
+  .scen h3 { margin: 0; font-family: var(--font-display); font-weight: 800; font-size: 28px; letter-spacing: -0.02em; }
+  .scen p  { margin: 0; color: var(--ink-soft); line-height: 1.7; font-size: 14.5px; }
+  .scen .preview {
+    margin-top: 10px; border-radius: 14px; border: 2px solid var(--ink);
+    background: var(--cream); padding: 16px; box-shadow: inset 0 0 0 2px rgba(251,247,238,0.8);
+    display: flex; flex-direction: column; gap: 10px;
+  }
+  .scen .preview.o { background: #FFF3E1; }
+  .scen .preview.g { background: #EEF2DC; }
+  .scen .preview.b { background: #F2E8EF; }
+  .bubble {
+    padding: 10px 14px; border-radius: 16px; background: var(--paper); border: 2px solid var(--ink);
+    font-size: 13.5px; max-width: 88%; line-height: 1.55;
+  }
+  .bubble.me   { align-self: flex-end; background: var(--ink); color: #FFF9EE; }
+  .bubble.ai   { align-self: flex-start; background: var(--olive-soft); }
+  .bubble.file { font-family: var(--font-sans); background: #FFF3E1; }
+  .bubble small{ display: block; color: var(--ink-mute); font-size: 11px; margin-top: 4px; }
+
+  /* ---------- Quote band ---------- */
+  .quoteband {
+    margin: 0; padding: 64px 28px; border-top: 2px solid var(--ink); border-bottom: 2px solid var(--ink);
+    background: var(--ink); color: #FFF9EE;
+    background-image:
+      radial-gradient(circle at 15% 30%, rgba(217,106,44,0.25), transparent 40%),
+      radial-gradient(circle at 85% 70%, rgba(94,106,58,0.28), transparent 40%);
+  }
+  .quoteband .inner { max-width: 1280px; margin: 0 auto; padding: 0 28px; display: grid; grid-template-columns: 1fr auto; gap: 22px; align-items: end; }
+  @media (max-width: 860px) { .quoteband .inner { grid-template-columns: 1fr; } }
+  .quoteband blockquote {
+    margin: 0; font-family: var(--font-display); font-weight: 700; font-size: clamp(30px, 3.6vw, 54px);
+    line-height: 1.1; letter-spacing: -0.015em;
+  }
+  .quoteband blockquote span { color: var(--orange-soft); }
+  .quoteband .cite { font-size: 14px; color: rgba(255,249,238,0.7); }
+
+  /* ---------- Voices ---------- */
+  .voices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; margin-top: 48px; }
+  @media (max-width: 900px) { .voices { grid-template-columns: 1fr; } }
+  .voice {
+    background: var(--paper); border: 2px solid var(--ink); border-radius: var(--radius-md);
+    box-shadow: var(--shadow-stamp); padding: 22px;
+    display: flex; flex-direction: column; gap: 14px;
+  }
+  .voice .head { display: flex; align-items: center; gap: 10px; }
+  .avatar {
+    width: 44px; height: 44px; border-radius: 999px; border: 2px solid var(--ink);
+    background: var(--olive-soft); display: grid; place-items: center;
+    font-family: var(--font-display); font-weight: 800;
+  }
+  .avatar.o { background: var(--orange-soft); }
+  .avatar.b { background: #E4D3E7; }
+  .voice .who { font-size: 14px; font-weight: 700; }
+  .voice .role { font-size: 12px; color: var(--ink-mute); }
+  .voice blockquote { margin: 0; font-size: 15.5px; line-height: 1.65; color: var(--ink); font-family: var(--font-display); font-weight: 500; }
+  .voice .stars { color: var(--orange); font-size: 13px; letter-spacing: 1px; }
+
+  /* ---------- Download ---------- */
+  .dl-card {
+    margin-top: 56px; padding: 44px;
+    border: 2px solid var(--ink); border-radius: var(--radius-lg);
+    background: var(--olive-soft); box-shadow: var(--shadow-stamp);
+    display: grid; grid-template-columns: 1.1fr 1fr; gap: 28px; align-items: center;
+  }
+  @media (max-width: 860px) { .dl-card { grid-template-columns: 1fr; } }
+  .dl-card h2 { margin: 0 0 10px; font-family: var(--font-display); font-weight: 900; font-size: clamp(32px, 4vw, 52px); line-height: 1.05; letter-spacing: -0.02em; }
+  .plats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+  .plat {
+    border: 2px solid var(--ink); border-radius: 14px; padding: 10px 12px; background: var(--paper);
+    text-align: center; font-weight: 700; font-size: 13px; box-shadow: 2px 2px 0 var(--ink);
+    cursor: pointer; text-decoration: none; color: var(--ink);
+  }
+  .plat:hover { background: var(--cream-2); }
+  .plat small { display: block; color: var(--ink-mute); font-weight: 500; font-size: 11px; margin-top: 2px; }
+
+  /* ---------- Footer ---------- */
+  footer.site {
+    padding: 48px 0 36px; border-top: 2px solid var(--ink);
+    background: var(--cream-2);
+  }
+  footer.site .inner {
+    max-width: 1280px; margin: 0 auto; padding: 0 28px;
+    display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; gap: 24px;
+  }
+  @media (max-width: 860px) { footer.site .inner { grid-template-columns: 1fr 1fr; } }
+  footer.site h4 { margin: 0 0 12px; font-family: var(--font-display); font-size: 18px; font-weight: 800; }
+  footer.site a  { display: block; padding: 4px 0; font-size: 13.5px; color: var(--ink-soft); text-decoration: none; }
+  footer.site a:hover { color: var(--terracotta); }
+  .icp { grid-column: 1 / -1; margin-top: 28px; padding-top: 20px; border-top: 1px dashed var(--line-strong); font-size: 12px; color: var(--ink-mute); display: flex; gap: 16px; flex-wrap: wrap; justify-content: space-between; align-items: center; }
+
+  /* ---------- FAB ---------- */
+  .fab {
+    position: fixed; right: 22px; bottom: 22px; z-index: 60;
+    width: 64px; height: 64px; border-radius: 999px;
+    background: var(--orange); border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--ink);
+    display: grid; place-items: center; cursor: pointer; color: #FFF9EE;
+  }
+  .fab:hover { transform: translate(-1px,-2px); box-shadow: 6px 6px 0 var(--ink); }
+  .fab .pulse {
+    position: absolute; inset: -6px; border-radius: 999px; border: 2px solid var(--orange); opacity: 0.5;
+    animation: ping 1.8s ease-out infinite;
+  }
+  @keyframes ping { 0%{transform:scale(1);opacity:0.5} 80%{transform:scale(1.3);opacity:0} 100%{opacity:0} }
+
+  /* ---------- Chat panel ---------- */
+  .chat {
+    position: fixed; right: 22px; bottom: 100px; width: min(380px, calc(100vw - 44px)); z-index: 60;
+    background: var(--paper); border: 2px solid var(--ink); border-radius: 24px; box-shadow: 8px 8px 0 var(--ink);
+    display: none; flex-direction: column; max-height: 72vh; overflow: hidden;
+  }
+  .chat.open { display: flex; }
+  .chat-head { padding: 14px 18px; border-bottom: 2px solid var(--ink); background: var(--olive-soft); display: flex; align-items: center; justify-content: space-between; }
+  .chat-head strong { font-family: var(--font-display); font-size: 18px; }
+  .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex: 1; }
+  .chat textarea {
+    width: 100%; resize: none; min-height: 70px; padding: 10px 14px;
+    border: 2px solid var(--ink); border-radius: 14px; background: var(--cream); color: var(--ink);
+    font-family: var(--font-sans); font-size: 14px; outline: none;
+  }
+  .chat-foot { padding: 12px 16px; border-top: 2px solid var(--ink); display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .chat-foot small { color: var(--ink-mute); font-size: 11px; }
+
+  /* --- niuma character (simple line-art SVG) --- */
+  .niu, .ma {
+    width: 160px; height: 160px;
+  }
+</style>
+</head>
+<body>
+
+<!-- sticker SVGs used inline -->
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <!-- NIU (cow) mascot -->
+    <symbol id="niu" viewBox="0 0 200 200">
+      <!-- body -->
+      <ellipse cx="100" cy="130" rx="62" ry="44" fill="#FBF7EE" stroke="#2B241E" stroke-width="3"/>
+      <!-- spots -->
+      <ellipse cx="78" cy="120" rx="14" ry="10" fill="#2B241E"/>
+      <ellipse cx="118" cy="142" rx="10" ry="7" fill="#2B241E"/>
+      <!-- legs -->
+      <rect x="70" y="160" width="10" height="24" fill="#2B241E" rx="2"/>
+      <rect x="120" y="160" width="10" height="24" fill="#2B241E" rx="2"/>
+      <!-- head -->
+      <ellipse cx="100" cy="78" rx="44" ry="38" fill="#FBF7EE" stroke="#2B241E" stroke-width="3"/>
+      <!-- snout -->
+      <ellipse cx="100" cy="92" rx="26" ry="16" fill="#F2C79A" stroke="#2B241E" stroke-width="3"/>
+      <circle cx="92" cy="92" r="2.2" fill="#2B241E"/>
+      <circle cx="108" cy="92" r="2.2" fill="#2B241E"/>
+      <!-- eyes -->
+      <circle cx="88" cy="72" r="3" fill="#2B241E"/>
+      <circle cx="112" cy="72" r="3" fill="#2B241E"/>
+      <!-- horns -->
+      <path d="M70 52 Q60 38 74 34 Q80 44 80 54 Z" fill="#FBF7EE" stroke="#2B241E" stroke-width="3"/>
+      <path d="M130 52 Q140 38 126 34 Q120 44 120 54 Z" fill="#FBF7EE" stroke="#2B241E" stroke-width="3"/>
+      <!-- ears -->
+      <ellipse cx="62" cy="68" rx="10" ry="6" fill="#F2C79A" stroke="#2B241E" stroke-width="3" transform="rotate(-20 62 68)"/>
+      <ellipse cx="138" cy="68" rx="10" ry="6" fill="#F2C79A" stroke="#2B241E" stroke-width="3" transform="rotate(20 138 68)"/>
+    </symbol>
+    <!-- MA (horse) mascot -->
+    <symbol id="ma" viewBox="0 0 200 200">
+      <!-- body -->
+      <path d="M40 140 Q40 100 80 98 L130 100 Q160 102 160 130 L160 170 L140 170 L140 150 L90 150 L90 170 L68 170 Z" fill="#D96A2C" stroke="#2B241E" stroke-width="3" stroke-linejoin="round"/>
+      <!-- neck + head -->
+      <path d="M130 100 Q160 60 168 40 Q158 46 150 58 Q144 38 138 36 Q140 54 134 70 Q120 86 120 98 Z" fill="#D96A2C" stroke="#2B241E" stroke-width="3" stroke-linejoin="round"/>
+      <!-- mane -->
+      <path d="M145 55 Q151 48 155 52 Q159 44 162 50 Q164 42 168 46 L161 66 Z" fill="#2B241E"/>
+      <!-- eye -->
+      <circle cx="150" cy="58" r="2.6" fill="#2B241E"/>
+      <!-- mouth -->
+      <path d="M160 68 L167 72" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+      <!-- tail -->
+      <path d="M40 136 Q22 140 20 158 Q28 148 36 146" fill="#2B241E"/>
+    </symbol>
+    <!-- clipboard -->
+    <symbol id="clip" viewBox="0 0 64 64">
+      <rect x="10" y="12" width="44" height="46" rx="5" fill="#FBF7EE" stroke="#2B241E" stroke-width="3"/>
+      <rect x="24" y="6"  width="16" height="10" rx="3" fill="#D96A2C" stroke="#2B241E" stroke-width="3"/>
+      <line x1="18" y1="26" x2="46" y2="26" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="34" x2="46" y2="34" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+      <line x1="18" y1="42" x2="36" y2="42" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+    <!-- paper airplane -->
+    <symbol id="plane" viewBox="0 0 64 64">
+      <path d="M6 32 L58 8 L44 58 L30 38 Z" fill="#5E6A3A" stroke="#2B241E" stroke-width="3" stroke-linejoin="round"/>
+      <path d="M30 38 L44 58 L36 42 Z" fill="#2B241E"/>
+    </symbol>
+    <!-- pot of coffee -->
+    <symbol id="mug" viewBox="0 0 64 64">
+      <rect x="10" y="18" width="36" height="30" rx="4" fill="#D96A2C" stroke="#2B241E" stroke-width="3"/>
+      <path d="M46 26 Q58 28 58 36 Q58 44 46 44" fill="none" stroke="#2B241E" stroke-width="3"/>
+      <path d="M20 8 Q22 14 20 18" fill="none" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M28 8 Q30 14 28 18" fill="none" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+      <path d="M36 8 Q38 14 36 18" fill="none" stroke="#2B241E" stroke-width="2.5" stroke-linecap="round"/>
+    </symbol>
+  </defs>
+</svg>
+
+<!-- ======= Header ======= -->
+<header class="site">
+  <div class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">
+        <svg viewBox="0 0 512 512" width="22" height="22" fill="currentColor">
+          <circle cx="178" cy="112" r="64"/><circle cx="334" cy="124" r="64"/>
+          <circle cx="232" cy="244" r="64"/><circle cx="368" cy="276" r="64"/>
+          <circle cx="196" cy="368" r="64"/><circle cx="332" cy="412" r="64"/>
+        </svg>
+      </span>
+      <div>
+        <div class="brand-name">PsyGo</div>
+        <div class="brand-sub">AI 牛马 · 直接干活</div>
+      </div>
+    </a>
+    <nav>
+      <a href="#capabilities">能力</a>
+      <a href="#scenarios">场景</a>
+      <a href="#voices">口碑</a>
+      <a href="#download">下载</a>
+    </nav>
+    <a href="#download" class="btn-sticker" style="padding:10px 20px;">下载 PsyGo →</a>
+  </div>
+</header>
+
+<!-- ======= Hero ======= -->
+<section class="hero" id="top">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div>
+        <span class="hero-tag"><span class="dot"></span>已上线 · iOS · Android · Mac · Windows · Linux</span>
+        <h1>
+          <span class="line">你的 <span class="em">AI 牛马</span>，</span>
+          <span class="line"><span class="u">直接干活</span>，</span>
+          <span class="line">不讲虚的。</span>
+        </h1>
+        <p class="hero-lead">
+          不是陪你聊两句，是替你把事情往前推。<br/>
+          把任务丢给它 — 关掉 App — 回来就有结果。<br/>
+          <span class="hand" style="font-size:22px;">真的，就这么简单。</span>
+        </p>
+        <div class="hero-cta">
+          <a href="#download" class="btn-sticker">下载 PsyGo →</a>
+          <a href="#scenarios" class="btn-ghost">看它能做什么</a>
+        </div>
+        <div class="hero-stats">
+          <div class="stat"><strong>3.2w</strong><span>件任务<br/>本周已交付</span></div>
+          <div class="stat"><strong>47min</strong><span>平均任务<br/>持续推进</span></div>
+          <div class="stat"><strong>5端</strong><span>手机·桌面<br/>都能用</span></div>
+        </div>
+      </div>
+
+      <div style="position: relative;">
+        <div class="chip a"><span class="ic">✓</span>论文初稿已完成</div>
+        <div class="chip b"><span class="ic" style="background:var(--olive-2);">~</span>3 个 AI 在跑</div>
+
+        <div class="hero-card">
+          <div class="hero-sky"></div>
+          <div class="hero-ground"></div>
+          <div class="horizon"></div>
+          <div class="sun"></div>
+          <div class="cloud c1"></div>
+          <div class="cloud c2"></div>
+
+          <div class="tag-speech">我先去干活了 →</div>
+          <div class="tag-speech r">收到，这就办！</div>
+
+          <div class="dust" style="left: 34%;"></div>
+          <div class="dust" style="left: 44%; bottom: 7%;"></div>
+          <div class="dust" style="right: 30%;"></div>
+
+          <div class="niuma-stage">
+            <svg class="niu" viewBox="0 0 200 200"><use href="#niu"/></svg>
+            <svg class="ma"  viewBox="0 0 200 200"><use href="#ma"/></svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Ticker ======= -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span>后台推进 <span class="sep">●</span> 关掉 App 它还在做 <span class="sep">●</span> 做完主动交结果 <span class="sep">●</span> 一人成组 <span class="sep">●</span> 不讲虚的 <span class="sep">●</span> 直接干活 <span class="sep">●</span></span>
+    <span>后台推进 <span class="sep">●</span> 关掉 App 它还在做 <span class="sep">●</span> 做完主动交结果 <span class="sep">●</span> 一人成组 <span class="sep">●</span> 不讲虚的 <span class="sep">●</span> 直接干活 <span class="sep">●</span></span>
+  </div>
+</div>
+
+<!-- ======= Capabilities ======= -->
+<section class="block" id="capabilities">
+  <div class="wrap">
+    <span class="eyebrow">Core Ideas · 五条核心</span>
+    <h2>不是陪你聊两句，<br/><em>是替你把事情</em> <span class="acc">往前推。</span></h2>
+    <p class="lead">你的 AI 牛马，重点不是&ldquo;回复得像不像人&rdquo;，而是&ldquo;能不能把活干出来&rdquo;。可以把花时间的事交给它，一直做到交付。</p>
+
+    <div class="caps">
+      <article class="cap c1">
+        <span class="num">01</span>
+        <div class="eyebrow">开箱即用</div>
+        <h3>下载 App 就能开始。</h3>
+        <p>不配环境，不看教程。打开 App，雇一个 AI 牛马，直接派活。</p>
+        <div class="illus">
+          <svg width="80" height="80"><use href="#mug"/></svg>
+        </div>
+      </article>
+
+      <article class="cap c2">
+        <span class="num">02</span>
+        <div class="eyebrow" style="color: var(--ink);">说完就做</div>
+        <h3>聊天就是派活。文档、代码、方案 — 聊完直接交付。</h3>
+        <p>你说的每句话，它都当作一件要做的事。不需要你复述三遍。</p>
+        <div class="illus">
+          <svg width="96" height="96"><use href="#clip"/></svg>
+        </div>
+      </article>
+
+      <article class="cap c3">
+        <span class="num">03</span>
+        <div class="eyebrow">后台推进</div>
+        <h3>关掉 App，<em class="hand" style="font-style: normal;">它还在做。</em></h3>
+        <p>任务在云端持续跑，你忙你的，它继续推进。有进展就推送你，不打扰节奏。</p>
+        <div class="illus">
+          <svg width="96" height="96"><use href="#plane"/></svg>
+        </div>
+      </article>
+
+      <article class="cap c4">
+        <span class="num">04</span>
+        <div class="eyebrow" style="color: var(--ink);">主动汇报</div>
+        <h3>做完了会找你。</h3>
+        <p>不用你盯，有节点就给一条消息。随时可以追问细节，也可以让它换个方向重做。</p>
+        <div class="illus">
+          <div style="display: flex; gap: 8px;">
+            <div class="bubble ai" style="max-width: 90%;">📄 技术方案.pdf · 54页<br/><small style="color: var(--ink-mute)">已完成 · 需要你确认</small></div>
+          </div>
+        </div>
+      </article>
+
+      <article class="cap c5">
+        <span class="num">05</span>
+        <div class="eyebrow">一人成组</div>
+        <h3>复杂的事，<span class="acc">它会拆给几个 AI 牛马同时跑</span>，各管一摊。</h3>
+        <p>一个 AI 查资料、一个 AI 写代码、一个 AI 做图。最后结果合并交给你，不需要你去协调。</p>
+        <div class="illus" style="display: flex; align-items: flex-end; gap: 14px;">
+          <svg class="niu" viewBox="0 0 200 200" style="width: 90px; height: 90px;"><use href="#niu"/></svg>
+          <svg class="ma"  viewBox="0 0 200 200" style="width: 90px; height: 90px;"><use href="#ma"/></svg>
+          <svg class="niu" viewBox="0 0 200 200" style="width: 74px; height: 74px; transform: scaleX(-1);"><use href="#niu"/></svg>
+          <div style="flex: 1;"></div>
+          <div class="bubble ai">三个任务都在跑，预计 30 分钟后合并结果。</div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Scenarios ======= -->
+<section class="block" id="scenarios" style="background: var(--cream-2); border-top: 2px dashed var(--line-strong); border-bottom: 2px dashed var(--line-strong);">
+  <div class="wrap">
+    <span class="eyebrow">Best Fits · 最适合的场景</span>
+    <h2>大块时间的事， <em>交给它。</em></h2>
+    <p class="lead">写不完的文档、看不完的论文、做不完的方案 — 一句话丢过去，做完拿文件。</p>
+
+    <div class="scen-grid">
+      <div class="scen">
+        <span class="scn-tag">科研 · 论文</span>
+        <h3>写一份 50+ 页的技术方案。</h3>
+        <p>系统调研、创新设计、模拟验算、图表、LaTeX 排版 — 一条龙交给它。</p>
+        <div class="preview o">
+          <div class="bubble me">给我一份 10 万吨级运载火箭的技术方案，不少于 50 页，LaTeX 排版。</div>
+          <div class="bubble ai">收到！这是一个大型工程，我来系统推进：<br/>1. 火箭技术调研<br/>2. 创新方案设计<br/>3. 关键参数模拟计算<br/>4. 配套图表生成<br/>5. 50页 + LaTeX 完整方案</div>
+          <div class="bubble file">📄 天矩-1.pdf · 54 页 · LaTeX<small>已完成 · 包含 56 台发动机集群方案</small></div>
+        </div>
+      </div>
+
+      <div class="scen">
+        <span class="scn-tag">留学 · 求职</span>
+        <h3>做一份留学选校对比表。</h3>
+        <p>候选学校、专业方向、截止日期、录取率 — 整理成表格推给你。</p>
+        <div class="preview g">
+          <div class="bubble me">帮我整理英美港新的 CS PhD，25 fall，GPA 3.7，给我一张对比表。</div>
+          <div class="bubble ai">在找最新的 admission 数据，先列出 18 所候选，20 分钟后给你结果。</div>
+          <div class="bubble file">📊 选校对比_25fall.xlsx · 18 所<small>含截止日期、GRE、平均 GPA、今年录取率</small></div>
+        </div>
+      </div>
+
+      <div class="scen">
+        <span class="scn-tag">商业 · 调研</span>
+        <h3>调研一个行业，给我可落地的建议。</h3>
+        <p>公司背景、市场数据、竞品对比、SWOT — 做完主动交。</p>
+        <div class="preview b">
+          <div class="bubble me">调研一下国内宠物鲜粮赛道，给我 top 5 品牌 + 进入建议。</div>
+          <div class="bubble ai">在查天眼查、抖音小店、小红书笔记。三个 AI 同时跑。</div>
+          <div class="bubble file">📎 宠物鲜粮赛道报告.pdf · 31 页<small>含 5 个品牌 SKU、毛利率、渠道占比</small></div>
+        </div>
+      </div>
+
+      <div class="scen">
+        <span class="scn-tag">日常 · 小工具</span>
+        <h3>写一个小游戏，今晚就能玩。</h3>
+        <p>审美、玩法、代码一条龙 — 做完生成网页，点链接就能玩。</p>
+        <div class="preview">
+          <div class="bubble me">帮我写一个贪吃蛇，带音效和粒子特效。</div>
+          <div class="bubble ai">👍 做好啦！点击智能助手生成入口就可开玩 🎮<br/>🎮 经典玩法时尚化<br/>💥 音效加成、3倍火力升级<br/>🎵 粒子爆炸特效、原声音效</div>
+          <div class="bubble file">🎮 snake-pro.html · 可直接运行<small>WebAudio 音效、Boss 关、4 种道具</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Quote Band ======= -->
+<section class="quoteband">
+  <div class="inner">
+    <blockquote>
+      它不是在陪你聊天，<br/>
+      <span>是在替你干活。</span>
+    </blockquote>
+    <div class="cite">— 一位 PsyGo 内测用户，2026 年 3 月</div>
+  </div>
+</section>
+
+<!-- ======= Voices ======= -->
+<section class="block" id="voices">
+  <div class="wrap">
+    <span class="eyebrow">Social Proof · 用户声音</span>
+    <h2>他们把活 <span class="acc">丢给 PsyGo。</span></h2>
+    <p class="lead">没有代言人，没有艺人站台。真实用户，真实任务，真实交付。</p>
+
+    <div class="voices">
+      <div class="voice">
+        <div class="head">
+          <div class="avatar">米</div>
+          <div><div class="who">小米</div><div class="role">研究生 · 航院</div></div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <blockquote>&ldquo;丢了篇 50 页的技术方案给它，去吃个饭回来 LaTeX 排版都搞好了。真的是 AI 牛马。&rdquo;</blockquote>
+      </div>
+      <div class="voice">
+        <div class="head">
+          <div class="avatar o">宋</div>
+          <div><div class="who">宋姐</div><div class="role">电商运营负责人</div></div>
+        </div>
+        <div class="stars">★★★★★</div>
+        <blockquote>&ldquo;以前调研一个品类要三个实习生三天。现在 PsyGo 一晚上出来，我只改结论部分。&rdquo;</blockquote>
+      </div>
+      <div class="voice">
+        <div class="head">
+          <div class="avatar b">K</div>
+          <div><div class="who">Kevin</div><div class="role">独立开发者</div></div>
+        </div>
+        <div class="stars">★★★★☆</div>
+        <blockquote>&ldquo;说&rsquo;写个贪吃蛇&rsquo;它真的写出来带音效和 Boss 关。下一句就能玩。值。&rdquo;</blockquote>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Download ======= -->
+<section class="block" id="download" style="padding-top: 40px;">
+  <div class="wrap">
+    <div class="dl-card">
+      <div>
+        <span class="eyebrow" style="color: var(--ink);">Download · 下载 PsyGo</span>
+        <h2>试试雇<br/>一个 AI 牛马。</h2>
+        <p style="margin: 8px 0 20px; color: var(--ink-soft); line-height: 1.7;">
+          不用想太多，先让它帮你做一件事。做得好不好，看结果就知道了。
+        </p>
+        <a href="#" class="btn-sticker">马上下载 →</a>
+      </div>
+      <div class="plats">
+        <a href="#" class="plat">iOS<small>App Store</small></a>
+        <a href="#" class="plat">Android<small>.apk / 应用商店</small></a>
+        <a href="#" class="plat">macOS<small>Apple Silicon</small></a>
+        <a href="#" class="plat">Windows<small>10 / 11</small></a>
+        <a href="#" class="plat">Linux<small>AppImage</small></a>
+        <a href="#" class="plat">Web<small>浏览器直达</small></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ======= Footer ======= -->
+<footer class="site">
+  <div class="inner">
+    <div>
+      <div class="brand" style="margin-bottom: 12px;">
+        <span class="brand-mark">
+          <svg viewBox="0 0 512 512" width="22" height="22" fill="currentColor">
+            <circle cx="178" cy="112" r="64"/><circle cx="334" cy="124" r="64"/>
+            <circle cx="232" cy="244" r="64"/><circle cx="368" cy="276" r="64"/>
+            <circle cx="196" cy="368" r="64"/><circle cx="332" cy="412" r="64"/>
+          </svg>
+        </span>
+        <div>
+          <div class="brand-name">PsyGo</div>
+          <div class="brand-sub">AI 牛马</div>
+        </div>
+      </div>
+      <p style="margin: 0; font-size: 13px; color: var(--ink-soft); line-height: 1.7; max-width: 30ch;">
+        一个 AI 助理 App。雇佣 AI 牛马，把任务交给它们。做完主动交结果。
+      </p>
+      <p class="hand" style="font-size: 24px; margin: 10px 0 0; color: var(--terracotta);">不讲虚的，直接干活。</p>
+    </div>
+    <div>
+      <h4>产品</h4>
+      <a href="#capabilities">能力</a>
+      <a href="#scenarios">场景</a>
+      <a href="#download">下载</a>
+      <a href="#">更新日志</a>
+    </div>
+    <div>
+      <h4>公司</h4>
+      <a href="#">关于我们</a>
+      <a href="#">加入我们</a>
+      <a href="#">企业版合作</a>
+      <a href="tel:18186338802">咨询电话 18186338802</a>
+    </div>
+    <div>
+      <h4>支持</h4>
+      <a href="#">使用帮助</a>
+      <a href="#">隐私政策</a>
+      <a href="#">服务条款</a>
+      <a href="#">用户协议</a>
+    </div>
+
+    <div class="icp">
+      <div>© 2026 武汉创意考拉科技有限公司</div>
+      <div style="display:flex; gap: 16px; flex-wrap: wrap;">
+        <span>鄂ICP备2025165530号</span>
+        <span style="display:inline-flex; align-items:center; gap:6px;">
+          <svg viewBox="0 0 64 64" width="13" height="13" aria-hidden="true"><path d="M32 4 12 12v18c0 14.2 8.3 24.1 20 30 11.7-5.9 20-15.8 20-30V12L32 4Z" fill="#2D7FF9"/><path d="M32 20.5a8.8 8.8 0 1 1 0 17.6 8.8 8.8 0 0 1 0-17.6Z" fill="#fff"/></svg>
+          鄂公网安备 42010302002808 号
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ======= FAB ======= -->
+<button class="fab" id="fab" aria-label="打开客服">
+  <span class="pulse"></span>
+  <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+  </svg>
+</button>
+
+<!-- ======= Chat Panel ======= -->
+<aside class="chat" id="chat" role="dialog">
+  <div class="chat-head">
+    <strong>PsyGo 客服牛马</strong>
+    <button class="btn-ghost" id="chatClose" style="padding: 4px 10px; font-size: 12px;">关闭</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="bubble ai">你好！有什么想丢给我干的？</div>
+    <div class="bubble ai" style="background: var(--orange-soft);">也可以问我产品、价格、企业版的事儿～</div>
+  </div>
+  <div class="chat-foot" style="display:flex; flex-direction: column; gap: 8px; align-items: stretch;">
+    <textarea id="chatInput" placeholder="请输入..." rows="2"></textarea>
+    <div style="display:flex; justify-content:space-between; align-items:center;">
+      <small>Enter 发送，Shift+Enter 换行</small>
+      <button class="btn-sticker" id="chatSend" style="padding: 8px 18px; font-size: 13px;">发送 →</button>
+    </div>
+  </div>
+</aside>
+
+<script>
+  // FAB toggle + tiny demo chat
+  const fab = document.getElementById('fab');
+  const chat = document.getElementById('chat');
+  const chatClose = document.getElementById('chatClose');
+  const chatSend  = document.getElementById('chatSend');
+  const chatBody  = document.getElementById('chatBody');
+  const chatInput = document.getElementById('chatInput');
+  fab.addEventListener('click', () => chat.classList.toggle('open'));
+  chatClose.addEventListener('click', () => chat.classList.remove('open'));
+
+  const send = () => {
+    const txt = chatInput.value.trim(); if (!txt) return;
+    const me = document.createElement('div'); me.className = 'bubble me'; me.textContent = txt; me.style.alignSelf = 'flex-end';
+    chatBody.appendChild(me); chatInput.value = '';
+    setTimeout(() => {
+      const ai = document.createElement('div'); ai.className = 'bubble ai';
+      ai.textContent = '收到！我去干活啦，完成后会在 App 里推送给你。';
+      chatBody.appendChild(ai); chatBody.scrollTop = chatBody.scrollHeight;
+    }, 700);
+    chatBody.scrollTop = chatBody.scrollHeight;
+  };
+  chatSend.addEventListener('click', send);
+  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+
+  // Tweak panel
+  const TWEAKS = /*EDITMODE-BEGIN*/{
+    "palette": "cream-orange",
+    "accent": "#D96A2C",
+    "showMascots": true,
+    "tickerSpeed": 33
+  }/*EDITMODE-END*/;
+
+  const palettes = {
+    'cream-orange': { '--cream':'#F6EFE3','--cream-2':'#EFE5D2','--cream-3':'#E7D9BE','--ink':'#2B241E','--ink-soft':'#5A4E43','--ink-mute':'#8B7C6E','--olive':'#5E6A3A','--olive-2':'#7D8C4C','--olive-soft':'#C8D29B','--orange':'#D96A2C','--orange-soft':'#F2C79A','--terracotta':'#C24B2B','--paper':'#FBF7EE' },
+    'berry-mochi':  { '--cream':'#F3ECE8','--cream-2':'#ECE1DB','--cream-3':'#E0CEC3','--ink':'#2E1E26','--ink-soft':'#5D4B55','--ink-mute':'#8E7A82','--olive':'#6A4A5C','--olive-2':'#8A5B71','--olive-soft':'#E8CDD8','--orange':'#C7547A','--orange-soft':'#F3C7CF','--terracotta':'#A83E62','--paper':'#FBF5F2' },
+    'sage-marine':  { '--cream':'#E8EDE4','--cream-2':'#DDE4D7','--cream-3':'#C9D5C2','--ink':'#1F2A28','--ink-soft':'#4A5954','--ink-mute':'#7A8882','--olive':'#345E57','--olive-2':'#4E7F75','--olive-soft':'#A8C4BC','--orange':'#C96F3A','--orange-soft':'#F1C49D','--terracotta':'#B25524','--paper':'#F3F7EE' }
+  };
+  function applyPalette(key) {
+    const p = palettes[key] || palettes['cream-orange'];
+    for (const k in p) document.documentElement.style.setProperty(k, p[k]);
+  }
+  function apply(t) {
+    applyPalette(t.palette);
+    document.documentElement.style.setProperty('--orange', t.accent);
+    document.querySelectorAll('.niu,.ma').forEach(el => el.style.display = t.showMascots ? '' : 'none');
+    document.querySelectorAll('.ticker-track').forEach(el => el.style.animationDuration = (t.tickerSpeed || 28) + 's');
+  }
+  apply(TWEAKS);
+
+  // Tweak UI
+  const state = { ...TWEAKS };
+  const panel = document.createElement('aside');
+  panel.id = 'tweaks-panel';
+  panel.style.cssText = 'display:none;position:fixed;left:22px;bottom:22px;z-index:80;width:280px;background:var(--paper);border:2px solid var(--ink);border-radius:20px;padding:16px;box-shadow:6px 6px 0 var(--ink);font-family:var(--font-sans);';
+  panel.innerHTML = `
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+      <strong style="font-family:var(--font-display);font-size:18px;">Tweaks</strong>
+      <button id="tw-close" style="background:none;border:none;font-size:18px;cursor:pointer;">×</button>
+    </div>
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Palette</label>
+    <div style="display:flex;gap:6px;margin-bottom:14px;">
+      <button data-pal="cream-orange" style="flex:1;padding:8px 4px;border:2px solid var(--ink);border-radius:10px;background:#F6EFE3;font-size:11px;cursor:pointer;">Cream · Orange</button>
+      <button data-pal="berry-mochi" style="flex:1;padding:8px 4px;border:2px solid var(--ink);border-radius:10px;background:#F3ECE8;font-size:11px;cursor:pointer;">Berry · Mochi</button>
+      <button data-pal="sage-marine" style="flex:1;padding:8px 4px;border:2px solid var(--ink);border-radius:10px;background:#E8EDE4;font-size:11px;cursor:pointer;">Sage · Marine</button>
+    </div>
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">CTA accent</label>
+    <input type="color" id="tw-acc" value="${state.accent}" style="width:100%;height:34px;border:2px solid var(--ink);border-radius:10px;background:var(--cream);padding:2px;margin-bottom:14px;"/>
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Show mascots</label>
+    <button id="tw-masc" style="width:100%;padding:8px;border:2px solid var(--ink);border-radius:10px;background:var(--cream-2);font-weight:600;cursor:pointer;margin-bottom:12px;">${state.showMascots ? 'On' : 'Off'}</button>
+    <label style="display:block;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--ink-soft);margin-bottom:6px;">Ticker speed · <span id="tw-sv">${state.tickerSpeed}</span>s</label>
+    <input type="range" id="tw-spd" min="12" max="60" value="${state.tickerSpeed}" style="width:100%;"/>
+  `;
+  document.body.appendChild(panel);
+  const save = () => { try { window.parent.postMessage({type:'__edit_mode_set_keys', edits: state}, '*'); } catch(e) {} };
+  panel.querySelector('#tw-close').onclick = () => panel.style.display = 'none';
+  panel.querySelectorAll('[data-pal]').forEach(b => b.onclick = () => { state.palette = b.dataset.pal; apply(state); save(); });
+  panel.querySelector('#tw-acc').oninput = (e) => { state.accent = e.target.value; apply(state); save(); };
+  panel.querySelector('#tw-masc').onclick = (e) => { state.showMascots = !state.showMascots; e.target.textContent = state.showMascots ? 'On' : 'Off'; apply(state); save(); };
+  panel.querySelector('#tw-spd').oninput = (e) => { state.tickerSpeed = +e.target.value; panel.querySelector('#tw-sv').textContent = state.tickerSpeed; apply(state); save(); };
+
+  window.addEventListener('message', (ev) => {
+    if (!ev.data) return;
+    if (ev.data.type === '__activate_edit_mode')   panel.style.display = 'block';
+    if (ev.data.type === '__deactivate_edit_mode') panel.style.display = 'none';
+  });
+  try { window.parent.postMessage({type:'__edit_mode_available'}, '*'); } catch(e) {}
+</script>
+
+</body>
+</html>
