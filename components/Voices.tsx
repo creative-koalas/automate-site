@@ -92,7 +92,7 @@ export const Voices = () => {
                   <p className="text-base leading-7 text-[var(--muted-strong)]">“{t.quote}”</p>
 
                   <div className="placeholder-tile rounded-[22px] p-4">
-                    <p className="text-xs font-semibold uppercase tracking-[0.22em] text-[var(--muted)]">Case Placeholder</p>
+                    <p className="text-xs font-semibold uppercase tracking-[-0.01em] text-[var(--muted)]">Case Placeholder</p>
                     <p className="mt-2 text-sm leading-6 text-[var(--muted)]">这里可替换为客户名称、行业标签、品牌 Logo 或案例结果摘要。</p>
                   </div>
                 </div>

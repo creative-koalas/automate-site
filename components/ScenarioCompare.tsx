@@ -133,13 +133,13 @@ export const ScenarioCompare = ({ comparison }: { comparison: ScenarioComparison
       ) : null}
 
       {comparison.showGlobalCaptions !== false && comparison.leftCaption ? (
-        <div className="pointer-events-none absolute bottom-6 left-5 z-10 max-w-[44%] rounded-[24px] bg-[rgba(8,12,18,0.52)] px-4 py-3 text-left text-sm font-medium leading-6 tracking-[-0.03em] text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:bottom-7 sm:left-6 sm:px-5 sm:py-4 sm:text-base">
+        <div className="pointer-events-none absolute bottom-6 left-5 z-10 max-w-[44%] rounded-[24px] bg-[rgba(8,12,18,0.52)] px-4 py-3 text-left text-sm font-medium leading-6 tracking-normal text-white shadow-[0_18px_40px_rgba(15,23,42,0.18)] backdrop-blur-xl sm:bottom-7 sm:left-6 sm:px-5 sm:py-4 sm:text-base">
           {comparison.leftCaption}
         </div>
       ) : null}
 
       {comparison.showGlobalCaptions !== false && comparison.rightCaption ? (
-        <div className="pointer-events-none absolute bottom-6 right-5 z-10 max-w-[44%] rounded-[24px] bg-[rgba(255,250,246,0.76)] px-4 py-3 text-right text-sm font-medium leading-6 tracking-[-0.03em] text-[#1d1d1f] shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:bottom-7 sm:right-6 sm:px-5 sm:py-4 sm:text-base">
+        <div className="pointer-events-none absolute bottom-6 right-5 z-10 max-w-[44%] rounded-[24px] bg-[rgba(255,250,246,0.76)] px-4 py-3 text-right text-sm font-medium leading-6 tracking-normal text-[#1d1d1f] shadow-[0_18px_40px_rgba(15,23,42,0.12)] backdrop-blur-xl sm:bottom-7 sm:right-6 sm:px-5 sm:py-4 sm:text-base">
           {comparison.rightCaption}
         </div>
       ) : null}
@@ -161,7 +161,7 @@ export const ScenarioCompare = ({ comparison }: { comparison: ScenarioComparison
         </div>
       </div>
 
-      <div className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/50 bg-white/60 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.22em] text-[var(--muted-strong)] shadow-[0_12px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:bottom-5">
+      <div className="pointer-events-none absolute bottom-4 left-1/2 z-10 -translate-x-1/2 rounded-full border border-white/50 bg-white/60 px-4 py-2 text-[11px] font-semibold uppercase tracking-[-0.01em] text-[var(--muted-strong)] shadow-[0_12px_24px_rgba(15,23,42,0.08)] backdrop-blur-xl sm:bottom-5">
         {comparison.hint}
       </div>
     </div>

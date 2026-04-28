@@ -18,7 +18,7 @@ export function SiteHeader() {
             className="h-[30px] w-[30px] rounded-[9px] object-cover"
           />
           <div>
-            <p className="font-semibold tracking-[-0.03em]">PsyGo</p>
+            <p className="font-semibold tracking-normal">PsyGo</p>
             <p className="text-xs text-[var(--muted)]">AI 助理</p>
           </div>
         </Link>

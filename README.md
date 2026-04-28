@@ -62,3 +62,11 @@
 - 已实现移动端抽屉导航、Skip Link、焦点可达、对比度与悬浮微动效；支持 prefers-reduced-motion；导航自动高亮当前锚点；支持返回顶部按钮
 - E2E 覆盖：锚点跳转、移动端菜单、响应式、Voices 横向滚动、nav 高亮、返回顶部、CTA 跳转
 - 推荐部署：Vercel（自动预览/环境变量/域名）
+
+### 官网部署-CHECKLIST
+
+- [ ] 本地测试
+- [ ] 打包静态文件 `out`
+- [ ] 上传到阿里云 `automate-site` 存储桶
+- [ ] 检查 `https://www.psygoai.com` 和 `https://psygoai.com` 是否访问正常（还要测试 HTTP 是否正常）
+- [ ] 存储桶域名页面刷新预热

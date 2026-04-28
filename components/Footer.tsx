@@ -21,7 +21,7 @@ export const Footer = () => {
     >
       <div className="apple-divider flex flex-col gap-6 pt-10 text-center sm:pt-12">
         <div className="mx-auto max-w-2xl">
-          <p className="text-2xl font-semibold tracking-[-0.04em]">PsyGo</p>
+          <p className="text-2xl font-semibold tracking-normal">PsyGo</p>
           <p className="mt-3 text-sm leading-7 text-[var(--muted)]">
             一个 AI 助理 App。雇佣 AI 牛马，把任务交给它们。它们会持续推进，做完主动交结果。支持 iOS、Android、macOS、Windows、Linux。
           </p>

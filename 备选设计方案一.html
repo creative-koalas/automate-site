@@ -408,6 +408,32 @@
   .chat-head { padding: 14px 18px; border-bottom: 2px solid var(--ink); background: var(--olive-soft); display: flex; align-items: center; justify-content: space-between; }
   .chat-head strong { font-family: var(--font-display); font-size: 18px; }
   .chat-body { padding: 16px; display: flex; flex-direction: column; gap: 10px; overflow-y: auto; flex: 1; }
+  .chat-body .bubble { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .chat-body .bubble.chat-md { white-space: normal; }
+  .chat-md p { margin: 0 0 8px; }
+  .chat-md p:last-child,
+  .chat-md ul:last-child,
+  .chat-md ol:last-child,
+  .chat-md pre:last-child { margin-bottom: 0; }
+  .chat-md ul,
+  .chat-md ol { margin: 0 0 8px 1.2em; padding: 0; }
+  .chat-md li + li { margin-top: 4px; }
+  .chat-md h1,
+  .chat-md h2,
+  .chat-md h3 { margin: 0 0 8px; font-family: var(--font-display); line-height: 1.2; }
+  .chat-md h1 { font-size: 22px; }
+  .chat-md h2 { font-size: 19px; }
+  .chat-md h3 { font-size: 16px; }
+  .chat-md a { color: var(--terracotta); font-weight: 700; }
+  .chat-md code {
+    border: 1px solid var(--line-strong); border-radius: 6px; background: rgba(251,247,238,0.72);
+    padding: 1px 5px; font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 0.92em;
+  }
+  .chat-md pre {
+    margin: 0 0 8px; overflow-x: auto; border: 1px solid var(--line-strong); border-radius: 12px;
+    background: rgba(43,36,30,0.08); padding: 10px; white-space: pre;
+  }
+  .chat-md pre code { border: 0; background: transparent; padding: 0; }
   .chat textarea {
     width: 100%; resize: none; min-height: 70px; padding: 10px 14px;
     border: 2px solid var(--ink); border-radius: 14px; background: var(--cream); color: var(--ink);
@@ -523,7 +549,7 @@
   <div class="wrap">
     <div class="hero-grid">
       <div>
-        <span class="hero-tag"><span class="dot"></span>已上线 · iOS · Android · Mac · Windows · Linux</span>
+        <span class="hero-tag"><span class="dot"></span>已支持 · Android · Windows · Linux</span>
         <h1>
           <span class="line">你的 <span class="em">AI 牛马</span>，</span>
           <span class="line"><span class="u">直接干活</span>，</span>
@@ -541,7 +567,7 @@
         <div class="hero-stats">
           <div class="stat"><strong>3.2w</strong><span>件任务<br/>本周已交付</span></div>
           <div class="stat"><strong>47min</strong><span>平均任务<br/>持续推进</span></div>
-          <div class="stat"><strong>5端</strong><span>手机·桌面<br/>都能用</span></div>
+          <div class="stat"><strong>3端</strong><span>安卓·Windows·Linux<br/>都能用</span></div>
         </div>
       </div>
 
@@ -761,15 +787,12 @@
         <p style="margin: 8px 0 20px; color: var(--ink-soft); line-height: 1.7;">
           不用想太多，先让它帮你做一件事。做得好不好，看结果就知道了。
         </p>
-        <a href="#" class="btn-sticker">马上下载 →</a>
+        <a href="https://psygoai.com/dist/app_release.apk" target="_blank" rel="noopener noreferrer" class="btn-sticker">下载 Android 版 →</a>
       </div>
       <div class="plats">
-        <a href="#" class="plat">iOS<small>App Store</small></a>
-        <a href="#" class="plat">Android<small>.apk / 应用商店</small></a>
-        <a href="#" class="plat">macOS<small>Apple Silicon</small></a>
-        <a href="#" class="plat">Windows<small>10 / 11</small></a>
-        <a href="#" class="plat">Linux<small>AppImage</small></a>
-        <a href="#" class="plat">Web<small>浏览器直达</small></a>
+        <a href="https://psygoai.com/dist/app_release.apk" target="_blank" rel="noopener noreferrer" class="plat">Android<small>.apk 安装包</small></a>
+        <a href="https://psygoai.com/dist/psygo_setup.exe" target="_blank" rel="noopener noreferrer" class="plat">Windows<small>.exe 安装包</small></a>
+        <a href="https://psygoai.com/dist/psygo_amd64.deb" target="_blank" rel="noopener noreferrer" class="plat">Linux<small>.deb 安装包</small></a>
       </div>
     </div>
   </div>
@@ -802,21 +825,18 @@
       <a href="#capabilities">能力</a>
       <a href="#scenarios">场景</a>
       <a href="#download">下载</a>
-      <a href="#">更新日志</a>
     </div>
     <div>
       <h4>公司</h4>
       <a href="#">关于我们</a>
       <a href="#">加入我们</a>
-      <a href="#">企业版合作</a>
       <a href="tel:18186338802">咨询电话 18186338802</a>
     </div>
     <div>
       <h4>支持</h4>
       <a href="#">使用帮助</a>
-      <a href="#">隐私政策</a>
-      <a href="#">服务条款</a>
-      <a href="#">用户协议</a>
+      <a href="https://psygoai.com/legal/privacy-policy.html">隐私政策</a>
+      <a href="https://psygoai.com/legal/user-agreement.html">用户协议</a>
     </div>
 
     <div class="icp">
@@ -824,7 +844,14 @@
       <div style="display:flex; gap: 16px; flex-wrap: wrap;">
         <span>鄂ICP备2025165530号</span>
         <span style="display:inline-flex; align-items:center; gap:6px;">
-          <svg viewBox="0 0 64 64" width="13" height="13" aria-hidden="true"><path d="M32 4 12 12v18c0 14.2 8.3 24.1 20 30 11.7-5.9 20-15.8 20-30V12L32 4Z" fill="#2D7FF9"/><path d="M32 20.5a8.8 8.8 0 1 1 0 17.6 8.8 8.8 0 0 1 0-17.6Z" fill="#fff"/></svg>
+          <img
+            src="https://psygoai.com/static/备案编号图标.png"
+            alt=""
+            aria-hidden="true"
+            width="13"
+            height="13"
+            style="display:block; width:13px; height:13px; object-fit:contain;"
+          />
           鄂公网安备 42010302002808 号
         </span>
       </div>
@@ -860,29 +887,317 @@
 </aside>
 
 <script>
-  // FAB toggle + tiny demo chat
+  // FAB toggle + customer service chat
   const fab = document.getElementById('fab');
   const chat = document.getElementById('chat');
   const chatClose = document.getElementById('chatClose');
   const chatSend  = document.getElementById('chatSend');
   const chatBody  = document.getElementById('chatBody');
   const chatInput = document.getElementById('chatInput');
+  const customerServiceEndpoint = 'https://ai-cs-backend.psygoai.com/api/v1/chat/completions';
+  const customerServicePageLoadTimestamp = Date.now();
+  let customerServiceLocked = false;
+
   fab.addEventListener('click', () => chat.classList.toggle('open'));
   chatClose.addEventListener('click', () => chat.classList.remove('open'));
 
-  const send = () => {
-    const txt = chatInput.value.trim(); if (!txt) return;
-    const me = document.createElement('div'); me.className = 'bubble me'; me.textContent = txt; me.style.alignSelf = 'flex-end';
-    chatBody.appendChild(me); chatInput.value = '';
-    setTimeout(() => {
-      const ai = document.createElement('div'); ai.className = 'bubble ai';
-      ai.textContent = '收到！我去干活啦，完成后会在 App 里推送给你。';
-      chatBody.appendChild(ai); chatBody.scrollTop = chatBody.scrollHeight;
-    }, 700);
+  const hashCustomerServiceValue = (value) => {
+    let hash = 5381;
+
+    for (let index = 0; index < value.length; index += 1) {
+      hash = (hash * 33) ^ value.charCodeAt(index);
+    }
+
+    return (hash >>> 0).toString(36);
+  };
+
+  const createCustomerServiceBrowserFingerprint = () => {
+    const source = [
+      navigator.userAgent,
+      navigator.language,
+      Array.isArray(navigator.languages) ? navigator.languages.join(',') : '',
+      navigator.platform,
+      navigator.hardwareConcurrency || '',
+      'deviceMemory' in navigator ? navigator.deviceMemory || '' : '',
+      navigator.maxTouchPoints || '',
+      screen.width || '',
+      screen.height || '',
+      screen.colorDepth || '',
+      window.devicePixelRatio || '',
+      Intl.DateTimeFormat().resolvedOptions().timeZone || ''
+    ].join('|');
+
+    return `browser-${hashCustomerServiceValue(source)}`;
+  };
+
+  const customerServiceBrowserFingerprint = createCustomerServiceBrowserFingerprint();
+  const customerServiceSessionId = `official-site-${customerServiceBrowserFingerprint}-${customerServicePageLoadTimestamp}`;
+
+  const scrollChatToBottom = () => {
     chatBody.scrollTop = chatBody.scrollHeight;
   };
+
+  const addChatBubble = (className, text = '') => {
+    const bubble = document.createElement('div');
+    bubble.className = className;
+    bubble.textContent = text;
+    chatBody.appendChild(bubble);
+    scrollChatToBottom();
+    return bubble;
+  };
+
+  const escapeHtml = (value) => String(value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+
+  const renderInlineMarkdown = (value) => {
+    const codeSpans = [];
+    let html = escapeHtml(value).replace(/`([^`]+)`/g, (_, code) => {
+      const index = codeSpans.push(`<code>${code}</code>`) - 1;
+      return `@@CODE_SPAN_${index}@@`;
+    });
+
+    html = html
+      .replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, (_, label, url) => {
+        const safeUrl = url.replace(/&quot;/g, '').replace(/"/g, '');
+        return `<a href="${safeUrl}" target="_blank" rel="noopener noreferrer">${label}</a>`;
+      })
+      .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>')
+      .replace(/__([^_]+)__/g, '<strong>$1</strong>')
+      .replace(/\*([^*\n]+)\*/g, '<em>$1</em>')
+      .replace(/_([^_\n]+)_/g, '<em>$1</em>')
+      .replace(/\n/g, '<br>');
+
+    return html.replace(/@@CODE_SPAN_(\d+)@@/g, (_, index) => codeSpans[Number(index)] || '');
+  };
+
+  const renderMarkdown = (markdown) => {
+    const lines = String(markdown || '').replace(/\r\n/g, '\n').split('\n');
+    const html = [];
+    let paragraph = [];
+    let listType = '';
+    let listItems = [];
+    let inCodeBlock = false;
+    let codeLines = [];
+
+    const flushParagraph = () => {
+      if (!paragraph.length) return;
+      html.push(`<p>${renderInlineMarkdown(paragraph.join('\n'))}</p>`);
+      paragraph = [];
+    };
+
+    const flushList = () => {
+      if (!listType) return;
+      html.push(`<${listType}>${listItems.map((item) => `<li>${renderInlineMarkdown(item)}</li>`).join('')}</${listType}>`);
+      listType = '';
+      listItems = [];
+    };
+
+    const flushCodeBlock = () => {
+      html.push(`<pre><code>${escapeHtml(codeLines.join('\n'))}</code></pre>`);
+      codeLines = [];
+    };
+
+    for (const line of lines) {
+      const trimmed = line.trim();
+
+      if (trimmed.startsWith('```')) {
+        if (inCodeBlock) {
+          flushCodeBlock();
+          inCodeBlock = false;
+        } else {
+          flushParagraph();
+          flushList();
+          inCodeBlock = true;
+        }
+        continue;
+      }
+
+      if (inCodeBlock) {
+        codeLines.push(line);
+        continue;
+      }
+
+      if (!trimmed) {
+        flushParagraph();
+        flushList();
+        continue;
+      }
+
+      const heading = trimmed.match(/^(#{1,3})\s+(.+)$/);
+      if (heading) {
+        flushParagraph();
+        flushList();
+        html.push(`<h${heading[1].length}>${renderInlineMarkdown(heading[2])}</h${heading[1].length}>`);
+        continue;
+      }
+
+      const unordered = line.match(/^\s*[-*+]\s+(.+)$/);
+      const ordered = line.match(/^\s*\d+\.\s+(.+)$/);
+      if (unordered || ordered) {
+        flushParagraph();
+        const nextType = unordered ? 'ul' : 'ol';
+        if (listType && listType !== nextType) flushList();
+        listType = nextType;
+        listItems.push((unordered || ordered)[1]);
+        continue;
+      }
+
+      flushList();
+      paragraph.push(trimmed);
+    }
+
+    if (inCodeBlock) flushCodeBlock();
+    flushParagraph();
+    flushList();
+
+    return html.join('');
+  };
+
+  const renderAssistantText = (bubble, text) => {
+    bubble.innerHTML = renderMarkdown(text);
+  };
+
+  const extractFetchError = async (response) => {
+    const raw = await response.text();
+
+    try {
+      const parsed = JSON.parse(raw);
+      return parsed?.error?.message || parsed?.message || raw;
+    } catch (error) {
+      return raw;
+    }
+  };
+
+  const processSseBlock = (block, onDelta, onDone) => {
+    if (!block.trim()) return false;
+
+    let eventName = '';
+    const dataLines = [];
+
+    for (const rawLine of block.split('\n')) {
+      const line = rawLine.trimEnd();
+      if (!line || line.startsWith(':')) continue;
+      if (line.startsWith('event:')) eventName = line.slice(6).trim();
+      if (line.startsWith('data:')) dataLines.push(line.slice(5).trimStart());
+    }
+
+    if (!eventName || !dataLines.length) return false;
+
+    const payload = JSON.parse(dataLines.join('\n'));
+
+    if (eventName === 'delta') {
+      onDelta(payload.content || '');
+      return false;
+    }
+
+    if (eventName === 'done') {
+      onDone(payload.answer || '');
+      return true;
+    }
+
+    if (eventName === 'error') {
+      throw new Error(payload.message || '客服服务暂时不可用。');
+    }
+
+    return false;
+  };
+
+  const streamCustomerServiceReply = async (query, onText) => {
+    const response = await fetch(customerServiceEndpoint, {
+      method: 'POST',
+      headers: {
+        Accept: 'text/event-stream',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        query,
+        session_id: customerServiceSessionId,
+        stream: true,
+        metadata: {
+          source: 'official-site-static',
+          lang: document.documentElement.lang || navigator.language || 'zh-CN',
+          page: window.location.pathname,
+          browser_fingerprint: customerServiceBrowserFingerprint,
+          page_load_timestamp: String(customerServicePageLoadTimestamp)
+        }
+      })
+    });
+
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${await extractFetchError(response)}`);
+    }
+
+    const reader = response.body?.getReader();
+    if (!reader) {
+      throw new Error('当前浏览器不支持客服流式响应。');
+    }
+
+    const decoder = new TextDecoder('utf-8');
+    let buffer = '';
+    let streamedText = '';
+
+    const appendDelta = (chunk) => {
+      streamedText += chunk;
+      onText(streamedText);
+    };
+
+    const finish = (answer) => {
+      onText(answer || streamedText || '已收到消息，但本次没有返回文本。');
+    };
+
+    while (true) {
+      const { done, value } = await reader.read();
+      if (done) break;
+
+      buffer += decoder.decode(value, { stream: true }).replace(/\r\n/g, '\n');
+      const blocks = buffer.split('\n\n');
+      buffer = blocks.pop() || '';
+
+      for (const block of blocks) {
+        if (processSseBlock(block, appendDelta, finish)) {
+          await reader.cancel();
+          return;
+        }
+      }
+    }
+
+    buffer += decoder.decode().replace(/\r\n/g, '\n');
+    if (buffer.trim()) {
+      processSseBlock(buffer, appendDelta, finish);
+    } else if (!streamedText) {
+      finish('');
+    }
+  };
+
+  const send = async () => {
+    const txt = chatInput.value.trim();
+    if (!txt || customerServiceLocked) return;
+
+    customerServiceLocked = true;
+    addChatBubble('bubble me', txt);
+    chatInput.value = '';
+
+    const ai = addChatBubble('bubble ai chat-md');
+
+    try {
+      await streamCustomerServiceReply(txt, (text) => {
+        renderAssistantText(ai, text);
+        scrollChatToBottom();
+      });
+    } catch (error) {
+      ai.textContent = error?.message || '暂时无法连接客服服务，请稍后再试。';
+      scrollChatToBottom();
+    } finally {
+      customerServiceLocked = false;
+    }
+  };
+
   chatSend.addEventListener('click', send);
-  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); send(); } });
+  chatInput.addEventListener('keydown', (e) => { if (e.key === 'Enter' && !e.shiftKey && !e.isComposing) { e.preventDefault(); send(); } });
 
   // Tweak panel
   const TWEAKS = /*EDITMODE-BEGIN*/{

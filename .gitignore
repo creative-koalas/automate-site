@@ -42,3 +42,20 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# local agent/runtime artifacts
+/.codex-run/
+
+# external source snapshots
+/external/
+
+# large/static media assets
+/public/videos/
+/static/*
+*.mp4
+*.mov
+*.webm
+*.avi
+*.rar
+*.zip
+*.7z

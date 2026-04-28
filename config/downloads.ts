@@ -17,7 +17,7 @@ export const downloadPlatforms: DownloadPlatform[] = [
     format: "APK",
     description: "适合 Android 手机和平板，直接下载安装包即可开始使用。",
     note: "如果浏览器提示未知来源安装，请在系统设置中允许本次安装。",
-    href: "https://home.psygoai.com/dist/app-release.apk",
+    href: "https://psygoai.com/dist/app_release.apk",
     ctaLabel: "下载 Android 版",
     badge: "Mobile",
     accentClassName:
@@ -29,7 +29,7 @@ export const downloadPlatforms: DownloadPlatform[] = [
     format: "EXE",
     description: "适合 Windows 桌面设备，下载后运行安装程序即可完成安装。",
     note: "建议使用 HTTPS 下载，避免浏览器将可执行文件识别为不安全下载。",
-    href: "https://home.psygoai.com/dist/PsyGo_Setup.exe",
+    href: "https://psygoai.com/dist/psygo_setup.exe",
     ctaLabel: "下载 Windows 版",
     badge: "Desktop",
     accentClassName:
@@ -41,7 +41,7 @@ export const downloadPlatforms: DownloadPlatform[] = [
     format: "DEB",
     description: "适合 Ubuntu、Debian 及兼容发行版，下载安装包后可直接安装。",
     note: "如果你的系统不是 Debian 系，请告诉我，我可以再补对应发行版的安装包入口。",
-    href: "https://home.psygoai.com/dist/psygo_amd64.deb",
+    href: "https://psygoai.com/dist/psygo_amd64.deb",
     ctaLabel: "下载 Debian 版",
     badge: "Developer",
     accentClassName:

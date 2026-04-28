@@ -1,6 +1,7 @@
 import {
   customerServiceConfig,
   getCustomerServiceEndpoint,
+  getCustomerServiceHealthEndpoint,
 } from "@/config/customer-service";
 
 export type CustomerServiceDeltaEvent = {
@@ -25,6 +26,11 @@ export type CustomerServiceDoneEvent = {
 
 export type CustomerServiceErrorEvent = {
   message?: string;
+};
+
+export type CustomerServiceHealthResult = {
+  ok: boolean;
+  status: number;
 };
 
 type StreamCustomerServiceReplyOptions = {
@@ -99,6 +105,22 @@ function extractErrorMessage(raw: string) {
   } catch {
     return raw;
   }
+}
+
+export async function checkCustomerServiceHealth(signal?: AbortSignal) {
+  const response = await fetch(getCustomerServiceHealthEndpoint(), {
+    method: "GET",
+    headers: {
+      Accept: "application/json",
+    },
+    cache: "no-store",
+    signal,
+  });
+
+  return {
+    ok: response.ok,
+    status: response.status,
+  } satisfies CustomerServiceHealthResult;
 }
 
 export async function streamCustomerServiceReply(

@@ -1,6 +1,7 @@
 export type CustomerServiceConfig = {
   apiBaseUrl: string;
   chatPath: string;
+  healthPath: string;
   requestDefaults: {
     stream: boolean;
     promptName?: string;
@@ -14,6 +15,7 @@ export const customerServiceConfig: CustomerServiceConfig = {
   // Same-origin deployment can use an empty string here.
   apiBaseUrl: "https://ai-cs-backend.psygoai.com/",
   chatPath: "/api/v1/chat/completions",
+  healthPath: "/api/v1/health",
   requestDefaults: {
     stream: true,
     metadata: {
@@ -30,6 +32,17 @@ export function getCustomerServiceEndpoint() {
 
   return new URL(
     customerServiceConfig.chatPath,
+    customerServiceConfig.apiBaseUrl,
+  ).toString();
+}
+
+export function getCustomerServiceHealthEndpoint() {
+  if (!customerServiceConfig.apiBaseUrl) {
+    return customerServiceConfig.healthPath;
+  }
+
+  return new URL(
+    customerServiceConfig.healthPath,
     customerServiceConfig.apiBaseUrl,
   ).toString();
 }

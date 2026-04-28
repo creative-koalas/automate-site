@@ -32,8 +32,8 @@ export default function DownloadPage() {
         />
 
         <div className="mx-auto w-full max-w-4xl text-center">
-          <span className="eyebrow">PsyGo / Download</span>
-          <h1 className="mx-auto mt-7 max-w-4xl text-4xl font-semibold tracking-[-0.06em] sm:text-6xl lg:text-[4.8rem] lg:leading-[0.96]">
+          <span className="eyebrow">PsyGo Download</span>
+          <h1 className="mx-auto mt-7 max-w-4xl text-4xl font-semibold tracking-normal sm:text-6xl lg:text-[4.8rem] lg:leading-[0.96]">
             下载适用于你的设备的
             <br />
             PsyGo
@@ -55,10 +55,10 @@ export default function DownloadPage() {
                   aria-hidden
                   className="pointer-events-none absolute inset-x-6 top-0 h-px bg-[linear-gradient(90deg,transparent,rgba(255,255,255,0.92),transparent)] opacity-90"
                 />
-                <h2 className="text-2xl font-semibold tracking-[-0.04em] text-[var(--foreground)]">
+                <h2 className="text-2xl font-semibold tracking-normal text-[var(--foreground)]">
                   {platformChipLabel[platform.id] ?? platform.title}
                 </h2>
-                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-[var(--muted)]">
+                <p className="mt-2 text-[11px] font-semibold uppercase tracking-[-0.01em] text-[var(--muted)]">
                   {platform.format}
                 </p>
                 <div className="mt-6 inline-flex min-w-[152px] items-center justify-center rounded-full bg-[var(--accent-soft)] px-4 py-2 text-sm font-semibold text-[var(--brand)] transition-colors duration-200 group-hover:bg-[var(--accent)] group-hover:text-white">

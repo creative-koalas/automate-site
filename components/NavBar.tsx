@@ -27,7 +27,7 @@ export const Navbar = () => {
     >
       <NavbarBrand className="gap-3">
         <Image src="/logo.svg" alt="PsyGo Logo（占位）" width={28} height={28} className="invert" />
-        <span className="text-lg font-semibold tracking-tight">PsyGo</span>
+        <span className="text-lg font-semibold tracking-normal">PsyGo</span>
       </NavbarBrand>
       <NavbarContent justify="end" className="hidden sm:flex">
         <NavbarItem>

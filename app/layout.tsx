@@ -1,25 +1,12 @@
 import type { Metadata, Viewport } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./providers";
 import { JsonLd } from "@/components/JsonLd";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-  display: "swap",
-});
-
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
-  display: "swap",
-});
-
 export const metadata: Metadata = {
   title: {
-    default: "PsyGo — 你的 AI 牛马",
-    template: "%s | PsyGo",
+    default: "PsyGo 你的 AI 牛马",
+    template: "%s PsyGo",
   },
   description:
     "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
@@ -27,7 +14,7 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://ai-workforce.example.com"),
   alternates: { canonical: "/" },
   openGraph: {
-    title: "PsyGo — 你的 AI 牛马",
+    title: "PsyGo 你的 AI 牛马",
     description:
       "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
     url: "https://ai-workforce.example.com",
@@ -40,7 +27,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "PsyGo — 你的 AI 牛马",
+    title: "PsyGo 你的 AI 牛马",
     description:
       "PsyGo 是一个 AI 助理 App，覆盖 iOS、Android、macOS、Windows 和 Linux。你可以直接雇佣 AI 牛马，把任务交给它们。做完了，它们会主动把结果交回来。",
     images: ["/og.svg"],
@@ -75,7 +62,7 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.webmanifest" />
         <JsonLd />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}>
+      <body className="antialiased bg-background text-foreground">
         <a href="#main-content" className="skip-link">跳到主要内容</a>
         <Providers>{children}</Providers>
       </body>

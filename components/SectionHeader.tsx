@@ -26,7 +26,7 @@ export const SectionHeader = ({
           ? { initial: false, transition: { duration: 0 } }
           : { initial: { opacity: 0, y: 18 }, whileInView: { opacity: 1, y: 0 }, transition: { duration: 0.55 } })}
         viewport={{ once: true }}
-        className="text-3xl font-semibold tracking-[-0.04em] sm:text-5xl"
+        className="text-3xl font-semibold tracking-normal sm:text-5xl"
       >
         {title}
       </motion.h2>

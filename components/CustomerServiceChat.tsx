@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import {
   AnimatePresence,
   motion,
@@ -17,10 +16,10 @@ import {
   type KeyboardEvent,
 } from "react";
 import {
+  checkCustomerServiceHealth,
   type CustomerServiceDoneEvent,
   streamCustomerServiceReply,
 } from "@/lib/customer-service";
-import logoImage from "@/static/logo.png";
 
 type ChatMessage = {
   content: string;
@@ -30,11 +29,40 @@ type ChatMessage = {
   status?: "error" | "idle" | "streaming";
 };
 
+type ServiceHealthStatus = "checking" | "offline" | "online";
+
 const INITIAL_MESSAGE: ChatMessage = {
   id: "assistant-welcome",
   role: "assistant",
   content: "你好有什么可以帮你的？",
   status: "idle",
+};
+
+const HEALTH_CHECK_INTERVAL_MS = 30_000;
+const HEALTH_CHECK_TIMEOUT_MS = 6_000;
+
+const HEALTH_STATUS_META: Record<
+  ServiceHealthStatus,
+  {
+    dotClassName: string;
+    label: string;
+  }
+> = {
+  checking: {
+    dotClassName:
+      "border-white bg-amber-300 shadow-[0_0_0_4px_rgba(245,158,11,0.16)]",
+    label: "客服状态检查中",
+  },
+  offline: {
+    dotClassName:
+      "border-white bg-zinc-300 shadow-[0_0_0_4px_rgba(113,113,122,0.14)]",
+    label: "客服服务暂不可用",
+  },
+  online: {
+    dotClassName:
+      "border-white bg-emerald-400 shadow-[0_0_0_4px_rgba(16,185,129,0.14)]",
+    label: "客服服务在线",
+  },
 };
 
 function hashString(value: string) {
@@ -117,7 +145,7 @@ function getRuntimeErrorMessage(error: unknown) {
     return error.message;
   }
 
-  return "暂时无法连接 PsyGo 服务，请稍后再试。";
+  return "暂时无法连接客服服务，请稍后再试。";
 }
 
 function AssistantMarkdown({ content }: { content: string }) {
@@ -146,6 +174,8 @@ export function CustomerServiceChat() {
   const [isStreaming, setIsStreaming] = useState(false);
   const [inputValue, setInputValue] = useState("");
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [healthStatus, setHealthStatus] =
+    useState<ServiceHealthStatus>("checking");
   const [messages, setMessages] = useState<ChatMessage[]>([
     INITIAL_MESSAGE,
   ]);
@@ -161,6 +191,67 @@ export function CustomerServiceChat() {
         pageLoadTimestampRef.current ?? Date.now(),
       );
     }
+  }, []);
+
+  useEffect(() => {
+    let isMounted = true;
+    let healthController: AbortController | null = null;
+
+    const runHealthCheck = async () => {
+      healthController?.abort();
+
+      const controller = new AbortController();
+      const timeoutId = window.setTimeout(() => {
+        controller.abort();
+      }, HEALTH_CHECK_TIMEOUT_MS);
+      healthController = controller;
+
+      try {
+        const result = await checkCustomerServiceHealth(controller.signal);
+
+        if (isMounted && healthController === controller) {
+          setHealthStatus(result.ok ? "online" : "offline");
+        }
+      } catch {
+        if (isMounted && healthController === controller) {
+          setHealthStatus("offline");
+        }
+      } finally {
+        window.clearTimeout(timeoutId);
+
+        if (healthController === controller) {
+          healthController = null;
+        }
+      }
+    };
+
+    const handleVisibilityChange = () => {
+      if (document.visibilityState === "visible") {
+        void runHealthCheck();
+      }
+    };
+
+    void runHealthCheck();
+
+    const intervalId = window.setInterval(
+      runHealthCheck,
+      HEALTH_CHECK_INTERVAL_MS,
+    );
+
+    document.addEventListener(
+      "visibilitychange",
+      handleVisibilityChange,
+    );
+
+    return () => {
+      isMounted = false;
+      healthController?.abort();
+      window.clearInterval(intervalId);
+      document.removeEventListener(
+        "visibilitychange",
+        handleVisibilityChange,
+      );
+    };
   }, []);
 
   useEffect(() => {
@@ -283,7 +374,7 @@ export function CustomerServiceChat() {
         },
         onError: (payload) => {
           streamErrorMessage =
-            payload.message || "PsyGo 服务暂时不可用。";
+            payload.message || "客服服务暂时不可用。";
         },
       });
 
@@ -306,7 +397,7 @@ export function CustomerServiceChat() {
         updateMessage(assistantMessageId, {
           content:
             streamedAnswer ||
-            "抱歉，我暂时没能连上 PsyGo 服务。请确认后端接口已启动后再试。",
+            "抱歉，我暂时没能连上客服服务。请确认后端接口已启动后再试。",
           note: message,
           status: "error",
         });
@@ -330,6 +421,8 @@ export function CustomerServiceChat() {
     }
   };
 
+  const healthStatusMeta = HEALTH_STATUS_META[healthStatus];
+
   return (
     <div className="fixed bottom-4 left-3 right-3 z-[60] flex flex-col items-end gap-3 sm:bottom-6 sm:left-auto sm:right-6 sm:w-[24rem]">
       <AnimatePresence>
@@ -340,28 +433,31 @@ export function CustomerServiceChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.96, y: 16 }}
             transition={{ duration: reduceMotion ? 0 : 0.22 }}
-            aria-label="PsyGo支持对话框"
+            aria-label="客服对话框"
             aria-modal="false"
             className="section-shell flex max-h-[min(72vh,42rem)] w-full flex-col overflow-hidden rounded-[30px]"
             id="customer-service-panel"
             role="dialog"
           >
-            <div className="flex items-start justify-between gap-4 border-b border-[var(--line)] px-4 py-4 sm:px-5">
-              <div>
-                <p className="text-sm font-semibold tracking-[-0.02em]">
-                  PsyGo支持
-                </p>
-              </div>
-              <div className="flex items-center gap-2">
+            <div className="border-b border-[var(--line)] px-4 pb-4 pt-4 sm:px-5">
+              <div className="flex items-start justify-between gap-4">
+                <div aria-hidden className="h-9 flex-1" />
                 <button
                   type="button"
                   className="apple-button-ghost h-9 w-9 px-0 py-0 text-lg"
                   onClick={handleToggle}
-                  aria-label="关闭支持对话框"
+                  aria-label="关闭客服对话框"
                 >
                   x
                 </button>
               </div>
+              <span className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-2 text-sm font-semibold tracking-normal text-emerald-700 shadow-[0_10px_24px_rgba(16,185,129,0.08)]">
+                <span
+                  aria-hidden
+                  className="inline-block h-2.5 w-2.5 shrink-0 rounded-full bg-emerald-400"
+                />
+                PsyGo支持
+              </span>
             </div>
 
             <div
@@ -388,7 +484,7 @@ export function CustomerServiceChat() {
                           isAssistant ? "text-left" : "text-right"
                         }`}
                       >
-                        {isAssistant ? "PsyGo" : "你"}
+                        {isAssistant ? "客服" : "你"}
                       </p>
                       <div
                         className={`${bubbleClassName} px-4 py-3 text-sm leading-6 whitespace-pre-wrap break-words`}
@@ -535,7 +631,7 @@ export function CustomerServiceChat() {
           onClick={handleToggle}
           aria-controls="customer-service-panel"
           aria-expanded={isOpen}
-          aria-label={isOpen ? "收起 PsyGo" : "打开 PsyGo"}
+          aria-label={`${isOpen ? "收起客服" : "打开客服"}，${healthStatusMeta.label}`}
           whileHover={
             reduceMotion
               ? undefined
@@ -545,16 +641,16 @@ export function CustomerServiceChat() {
           className="group relative h-[4.15rem] w-[4.15rem] overflow-hidden rounded-full border border-white/18 bg-[linear-gradient(135deg,#0b84ff_0%,#0567db_46%,#0447a1_100%)] p-0 text-white shadow-[0_22px_52px_rgba(0,113,227,0.34)] backdrop-blur-xl"
         >
           <span className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,rgba(255,255,255,0.34),transparent_42%),linear-gradient(135deg,rgba(255,255,255,0.10),transparent_55%)]" />
+          <span
+            aria-hidden
+            className={`absolute right-0.5 top-0.5 h-3 w-3 rounded-full border-2 ${healthStatusMeta.dotClassName}`}
+          />
 
           <span className="relative flex h-full w-full items-center justify-center">
             <span className="flex h-[3.2rem] w-[3.2rem] items-center justify-center overflow-hidden rounded-full border border-white/20 bg-white/14 shadow-[inset_0_1px_0_rgba(255,255,255,0.18)] backdrop-blur">
-              <Image
-                src={logoImage}
-                alt="PsyGo"
-                width={52}
-                height={52}
-                className="h-full w-full object-cover"
-              />
+              <span className="text-base font-semibold tracking-normal text-white">
+                客服
+              </span>
             </span>
           </span>
         </motion.button>
